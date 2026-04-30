@@ -302,104 +302,48 @@ function setupSlider() {
     return;
   }
 
-  const mask = slider.querySelector("[data-slider-mask]");
-  const slides = Array.from(slider.querySelectorAll(".testimonial-slide"));
+  if (slider.closest(".mrittik-about-clone")) {
+    return;
+  }
+  const viewport = slider.querySelector(".testimonial-mrittik__viewport");
   const prev = slider.querySelector("[data-slider-prev]");
   const next = slider.querySelector("[data-slider-next]");
   const nav = slider.querySelector("[data-slider-nav]");
 
-  if (!mask || slides.length <= 1 || !prev || !next || !nav) {
+  if (typeof window.Swiper !== "function" || !viewport || !prev || !next || !nav) {
     return;
   }
 
-  let activeIndex = 0;
-  let touchStartX = 0;
-  let touchDeltaX = 0;
-  let autoplayId = 0;
-
-  const dots = slides.map((_, index) => {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.className = "w-slider-dot";
-    dot.setAttribute("aria-label", `Go to testimonial ${index + 1}`);
-    dot.addEventListener("click", () => {
-      render(index);
-      startAutoplay();
-    });
-    nav.appendChild(dot);
-    return dot;
-  });
-
-  function getPrevIndex(index) {
-    return (index - 1 + slides.length) % slides.length;
-  }
-
-  function getNextIndex(index) {
-    return (index + 1) % slides.length;
-  }
-
-  function stopAutoplay() {
-    window.clearInterval(autoplayId);
-  }
-
-  function startAutoplay() {
-    stopAutoplay();
-    autoplayId = window.setInterval(() => {
-      render(activeIndex + 1);
-    }, 5000);
-  }
-
-  function render(index) {
-    activeIndex = (index + slides.length) % slides.length;
-    const prevIndex = getPrevIndex(activeIndex);
-    const nextIndex = getNextIndex(activeIndex);
-
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === activeIndex);
-      slide.classList.toggle("is-prev", slideIndex === prevIndex);
-      slide.classList.toggle("is-next", slideIndex === nextIndex);
-    });
-
-    dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle("w-active", dotIndex === activeIndex);
-    });
-  }
-
-  prev.addEventListener("click", () => {
-    render(activeIndex - 1);
-    startAutoplay();
-  });
-
-  next.addEventListener("click", () => {
-    render(activeIndex + 1);
-    startAutoplay();
-  });
-
-  slider.addEventListener("mouseenter", stopAutoplay);
-  slider.addEventListener("mouseleave", startAutoplay);
-
-  mask.addEventListener("touchstart", (event) => {
-    touchStartX = event.changedTouches[0].clientX;
-    touchDeltaX = 0;
-    stopAutoplay();
-  }, { passive: true });
-
-  mask.addEventListener("touchmove", (event) => {
-    touchDeltaX = event.changedTouches[0].clientX - touchStartX;
-  }, { passive: true });
-
-  mask.addEventListener("touchend", () => {
-    if (Math.abs(touchDeltaX) < 40) {
-      startAutoplay();
-      return;
+  new window.Swiper(viewport, {
+    speed: 700,
+    loop: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    spaceBetween: 26,
+    grabCursor: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    navigation: {
+      prevEl: prev,
+      nextEl: next
+    },
+    pagination: {
+      el: nav,
+      clickable: true,
+      bulletClass: "w-slider-dot",
+      bulletActiveClass: "w-active"
+    },
+    breakpoints: {
+      768: {
+        spaceBetween: 34
+      },
+      992: {
+        spaceBetween: 42
+      }
     }
-
-    render(activeIndex + (touchDeltaX < 0 ? 1 : -1));
-    startAutoplay();
   });
-
-  render(0);
-  startAutoplay();
 }
 
 function setupFaq() {
@@ -451,9 +395,105 @@ function setupFaq() {
   });
 }
 
+function setupAboutClone() {
+  const video = document.querySelector("[data-about-video]");
+  const videoToggle = document.querySelector("[data-about-video-toggle]");
+  const videoFrame = video?.querySelector("iframe");
+  const aboutForm = document.querySelector("[data-about-form]");
+  const teamRoot = document.querySelector("[data-about-team]");
+  const testimonialRoot = document.querySelector("[data-about-testimonials]");
+
+  videoToggle?.addEventListener("click", () => {
+    if (!video || !videoFrame) {
+      return;
+    }
+
+    video.classList.add("is-playing");
+
+    if (!videoFrame.src.includes("autoplay=1")) {
+      const separator = videoFrame.src.includes("?") ? "&" : "?";
+      videoFrame.src = `${videoFrame.src}${separator}autoplay=1`;
+    }
+  });
+
+  aboutForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+
+  if (typeof window.Swiper !== "function") {
+    return;
+  }
+
+  if (teamRoot) {
+    const teamViewport = teamRoot.querySelector(".clone-team-swiper");
+    const prev = teamRoot.querySelector("[data-about-team-prev]");
+    const next = teamRoot.querySelector("[data-about-team-next]");
+
+    if (teamViewport && prev && next) {
+      new window.Swiper(teamViewport, {
+        speed: 700,
+        slidesPerView: 1.15,
+        spaceBetween: 24,
+        navigation: {
+          prevEl: prev,
+          nextEl: next
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2.2,
+            spaceBetween: 28
+          },
+          992: {
+            slidesPerView: 3.15,
+            spaceBetween: 32
+          }
+        }
+      });
+    }
+  }
+
+  if (testimonialRoot) {
+    const pagination = document.querySelector("[data-about-testimonials-pagination]");
+    const prev = testimonialRoot.closest("[data-slider]")?.querySelector("[data-slider-prev]");
+    const next = testimonialRoot.closest("[data-slider]")?.querySelector("[data-slider-next]");
+
+    new window.Swiper(testimonialRoot, {
+      speed: 700,
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      spaceBetween: 26,
+      grabCursor: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      navigation: prev && next ? {
+        prevEl: prev,
+        nextEl: next
+      } : undefined,
+      pagination: pagination ? {
+        el: pagination,
+        clickable: true,
+        bulletClass: "w-slider-dot",
+        bulletActiveClass: "w-active"
+      } : undefined,
+      breakpoints: {
+        768: {
+          spaceBetween: 34
+        },
+        992: {
+          spaceBetween: 42
+        }
+      }
+    });
+  }
+}
+
 setupMrittikHeader();
 setupHeroSlider();
 setupScrollReveal();
 setupServices();
 setupSlider();
 setupFaq();
+setupAboutClone();

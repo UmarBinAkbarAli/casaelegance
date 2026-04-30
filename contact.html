@@ -11,6 +11,16 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <div class="site-background" aria-hidden="true">
+    <div class="site-background__grid">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
   <div class="page-wrapper">
 
     <header class="mrittik-header" data-mrittik-header>
@@ -71,44 +81,38 @@
       </div>
     </div>
 
-    <main class="mrittik-page-main">
-                      <section class="mrittik-page-hero" style="--page-hero-image:url('./assets/testimonial-bg.png')">
-                        <div class="mrittik-page-hero__inner">
-                          <div class="mrittik-page-hero__eyebrow">Start A Conversation</div>
-                          <h1 class="mrittik-page-hero__title">Contact Us</h1>
-                          <p class="mrittik-page-hero__summary">Tell us about your space, your timeline, and the atmosphere you want to create. We’ll shape the next steps together.</p>
-                        </div>
-                      </section>
-                
-                      <section class="mrittik-page-section">
-                        <div class="mrittik-page-section__inner mrittik-page-grid">
-                          <div>
-                            <div class="mrittik-page-kicker">Reach Out</div>
-                            <h2 class="mrittik-page-heading">Let’s talk about your next project.</h2>
-                            <p class="mrittik-page-copy">We work across private residences, boutique hospitality, and signature commercial interiors. Share your goals and we’ll get back with a tailored response.</p>
-                            <ul class="mrittik-page-list">
-                              <li>Email: hello@casaelegance.com</li>
-                              <li>Phone: +1 234 (567 8900)</li>
-                              <li>Studio: 3 Madison Street NY, USA</li>
-                            </ul>
-                          </div>
-                          <div class="mrittik-page-card">
-                            <form class="mrittik-page-form">
-                              <div class="mrittik-page-form__row">
-                                <input class="mrittik-page-input" type="text" placeholder="Your Name">
-                                <input class="mrittik-page-input" type="email" placeholder="Email Address">
-                              </div>
-                              <div class="mrittik-page-form__row">
-                                <input class="mrittik-page-input" type="text" placeholder="Project Type">
-                                <input class="mrittik-page-input" type="text" placeholder="Budget Range">
-                              </div>
-                              <textarea class="mrittik-page-textarea" placeholder="Tell us about your project"></textarea>
-                              <button class="mrittik-page-button" type="button">Send Inquiry</button>
-                            </form>
-                          </div>
-                        </div>
-                      </section>
-                    </main>
+    <main class="mrittik-page-main mrittik-about-clone mrittik-contact-page">
+                              <section class="contact-map-section">
+                                <div class="clone-shell">
+                                  <div class="contact-map-section__frame">
+                                    <iframe
+                                      class="contact-map-section__embed"
+                                      src="https://maps.google.com/maps?q=3%20Madison%20Street%20NY%2C%20USA&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                      title="Casa Elegance studio location"
+                                      loading="lazy"
+                                      referrerpolicy="no-referrer-when-downgrade"
+                                    ></iframe>
+                                  </div>
+                                </div>
+                              </section>
+                              <section class="clone-contact">
+                                <div class="clone-shell">
+                                  <div class="clone-contact__grid">
+                                    <div class="clone-contact__intro">
+                                      <h2>LET'S DISCUSS NEXT PROJECTS</h2>
+                                      <p>The talent at Mrittik runs wide and deep. Across many markets, geographies and typologies, our team members are some of the finest professionals in the industry.. WeÃ¢â‚¬â„¢ve grouped our work into five categories: places, venues, spaces, experiences and events.</p>
+                                    </div>
+                                    <form class="clone-contact__form" data-about-form>
+                                      <input type="text" placeholder="Your Name*" aria-label="Your Name" required>
+                                      <input type="tel" placeholder="Your Phone No" aria-label="Your Phone Number">
+                                      <input type="email" placeholder="Your Email*" aria-label="Your Email" required>
+                                      <textarea rows="4" placeholder="Your Message" aria-label="Your Message"></textarea>
+                                      <button type="submit">Send Mail</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </section>
+                            </main>
 
 
     <footer class="mrittik-footer">

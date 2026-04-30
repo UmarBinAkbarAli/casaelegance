@@ -72,41 +72,177 @@
     </div>
 
     <main class="mrittik-page-main">
-                              <section class="mrittik-page-hero" style="--page-hero-image:url('./assets/project-grand-vista.png')">
-                                <div class="mrittik-page-hero__inner">
-                                  <div class="mrittik-page-hero__eyebrow">Selected Work</div>
-                                  <h1 class="mrittik-page-hero__title">Projects</h1>
-                                  <p class="mrittik-page-hero__summary">A curated look at residences and signature interiors shaped through proportion, texture, and considered spatial flow.</p>
+                              <section class="projects-page-hero">
+                                <div class="projects-page-hero__inner clone-shell">
+                                  <h1 class="projects-page-hero__title">Projects</h1>
+                                  <nav class="projects-page-hero__breadcrumb" aria-label="Breadcrumb">
+                                    <a href="./index.html">Home</a>
+                                    <span aria-hidden="true">›</span>
+                                    <span>Projects</span>
+                                  </nav>
                                 </div>
                               </section>
-                        
-                              <section class="mrittik-page-section">
-                                <div class="mrittik-page-section__inner">
-                                  <div class="mrittik-page-grid mrittik-page-grid--three">
-                                    <article class="mrittik-page-project">
-                                      <img src="./assets/project-grand-vista.png" alt="Grand Vista project" class="mrittik-page-project__image">
-                                      <div class="mrittik-page-project__body">
-                                        <div class="mrittik-page-project__meta">Residential</div>
-                                        <h2 class="mrittik-page-card__title">Grand Vista</h2>
-                                        <p class="mrittik-page-card__text">A layered family residence with soft neutrals, daylight-led planning, and bold sculptural furniture moments.</p>
-                                      </div>
-                                    </article>
-                                    <article class="mrittik-page-project">
-                                      <img src="./assets/project-elegant-retreat.png" alt="Elegant Retreat project" class="mrittik-page-project__image">
-                                      <div class="mrittik-page-project__body">
-                                        <div class="mrittik-page-project__meta">Hospitality</div>
-                                        <h2 class="mrittik-page-card__title">Elegant Retreat</h2>
-                                        <p class="mrittik-page-card__text">A boutique stay concept pairing warm timber detailing with understated luxury and intimate guest experiences.</p>
-                                      </div>
-                                    </article>
-                                    <article class="mrittik-page-project">
-                                      <img src="./assets/project-modern-marvel.png" alt="Modern Marvel project" class="mrittik-page-project__image">
-                                      <div class="mrittik-page-project__body">
-                                        <div class="mrittik-page-project__meta">Urban Living</div>
-                                        <h2 class="mrittik-page-card__title">Modern Marvel</h2>
-                                        <p class="mrittik-page-card__text">A city-centered home built around contrast, crisp geometry, and flexible spaces for contemporary routines.</p>
-                                      </div>
-                                    </article>
+
+                              <section class="projects-section">
+                                <div class="clone-shell">
+
+                                  <div class="projects-filter-wrap">
+                                    <div class="projects-filter" role="group" aria-label="Filter projects by category">
+                                      <button class="projects-filter__btn is-active" data-filter="all">All Projects</button>
+                                      <button class="projects-filter__btn" data-filter="turnkey-fitout">Turnkey Fitout</button>
+                                      <button class="projects-filter__btn" data-filter="design-build">Design &amp; Build</button>
+                                      <button class="projects-filter__btn" data-filter="furniture-works">Furniture Works</button>
+                                      <button class="projects-filter__btn" data-filter="project-management">Project Management</button>
+                                      <button class="projects-filter__btn" data-filter="renovation-remodeling">Renovation &amp; Remodeling</button>
+                                    </div>
+                                  </div>
+
+                                  <div class="work-list projects-grid" id="projects-grid">
+
+                                    <div class="work-item" data-project-category="turnkey-fitout">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/Website Photos & Videos/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69ce946be65481932970df49_69cae22c68939cf61015796d_01.BK115_Hero-p-1080.jpg" alt="Penthouse Tower" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Penthouse Tower</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Commercial</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2024</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">New York</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="design-build">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/Website Photos & Videos/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8eeb18c917589f966d7_01. Khyber Restaurant_Hero.jpeg" alt="Zenith Collection" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Zenith Collection</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Sustainable</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2023</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Koh Tao</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="furniture-works">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/Website Photos & Videos/Residential Projects/Apartments/2BHK Apartment (Bluewaters)/1.jpg" alt="Coastal Chic Residence" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Coastal Chic Residence</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Residential</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2021</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Missoula</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="turnkey-fitout">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/Website Photos & Videos/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/2.jpg" alt="Modern Oasis" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Modern Oasis</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Conceptual</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2020-22</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Ottawa</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="design-build">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/Website Photos & Videos/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69cae232f4cf2e75b202122a_02.BK115.jpg" alt="Nexus Innovation Center" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Nexus Innovation Center</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Conceptual</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2019</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Los Angeles</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="project-management">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/project-grand-vista.png" alt="Grand Vista" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Grand Vista</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Sustainable</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2021-23</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Tokyo</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="renovation-remodeling">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/project-elegant-retreat.png" alt="Elegant Retreat" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Elegant Retreat</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Interior</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2022</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">San Francisco</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="furniture-works">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/project-modern-marvel.png" alt="Modern Marvel" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Modern Marvel</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Residential</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2021</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">London, UK</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
+                                    <div class="work-item" data-project-category="renovation-remodeling">
+                                      <a href="./project-details.html" class="work-card w-inline-block">
+                                        <div>
+                                          <div class="work-card-image-wrapper">
+                                            <img src="./assets/Website Photos & Videos/Residential Projects/Apartments/2BHK Apartment (Dubai Creek Harbor)/4077486C-8922-41F5-B621-1B6DB225E5DA.jpeg" alt="Urban Sanctuary" class="work-card-image">
+                                          </div>
+                                          <div><h3 class="work-card-title">Urban Sanctuary</h3></div>
+                                        </div>
+                                        <div class="work-card-info">
+                                          <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Residential</div></div>
+                                          <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">2023</div></div>
+                                          <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">Dubai</div></div>
+                                        </div>
+                                      </a>
+                                    </div>
+
                                   </div>
                                 </div>
                               </section>
@@ -152,5 +288,59 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
   <script src="./script.js"></script>
+  <script>
+    (function () {
+      var bar   = document.querySelector('.projects-filter');
+      var btns  = bar ? bar.querySelectorAll('.projects-filter__btn') : [];
+      var cards = document.querySelectorAll('#projects-grid .work-item');
+
+      if (!bar || !btns.length) return;
+
+      /* create the sliding pill */
+      var slider = document.createElement('span');
+      slider.className = 'projects-filter__slider';
+      bar.insertBefore(slider, bar.firstChild);
+
+      function moveSlider(btn) {
+        slider.style.width  = btn.offsetWidth  + 'px';
+        slider.style.height = btn.offsetHeight + 'px';
+        slider.style.top    = btn.offsetTop    + 'px';
+        slider.style.left   = btn.offsetLeft   + 'px';
+      }
+
+      /* position on load without animation */
+      var activeBtn = bar.querySelector('.projects-filter__btn.is-active');
+      if (activeBtn) {
+        slider.style.transition = 'none';
+        moveSlider(activeBtn);
+        requestAnimationFrame(function () {
+          slider.style.transition = '';
+        });
+      }
+
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btns.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          moveSlider(btn);
+
+          var filter = btn.dataset.filter;
+          cards.forEach(function (card) {
+            if (filter === 'all' || card.dataset.projectCategory === filter) {
+              card.removeAttribute('hidden');
+            } else {
+              card.setAttribute('hidden', '');
+            }
+          });
+        });
+      });
+
+      /* keep slider in sync on resize */
+      window.addEventListener('resize', function () {
+        var active = bar.querySelector('.projects-filter__btn.is-active');
+        if (active) moveSlider(active);
+      });
+    })();
+  </script>
 </body>
 </html>

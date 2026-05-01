@@ -2,6 +2,21 @@ document.documentElement.classList.add("js-ready");
 
 const mediaDesktop = window.matchMedia("(min-width: 992px)");
 
+function scheduleAnimationFrame(callback) {
+  let frameId = 0;
+
+  return (...args) => {
+    if (frameId) {
+      return;
+    }
+
+    frameId = requestAnimationFrame(() => {
+      frameId = 0;
+      callback(...args);
+    });
+  };
+}
+
 function setupMrittikHeader() {
   const header = document.querySelector("[data-mrittik-header]");
   const mobileMenu = document.querySelector("[data-mobile-menu]");
@@ -26,8 +41,10 @@ function setupMrittikHeader() {
       lastScrollY = currentScrollY;
     };
 
+    const scheduleHeaderSync = scheduleAnimationFrame(syncHeader);
+
     syncHeader();
-    window.addEventListener("scroll", syncHeader, { passive: true });
+    window.addEventListener("scroll", scheduleHeaderSync, { passive: true });
   }
 
   const syncBodyLock = () => {
@@ -441,12 +458,14 @@ function setupProjectsFilter() {
     });
   });
 
-  window.addEventListener("resize", () => {
+  const syncSliderToActiveButton = scheduleAnimationFrame(() => {
     const active = bar.querySelector(".projects-filter__btn.is-active");
     if (active) {
       moveSlider(active);
     }
   });
+
+  window.addEventListener("resize", syncSliderToActiveButton);
 }
 
 function setupAboutClone() {
@@ -462,9 +481,16 @@ function setupAboutClone() {
       return;
     }
 
+    const videoSrc = videoFrame.dataset.videoSrc;
+    if (!videoSrc) {
+      return;
+    }
+
     video.classList.add("is-playing");
 
-    if (!videoFrame.src.includes("autoplay=1")) {
+    if (!videoFrame.src || videoFrame.src === "about:blank") {
+      videoFrame.src = videoSrc;
+    } else if (!videoFrame.src.includes("autoplay=1")) {
       const separator = videoFrame.src.includes("?") ? "&" : "?";
       videoFrame.src = `${videoFrame.src}${separator}autoplay=1`;
     }

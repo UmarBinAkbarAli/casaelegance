@@ -113,7 +113,27 @@ function extractMain(html) {
     throw new Error("Could not find <main> block in source HTML.");
   }
 
-  return indentBlock(match[0].trim(), 4);
+  return indentBlock(removeGeneratedIndent(match[0].trim()), 4);
+}
+
+function removeGeneratedIndent(content) {
+  const lines = content.split("\n");
+  const innerLines = lines.slice(1);
+  const indents = innerLines
+    .filter((line) => line.trim())
+    .map((line) => line.match(/^\s*/)[0].length);
+  const commonIndent = indents.length ? Math.min(...indents) : 0;
+
+  if (!commonIndent) {
+    return content;
+  }
+
+  return [
+    lines[0],
+    ...innerLines.map((line) => line.startsWith(" ".repeat(commonIndent))
+      ? line.slice(commonIndent)
+      : line)
+  ].join("\n");
 }
 
 function indentBlock(content, spaces) {

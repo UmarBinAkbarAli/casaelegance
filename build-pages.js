@@ -9,11 +9,12 @@ const layoutTemplate = readTemplate("layout.html");
 const pages = [
   {
     file: "index.html",
-    title: "Arsy Interior Design",
+    title: "Casa Elegance Interior Design",
     description:
       "Arsy interior design services, selected work, testimonials, FAQs, and contact CTA.",
     beforeHeader: readPartial("home-global-styles.html"),
     includePartners: true,
+    needsSwiper: true,
   },
   {
     file: "about.html",
@@ -22,6 +23,7 @@ const pages = [
       "Learn about Casa Elegance, our architectural philosophy, design process, and project achievements.",
     beforeHeader: "",
     includePartners: false,
+    needsSwiper: true,
   },
   {
     file: "services.html",
@@ -29,7 +31,8 @@ const pages = [
     description:
       "Explore Casa Elegance interior design, renovation, furniture, and spatial planning services.",
     beforeHeader: "",
-    includePartners: false,
+    includePartners: true,
+    needsSwiper: true,
   },
   {
     file: "projects.html",
@@ -38,6 +41,16 @@ const pages = [
       "Browse selected Casa Elegance interior and architectural projects across residential and hospitality spaces.",
     beforeHeader: "",
     includePartners: false,
+    needsSwiper: false,
+  },
+  {
+    file: "project-details.html",
+    title: "Project Details | Casa Elegance",
+    description:
+      "Explore the full story behind a Casa Elegance project, from design brief to final execution.",
+    beforeHeader: "",
+    includePartners: false,
+    needsSwiper: false,
   },
   {
     file: "contact.html",
@@ -46,6 +59,7 @@ const pages = [
       "Contact Casa Elegance for interior design, architecture, and project consultation inquiries.",
     beforeHeader: "",
     includePartners: false,
+    needsSwiper: false,
   },
 ];
 
@@ -69,12 +83,18 @@ function renderPage(page, sourceHtml) {
     title: page.title,
     description: page.description,
     beforeHeader: page.beforeHeader,
+    swiperCss: page.needsSwiper
+      ? '  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">'
+      : "",
     header: shared.header,
     mobileMenu: shared.mobileMenu,
     searchModal: shared.searchModal,
     main: extractMain(sourceHtml),
     partners: page.includePartners ? `\n${shared.partners}` : "",
     footer: `\n${shared.footer}`,
+    swiperJs: page.needsSwiper
+      ? '  <script defer src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>'
+      : "",
   };
 
   return layoutTemplate.replace(/\{\{(\w+)\}\}/g, (_, key) => {

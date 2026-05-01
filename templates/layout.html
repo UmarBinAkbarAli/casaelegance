@@ -6,21 +6,10 @@
   <title>{{title}}</title>
   <meta name="description" content="{{description}}">
   <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
-  <link rel="stylesheet" href="./arsy-ref.css">
+{{swiperCss}}
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="site-background" aria-hidden="true">
-    <div class="site-background__grid">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
   <div class="page-wrapper">
 {{beforeHeader}}
 {{header}}
@@ -33,7 +22,7 @@
 {{partners}}
 {{footer}}
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-  <script src="./script.js"></script>
+{{swiperJs}}
+  <script defer src="./script.js"></script>
 </body>
 </html>

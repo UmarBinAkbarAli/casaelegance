@@ -395,6 +395,60 @@ function setupFaq() {
   });
 }
 
+function setupProjectsFilter() {
+  const bar = document.querySelector(".projects-filter");
+  const buttons = Array.from(bar?.querySelectorAll(".projects-filter__btn") || []);
+  const cards = Array.from(document.querySelectorAll("#projects-grid .work-item"));
+
+  if (!bar || !buttons.length || !cards.length) {
+    return;
+  }
+
+  const slider = document.createElement("span");
+  slider.className = "projects-filter__slider";
+  bar.insertBefore(slider, bar.firstChild);
+
+  const moveSlider = (button) => {
+    slider.style.width = `${button.offsetWidth}px`;
+    slider.style.height = `${button.offsetHeight}px`;
+    slider.style.top = `${button.offsetTop}px`;
+    slider.style.left = `${button.offsetLeft}px`;
+  };
+
+  const activeButton = bar.querySelector(".projects-filter__btn.is-active");
+  if (activeButton) {
+    slider.style.transition = "none";
+    moveSlider(activeButton);
+    requestAnimationFrame(() => {
+      slider.style.transition = "";
+    });
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((item) => item.classList.remove("is-active"));
+      button.classList.add("is-active");
+      moveSlider(button);
+
+      const filter = button.dataset.filter;
+      cards.forEach((card) => {
+        if (filter === "all" || card.dataset.projectCategory === filter) {
+          card.removeAttribute("hidden");
+        } else {
+          card.setAttribute("hidden", "");
+        }
+      });
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    const active = bar.querySelector(".projects-filter__btn.is-active");
+    if (active) {
+      moveSlider(active);
+    }
+  });
+}
+
 function setupAboutClone() {
   const video = document.querySelector("[data-about-video]");
   const videoToggle = document.querySelector("[data-about-video-toggle]");
@@ -496,4 +550,5 @@ setupScrollReveal();
 setupServices();
 setupSlider();
 setupFaq();
+setupProjectsFilter();
 setupAboutClone();

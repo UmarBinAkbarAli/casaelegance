@@ -1,0 +1,150 @@
+{
+  "home": [
+    {
+      "title": "Turnkey Fitout",
+      "image": "./assets/Website Photos & Videos/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8f7e0b317dbdb8e3231_02. Khyber Restaurant.png",
+      "alt": "Turnkey Fitout",
+      "width": "1200",
+      "height": "800",
+      "category": "Sustainable",
+      "year": "2021-23",
+      "location": "Tokyo"
+    },
+    {
+      "title": "Design and Build",
+      "image": "./assets/Website Photos & Videos/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/2.jpg",
+      "alt": "Design and Build",
+      "width": "1080",
+      "height": "608",
+      "category": "Interior",
+      "year": "2022",
+      "location": "San Francisco"
+    },
+    {
+      "title": "Furniture Works",
+      "image": "./assets/Website Photos & Videos/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/8.jpg",
+      "alt": "Furniture Works",
+      "width": "1080",
+      "height": "608",
+      "category": "Residential",
+      "year": "2021",
+      "location": "London, UK"
+    }
+  ],
+  "listing": [
+    {
+      "title": "Penthouse Tower",
+      "filter": "turnkey-fitout",
+      "image": "./assets/Website Photos & Videos/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69ce946be65481932970df49_69cae22c68939cf61015796d_01.BK115_Hero-p-1080.jpg",
+      "alt": "Penthouse Tower",
+      "width": "1080",
+      "height": "720",
+      "priority": true,
+      "category": "Commercial",
+      "year": "2024",
+      "location": "New York"
+    },
+    {
+      "title": "Zenith Collection",
+      "filter": "design-build",
+      "image": "./assets/Website Photos & Videos/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8eeb18c917589f966d7_01. Khyber Restaurant_Hero.jpeg",
+      "alt": "Zenith Collection",
+      "width": "1189",
+      "height": "792",
+      "category": "Sustainable",
+      "year": "2023",
+      "location": "Koh Tao"
+    },
+    {
+      "title": "Coastal Chic Residence",
+      "filter": "furniture-works",
+      "image": "./assets/Website Photos & Videos/Residential Projects/Apartments/2BHK Apartment (Bluewaters)/1.jpg",
+      "alt": "Coastal Chic Residence",
+      "width": "1080",
+      "height": "1350",
+      "category": "Residential",
+      "year": "2021",
+      "location": "Missoula"
+    },
+    {
+      "title": "Modern Oasis",
+      "filter": "turnkey-fitout",
+      "image": "./assets/Website Photos & Videos/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/2.jpg",
+      "alt": "Modern Oasis",
+      "width": "1080",
+      "height": "608",
+      "category": "Conceptual",
+      "year": "2020-22",
+      "location": "Ottawa"
+    },
+    {
+      "title": "Nexus Innovation Center",
+      "filter": "design-build",
+      "image": "./assets/Website Photos & Videos/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69cae232f4cf2e75b202122a_02.BK115.jpg",
+      "alt": "Nexus Innovation Center",
+      "width": "1200",
+      "height": "800",
+      "category": "Conceptual",
+      "year": "2019",
+      "location": "Los Angeles"
+    },
+    {
+      "title": "Grand Vista",
+      "filter": "project-management",
+      "image": "./assets/project-grand-vista.png",
+      "alt": "Grand Vista",
+      "width": "383",
+      "height": "418",
+      "category": "Sustainable",
+      "year": "2021-23",
+      "location": "Tokyo"
+    },
+    {
+      "title": "Elegant Retreat",
+      "filter": "renovation-remodeling",
+      "image": "./assets/project-elegant-retreat.png",
+      "alt": "Elegant Retreat",
+      "width": "384",
+      "height": "418",
+      "category": "Interior",
+      "year": "2022",
+      "location": "San Francisco"
+    },
+    {
+      "title": "Modern Marvel",
+      "filter": "furniture-works",
+      "image": "./assets/project-modern-marvel.png",
+      "alt": "Modern Marvel",
+      "width": "296",
+      "height": "418",
+      "category": "Residential",
+      "year": "2021",
+      "location": "London, UK"
+    },
+    {
+      "title": "Urban Sanctuary",
+      "filter": "renovation-remodeling",
+      "image": "./assets/Website Photos & Videos/Residential Projects/Apartments/2BHK Apartment (Dubai Creek Harbor)/4077486C-8922-41F5-B621-1B6DB225E5DA.jpeg",
+      "alt": "Urban Sanctuary",
+      "width": "1080",
+      "height": "1346",
+      "category": "Residential",
+      "year": "2023",
+      "location": "Dubai"
+    }
+  ],
+  "detail": {
+    "title": "Burj115 Premium Office",
+    "eyebrow": "Featured Project",
+    "text": "A high-end workplace designed to balance executive presence, everyday collaboration, and a refined hospitality-driven arrival experience.",
+    "meta": [
+      ["Client", "Private Corporate Office"],
+      ["Location", "Burj Khalifa District"],
+      ["Scope", "Design & Build"],
+      ["Completion", "2024"]
+    ],
+    "ctaKicker": "Start Your Project",
+    "ctaTitle": "Looking for a tailored interior with the same level of finish?",
+    "ctaLinkText": "Contact Casa Elegance"
+  }
+}

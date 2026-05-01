@@ -4,7 +4,12 @@ const path = require("path");
 const rootDir = __dirname;
 const templatesDir = path.join(rootDir, "templates");
 const partialsDir = path.join(templatesDir, "partials");
+const dataDir = path.join(templatesDir, "data");
 const layoutTemplate = readTemplate("layout.html");
+const services = readJson("services.json");
+const site = readJson("site.json");
+const testimonials = readJson("testimonials.json");
+const projects = readJson("projects.json");
 
 const pages = [
   {
@@ -79,6 +84,7 @@ for (const page of pages) {
 }
 
 function renderPage(page, sourceHtml) {
+  const main = renderPageComponents(page, extractMain(sourceHtml));
   const replacements = {
     title: page.title,
     description: page.description,
@@ -89,7 +95,7 @@ function renderPage(page, sourceHtml) {
     header: shared.header,
     mobileMenu: shared.mobileMenu,
     searchModal: shared.searchModal,
-    main: extractMain(sourceHtml),
+    main: indentBlock(main, 4),
     partners: page.includePartners ? `\n${shared.partners}` : "",
     footer: `\n${shared.footer}`,
     swiperJs: page.needsSwiper
@@ -113,7 +119,404 @@ function extractMain(html) {
     throw new Error("Could not find <main> block in source HTML.");
   }
 
-  return indentBlock(removeGeneratedIndent(match[0].trim()), 4);
+  return removeGeneratedIndent(match[0].trim());
+}
+
+function renderPageComponents(page, main) {
+  if (page.file === "index.html") {
+    return replaceSection(
+      replaceSection(
+        replaceSection(main, "section-services", renderHomeServicesSection()),
+        "section-work",
+        renderHomeProjectsSection()
+      ),
+      "section-testimonial-mrittik",
+      renderTestimonialSection({ wId: "home-testimonial-shell" })
+    );
+  }
+
+  if (page.file === "about.html") {
+    return replaceSection(
+      replaceSection(
+        replaceSection(
+          main,
+          "clone-services",
+          renderCloneServicesSection({ wIdPrefix: "about-service" })
+        ),
+        "section-testimonial-mrittik",
+        renderTestimonialSection({
+          wId: "about-testimonial-shell",
+          viewportAttrs: "data-about-testimonials",
+          dotsAttrs: "data-about-testimonials-pagination",
+        })
+      ),
+      "clone-contact",
+      renderContactSection({
+        introWId: "about-contact-intro",
+        formWId: "about-contact-form",
+        includePartners: true,
+      })
+    );
+  }
+
+  if (page.file === "services.html") {
+    return replaceSection(
+      replaceSection(
+        main,
+        "clone-services",
+        renderCloneServicesSection({ includeHeader: true, wIdPrefix: "services-page-card" })
+      ),
+      "section-testimonial-mrittik",
+      renderTestimonialSection({ wId: "services-testimonial-shell" })
+    );
+  }
+
+  if (page.file === "projects.html") {
+    return replaceSection(
+      replaceSection(main, "projects-page-hero", renderProjectsPageHero()),
+      "projects-section",
+      renderProjectsSection()
+    );
+  }
+
+  if (page.file === "project-details.html") {
+    return replaceSection(
+      replaceSection(main, "project-detail-hero", renderProjectDetailHero()),
+      "project-detail-cta",
+      renderProjectDetailCta()
+    );
+  }
+
+  if (page.file === "contact.html") {
+    return replaceSection(
+      main,
+      "clone-contact",
+      renderContactSection({
+        introWId: "contact-intro",
+        formWId: "contact-form",
+      })
+    );
+  }
+
+  return main;
+}
+
+function renderHomeServicesSection() {
+  return `<section class="section-services">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="_2-col-content-top">
+        <div data-w-id="91406df7-4871-4ba7-a32c-3a5d828d24ca" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
+          <div class="pill white">our services</div>
+          <div class="spacer-medium"></div>
+          <h2 class="heading-style-h2 text-color-alternate">Crafting Possibilities ?<br>Our Architectural Palette</h2>
+        </div>
+        <div data-w-id="19557f39-0333-1a19-01a6-68b6a515d637" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
+          <p class="text-style-muted">Our team of skilled professionals is dedicated to turning your vision into reality, combining creativity, innovation, and expertise to deliver exceptional results.</p>
+          <div class="spacer-xxsmall"></div>
+        </div>
+      </div>
+
+      <div class="spacer-xxlarge"></div>
+
+      <div class="services-list" data-services-list>
+${services.map(renderHomeServiceCard).join("\n\n")}
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
+function renderHomeServiceCard(service) {
+  return indentBlock(`<a href="#" class="services-item w-inline-block" data-service-item>
+  <div class="services-content">
+    <div class="services-heading-wrap">
+      <div class="services-count">${escapeHtml(service.homeCount)}</div>
+      <h3 class="heading-style-h3 text-color-alternate">${escapeHtml(service.title)}</h3>
+    </div>
+    <div class="services-desc-wrap">
+      <p class="services-desc">${escapeHtml(service.homeDescription)}</p>
+    </div>
+  </div>
+  <div class="services-item-image-wrap" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.5, 0.5, 1);" data-service-image>
+    <img src="${escapeAttr(service.homeImage)}" alt="${escapeAttr(service.homeImageAlt)}" class="services-item-image" loading="lazy" decoding="async">
+  </div>
+  <img src="https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663a65a75b1d340c013fbc28_arrow%20icon.svg" alt="Arrow" class="services-arrow-icon" loading="lazy" decoding="async">
+</a>`, 8);
+}
+
+function renderCloneServicesSection({ includeHeader = false, wIdPrefix }) {
+  const header = includeHeader
+    ? `      <div class="_2-col-content-top" data-w-id="services-page-head" style="margin-bottom:4rem;opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+        <div>
+          <div class="pill white">our services</div>
+          <div class="spacer-medium"></div>
+      </div>
+      </div>
+`
+    : "";
+
+  return `<section class="clone-services">
+  <div class="clone-shell">
+${header}    <div class="clone-services__grid">
+${services.map((service, index) => renderCloneServiceCard(service, `${wIdPrefix}-${index + 1}`)).join("\n")}
+    </div>
+  </div>
+</section>`;
+}
+
+function renderCloneServiceCard(service, wId) {
+  return indentBlock(`<article class="clone-service" data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+  <span class="clone-service__count">${escapeHtml(service.cloneCount)}</span>
+  <img src="./assets/casa-elegance-icon.png" alt="Casa Elegance icon" class="clone-service__icon" width="537" height="653" loading="lazy" decoding="async">
+  <h3>${escapeHtml(service.title)}</h3>
+  <p>${escapeHtml(service.cloneDescription)}</p>
+  <a href="./services.html" class="clone-service__arrow" aria-label="${escapeAttr(service.ariaLabel)}"></a>
+</article>`, 6);
+}
+
+function renderTestimonialSection({ wId, viewportAttrs = "", dotsAttrs = "" }) {
+  const viewportAttributeText = viewportAttrs ? ` ${viewportAttrs}` : "";
+  const dotsAttributeText = dotsAttrs ? ` ${dotsAttrs}` : "";
+
+  return `<section class="section-testimonial-mrittik">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="testimonial-mrittik testimonial-slider" data-slider data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+        <button type="button" class="testimonial-mrittik__arrow" data-slider-prev aria-label="Previous testimonial"></button>
+        <button type="button" class="testimonial-mrittik__arrow" data-slider-next aria-label="Next testimonial"></button>
+
+        <div class="testimonial-mrittik__viewport swiper"${viewportAttributeText}>
+          <div class="testimonial-mask swiper-wrapper" data-slider-mask>
+${testimonials.map(renderTestimonialSlide).join("\n\n")}
+          </div>
+        </div>
+
+        <div class="testimonial-slider-nav testimonial-mrittik__dots" data-slider-nav${dotsAttributeText}></div>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
+function renderTestimonialSlide(testimonial) {
+  return indentBlock(`<article class="testimonial-slide swiper-slide">
+  <div class="testimonial-mrittik__card">
+    <div class="testimonial-mrittik__avatar-wrap" aria-hidden="true">
+      <img src="${escapeAttr(testimonial.avatar)}" alt="${escapeAttr(testimonial.avatarAlt)}" class="testimonial-mrittik__avatar" loading="lazy" decoding="async">
+    </div>
+    <blockquote class="testimonial-mrittik__quote">
+      " ${escapeHtml(testimonial.quote)} "
+    </blockquote>
+    <h6 class="testimonial-mrittik__author">${escapeHtml(testimonial.author)}</h6>
+  </div>
+</article>`, 12);
+}
+
+function renderHomeProjectsSection() {
+  return `<section class="section-work" id="work">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="_2-col-content-top">
+        <div data-w-id="9316677b-5f04-5d8f-1abc-1b599d2fa8af" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
+          <div class="pill white">our Work</div>
+          <div class="spacer-medium"></div>
+          <h2 class="heading-style-h2 text-color-alternate">Design Chronicles ?<br>Our Latest Masterpieces</h2>
+          <div class="spacer-small"></div>
+          <div class="max-width-medium">
+            <p class="text-style-muted">Explore a selection of our latest projects, each a testament to our commitment to innovation, creativity, and excellence in design.</p>
+          </div>
+        </div>
+        <div id="w-node-_9316677b-5f04-5d8f-1abc-1b599d2fa8b7-a6e5fc78" data-w-id="9316677b-5f04-5d8f-1abc-1b599d2fa8b7" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
+          <div class="button-group">
+            <a href="#" class="button is-secondary w-inline-block">
+              <div>Get a Quote</div>
+              <div class="button-icon-wrap">
+                <img src="https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663a78af9494684e9f0e93e1_arrow%20upright%20(3).svg" alt="Arrow" class="button-icon" loading="lazy" decoding="async">
+                <img src="https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663a78af9494684e9f0e93e1_arrow%20upright%20(3).svg" alt="Arrow" class="button-icon below" loading="lazy" decoding="async">
+              </div>
+            </a>
+            <a href="#" class="button w-inline-block">
+              <div>Browse Portfolio</div>
+            </a>
+          </div>
+          <div class="spacer-xxsmall"></div>
+        </div>
+      </div>
+
+      <div class="spacer-xlarge"></div>
+
+      <div>
+        <div class="work-list">
+${projects.home.map((project) => renderProjectCard(project, { indent: 10, wId: "d0339084-321d-c54a-cd66-167a365879f0" })).join("\n\n")}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
+function renderProjectsPageHero() {
+  return `<section class="projects-page-hero">
+  <div class="projects-page-hero__inner clone-shell" data-w-id="projects-hero-shell" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+    <h1 class="projects-page-hero__title">Projects</h1>
+    ${renderBreadcrumb({
+      className: "projects-page-hero__breadcrumb",
+      separator: "&rsaquo;",
+      items: [
+        { label: "Home", href: "./index.html" },
+        { label: "Projects" },
+      ],
+    })}
+  </div>
+</section>`;
+}
+
+function renderProjectsSection() {
+  return `<section class="projects-section">
+  <div class="clone-shell">
+
+    <div class="projects-filter-wrap" data-w-id="projects-filter-wrap" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+      <div class="projects-filter" role="group" aria-label="Filter projects by category">
+        <button class="projects-filter__btn is-active" data-filter="all">All Projects</button>
+        <button class="projects-filter__btn" data-filter="turnkey-fitout">Turnkey Fitout</button>
+        <button class="projects-filter__btn" data-filter="design-build">Design &amp; Build</button>
+        <button class="projects-filter__btn" data-filter="furniture-works">Furniture Works</button>
+        <button class="projects-filter__btn" data-filter="project-management">Project Management</button>
+        <button class="projects-filter__btn" data-filter="renovation-remodeling">Renovation &amp; Remodeling</button>
+      </div>
+    </div>
+
+    <div class="work-list projects-grid" id="projects-grid">
+${projects.listing.map((project, index) => renderProjectCard(project, { indent: 6, wId: `projects-card-${index + 1}`, filter: project.filter })).join("\n\n")}
+    </div>
+  </div>
+</section>`;
+}
+
+function renderProjectCard(project, { indent, wId, filter = "" }) {
+  const filterAttribute = filter ? ` data-project-category="${escapeAttr(filter)}"` : "";
+  const imageLoading = project.priority ? ' fetchpriority="high"' : ' loading="lazy"';
+
+  return indentBlock(`<div class="work-item"${filterAttribute} data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+  <a href="./project-details.html" class="work-card w-inline-block">
+    <div>
+      <div class="work-card-image-wrapper">
+        <img src="${escapeAttr(project.image)}" alt="${escapeAttr(project.alt)}" class="work-card-image" width="${escapeAttr(project.width)}" height="${escapeAttr(project.height)}"${imageLoading} decoding="async">
+      </div>
+      <div><h3 class="work-card-title">${escapeHtml(project.title)}</h3></div>
+    </div>
+    <div class="work-card-info">
+      <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.category)}</div></div>
+      <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.year)}</div></div>
+      <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.location)}</div></div>
+    </div>
+  </a>
+</div>`, indent);
+}
+
+function renderProjectDetailHero() {
+  const detail = projects.detail;
+  return `<section class="project-detail-hero">
+  <div class="clone-shell project-detail-hero__inner">
+    <div class="project-detail-hero__content" data-w-id="project-detail-hero-content" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+      <div class="pill white">${escapeHtml(detail.eyebrow)}</div>
+      ${renderBreadcrumb({
+        className: "project-detail-breadcrumb",
+        separator: "/",
+        items: [
+          { label: "Home", href: "./index.html" },
+          { label: "Projects", href: "./projects.html" },
+          { label: detail.title },
+        ],
+      })}
+      <h1 class="project-detail-hero__title">${escapeHtml(detail.title)}</h1>
+      <p class="project-detail-hero__text">${escapeHtml(detail.text)}</p>
+    </div>
+
+    <div class="project-detail-hero__meta" data-w-id="project-detail-hero-meta" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+${detail.meta.map(([label, value]) => indentBlock(`<div class="project-detail-meta-card">
+  <span>${escapeHtml(label)}</span>
+  <strong>${escapeHtml(value)}</strong>
+</div>`, 6)).join("\n")}
+    </div>
+  </div>
+</section>`;
+}
+
+function renderProjectDetailCta() {
+  const detail = projects.detail;
+  return `<section class="project-detail-cta">
+  <div class="clone-shell project-detail-cta__inner" data-w-id="project-detail-cta-shell" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+    <div>
+      <span class="project-detail-section-kicker">${escapeHtml(detail.ctaKicker)}</span>
+      <h2>${escapeHtml(detail.ctaTitle)}</h2>
+    </div>
+    <a href="./contact.html" class="about-mrittik__button">${escapeHtml(detail.ctaLinkText)}</a>
+  </div>
+</section>`;
+}
+
+function renderContactSection({ introWId, formWId, includePartners = false }) {
+  return `<section class="clone-contact">
+  <div class="clone-shell">
+    <div class="clone-contact__grid">
+      <div class="clone-contact__intro" data-w-id="${escapeAttr(introWId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+        <h2>${escapeHtml(site.contact.heading)}</h2>
+        <p>${escapeHtml(site.contact.description)}</p>
+      </div>
+      ${renderContactForm(formWId)}
+    </div>${includePartners ? `\n${renderAboutPartnerStrip()}` : ""}
+  </div>
+</section>`;
+}
+
+function renderContactForm(wId) {
+  return `<form class="clone-contact__form" data-about-form data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+        <input type="text" placeholder="Your Name*" aria-label="Your Name" required>
+        <input type="tel" placeholder="Your Phone No" aria-label="Your Phone Number">
+        <input type="email" placeholder="Your Email*" aria-label="Your Email" required>
+        <textarea rows="4" placeholder="Your Message" aria-label="Your Message"></textarea>
+        <button type="submit">Send Mail</button>
+      </form>`;
+}
+
+function renderAboutPartnerStrip() {
+  const partners = [
+    ["5", "123", "55"],
+    ["2", "209", "44"],
+    ["4", "126", "54"],
+    ["1", "87", "38"],
+    ["3", "138", "48"],
+  ];
+
+  return `    <div class="clone-partners">
+${partners.map(([name, width, height], index) => indentBlock(`<div class="clone-partners__item" data-w-id="about-partner-${index + 1}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);"><img src="./assets/partner/${name}.svg" alt="Partner ${name}" width="${width}" height="${height}" loading="lazy" decoding="async"><img src="./assets/partner/${name}${name}.svg" alt="Partner ${name} active" width="${width}" height="${height}" loading="lazy" decoding="async"></div>`, 6)).join("\n")}
+    </div>`;
+}
+
+function renderBreadcrumb({ className, separator, items }) {
+  return `<nav class="${escapeAttr(className)}" aria-label="Breadcrumb">
+${items.map((item, index) => {
+  const crumb = item.href
+    ? `<a href="${escapeAttr(item.href)}">${escapeHtml(item.label)}</a>`
+    : `<span>${escapeHtml(item.label)}</span>`;
+  const separatorMarkup = index < items.length - 1
+    ? `\n  <span aria-hidden="true">${separator}</span>`
+    : "";
+  return `  ${crumb}${separatorMarkup}`;
+}).join("\n")}
+</nav>`;
+}
+
+function replaceSection(html, className, replacement) {
+  const pattern = new RegExp(`<section class="${escapeRegExp(className)}"[^>]*>[\\s\\S]*?<\\/section>`);
+
+  if (!pattern.test(html)) {
+    throw new Error(`Could not find section: ${className}`);
+  }
+
+  return html.replace(pattern, replacement);
 }
 
 function removeGeneratedIndent(content) {
@@ -148,6 +551,26 @@ function readPartial(fileName) {
   return readTemplate(path.join("partials", fileName));
 }
 
+function readJson(fileName) {
+  return JSON.parse(fs.readFileSync(path.join(dataDir, fileName), "utf8"));
+}
+
 function readTemplate(relativePath) {
   return fs.readFileSync(path.join(templatesDir, relativePath), "utf8").trimEnd();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value).replace(/'/g, "&#39;");
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

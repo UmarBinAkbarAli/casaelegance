@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Turnkey Fitout",
+    "ariaLabel": "Turnkey Fitout",
+    "homeCount": "1.",
+    "cloneCount": "01",
+    "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+    "cloneDescription": "Mrittik Architects is a full-service design firm providing architecture, master planning, urban design, interior architecture.",
+    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdac529ded0938acfe6f1_0_1%20(2).webp",
+    "homeImageAlt": "Architecture Design"
+  },
+  {
+    "title": "Design & Build",
+    "ariaLabel": "Design and Build",
+    "homeCount": "2.",
+    "cloneCount": "02",
+    "homeDescription": "Our talented furniture designers blend form and function to create pieces that are not only visually stunning but also practical and durable.",
+    "cloneDescription": "Mrittik Architects is a full-service design firm providing architecture, master planning, urban design, interior architecture.",
+    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdb4cc93a0bc041e7110d_0_3%20(2).webp",
+    "homeImageAlt": "Furniture Design"
+  },
+  {
+    "title": "Furniture Works",
+    "ariaLabel": "Furniture Works",
+    "homeCount": "3.",
+    "cloneCount": "03",
+    "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+    "cloneDescription": "Mrittik Architects is a full-service design firm providing architecture, master planning, urban design, interior architecture.",
+    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdb94b6e8ee7693812200_0_0%20(2).webp",
+    "homeImageAlt": "Interior Design"
+  },
+  {
+    "title": "Project Management",
+    "ariaLabel": "Project Management",
+    "homeCount": "4.",
+    "cloneCount": "04",
+    "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+    "cloneDescription": "Mrittik Architects is a full-service design firm providing architecture, master planning, urban design, interior architecture.",
+    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdbd913e6407ad512401b_0_2%20(2).webp",
+    "homeImageAlt": "Space Planning"
+  },
+  {
+    "title": "Renovation & Remodeling",
+    "ariaLabel": "Renovation and Remodeling",
+    "homeCount": "4.",
+    "cloneCount": "05",
+    "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+    "cloneDescription": "Mrittik Architects is a full-service design firm providing architecture, master planning, urban design, interior architecture.",
+    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdbd913e6407ad512401b_0_2%20(2).webp",
+    "homeImageAlt": "Space Planning"
+  }
+]

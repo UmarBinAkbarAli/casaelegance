@@ -1,0 +1,17 @@
+# Local dependency/cache output
+.npm-cache/
+
+# Browser profiles and audit scratch output
+.chrome-*/
+.asset-tools/
+Microsoft/
+
+# Local audit/report artifacts
+phase-*-report.md
+phase-*-optimization-report.json
+phase*-shot.png
+phase-*-image-worker.html
+
+# Common OS/editor noise
+.DS_Store
+Thumbs.db

@@ -10,6 +10,77 @@ const services = readJson("services.json");
 const site = readJson("site.json");
 const testimonials = readJson("testimonials.json");
 const projects = readJson("projects.json");
+const optimizedAssets = readRootJson("phase-5-optimization-report.json");
+const optimizedAssetMap = new Map(
+  optimizedAssets
+    .filter((entry) => entry.status === "optimized")
+    .map((entry) => [normalizeAssetPath(entry.path), entry])
+);
+const contentImageDeliveryMap = new Map(
+  Object.entries({
+    "assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8f7e0b317dbdb8e3231_02. Khyber Restaurant.png": {
+      fallback: "./assets/delivery/khyber-restaurant-detail.png",
+      webp: "./assets/delivery/khyber-restaurant-detail.webp",
+    },
+    "assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8eeb18c917589f966d7_01. Khyber Restaurant_Hero.jpeg": {
+      fallback: "./assets/delivery/khyber-restaurant-hero.jpg",
+      webp: "./assets/delivery/khyber-restaurant-hero.webp",
+      avif: "./assets/delivery/khyber-restaurant-hero.avif",
+    },
+    "assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/1.jpg": {
+      fallback: "./assets/delivery/genetec-office-hero.jpg",
+      webp: "./assets/delivery/genetec-office-hero.webp",
+      avif: "./assets/delivery/genetec-office-hero.avif",
+    },
+    "assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/2.jpg": {
+      fallback: "./assets/delivery/genetec-office-meeting-room.jpg",
+      webp: "./assets/delivery/genetec-office-meeting-room.webp",
+      avif: "./assets/delivery/genetec-office-meeting-room.avif",
+    },
+    "assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/8.jpg": {
+      fallback: "./assets/delivery/genetec-office-furniture.jpg",
+      webp: "./assets/delivery/genetec-office-furniture.webp",
+      avif: "./assets/delivery/genetec-office-furniture.avif",
+    },
+    "assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69ce946be65481932970df49_69cae22c68939cf61015796d_01.BK115_Hero-p-1080.jpg": {
+      fallback: "./assets/delivery/burj115-hero.jpg",
+      webp: "./assets/delivery/burj115-hero.webp",
+      avif: "./assets/delivery/burj115-hero.avif",
+    },
+    "assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69cae232f4cf2e75b202122a_02.BK115.jpg": {
+      fallback: "./assets/delivery/burj115-breakout-area.jpg",
+      webp: "./assets/delivery/burj115-breakout-area.webp",
+      avif: "./assets/delivery/burj115-breakout-area.avif",
+    },
+    "assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69cae23ab7cefcc49aedc3fe_10.BK115.jpg": {
+      fallback: "./assets/delivery/burj115-corridor.jpg",
+      webp: "./assets/delivery/burj115-corridor.webp",
+      avif: "./assets/delivery/burj115-corridor.avif",
+    },
+    "assets/website-used/Residential Projects/Apartments/2BHK Apartment (Bluewaters)/1.jpg": {
+      fallback: "./assets/delivery/bluewaters-apartment.jpg",
+      webp: "./assets/delivery/bluewaters-apartment.webp",
+      avif: "./assets/delivery/bluewaters-apartment.avif",
+    },
+    "assets/website-used/Residential Projects/Apartments/2BHK Apartment (Dubai Creek Harbor)/4077486C-8922-41F5-B621-1B6DB225E5DA.jpeg": {
+      fallback: "./assets/delivery/dubai-creek-apartment.jpg",
+      webp: "./assets/delivery/dubai-creek-apartment.webp",
+      avif: "./assets/delivery/dubai-creek-apartment.avif",
+    },
+    "assets/project-grand-vista.png": {
+      fallback: "./assets/delivery/project-grand-vista.png",
+      webp: "./assets/delivery/project-grand-vista.webp",
+    },
+    "assets/project-elegant-retreat.png": {
+      fallback: "./assets/delivery/project-elegant-retreat.png",
+      webp: "./assets/delivery/project-elegant-retreat.webp",
+    },
+    "assets/project-modern-marvel.png": {
+      fallback: "./assets/delivery/project-modern-marvel.png",
+      webp: "./assets/delivery/project-modern-marvel.webp",
+    },
+  })
+);
 
 const pages = [
   {
@@ -266,9 +337,10 @@ ${services.map((service, index) => renderCloneServiceCard(service, `${wIdPrefix}
 }
 
 function renderCloneServiceCard(service, wId) {
+  const iconResponsiveAttrs = renderResponsiveAttrs("./assets/casa-elegance-icon.png", "72px");
   return indentBlock(`<article class="clone-service" data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
   <span class="clone-service__count">${escapeHtml(service.cloneCount)}</span>
-  <img src="./assets/casa-elegance-icon.png" alt="Casa Elegance icon" class="clone-service__icon" width="537" height="653" loading="lazy" decoding="async">
+  <img src="./assets/casa-elegance-icon.png" alt="Casa Elegance icon" class="clone-service__icon" width="537" height="653"${iconResponsiveAttrs} loading="lazy" decoding="async">
   <h3>${escapeHtml(service.title)}</h3>
   <p>${escapeHtml(service.cloneDescription)}</p>
   <a href="./services.html" class="clone-service__arrow" aria-label="${escapeAttr(service.ariaLabel)}"></a>
@@ -396,13 +468,20 @@ ${projects.listing.map((project, index) => renderProjectCard(project, { indent: 
 
 function renderProjectCard(project, { indent, wId, filter = "" }) {
   const filterAttribute = filter ? ` data-project-category="${escapeAttr(filter)}"` : "";
-  const imageLoading = project.priority ? ' fetchpriority="high"' : ' loading="lazy"';
+  const imageMarkup = renderContentImage(project.image, {
+    alt: project.alt,
+    className: "work-card-image",
+    width: project.width,
+    height: project.height,
+    loading: project.priority ? "eager" : "lazy",
+    fetchpriority: project.priority ? "high" : "",
+  });
 
   return indentBlock(`<div class="work-item"${filterAttribute} data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
   <a href="./project-details.html" class="work-card w-inline-block">
     <div>
       <div class="work-card-image-wrapper">
-        <img src="${escapeAttr(project.image)}" alt="${escapeAttr(project.alt)}" class="work-card-image" width="${escapeAttr(project.width)}" height="${escapeAttr(project.height)}"${imageLoading} decoding="async">
+${indentBlock(imageMarkup, 8)}
       </div>
       <div><h3 class="work-card-title">${escapeHtml(project.title)}</h3></div>
     </div>
@@ -555,6 +634,10 @@ function readJson(fileName) {
   return JSON.parse(fs.readFileSync(path.join(dataDir, fileName), "utf8"));
 }
 
+function readRootJson(fileName) {
+  return JSON.parse(fs.readFileSync(path.join(rootDir, fileName), "utf8"));
+}
+
 function readTemplate(relativePath) {
   return fs.readFileSync(path.join(templatesDir, relativePath), "utf8").trimEnd();
 }
@@ -573,4 +656,89 @@ function escapeAttr(value) {
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function renderResponsiveAttrs(assetPath, sizes) {
+  const normalizedPath = normalizeAssetPath(assetPath);
+  const entry = optimizedAssetMap.get(normalizedPath);
+
+  if (!entry) {
+    return "";
+  }
+
+  const extension = normalizeExtension(path.extname(normalizedPath));
+  const fallbackVariants = entry.variants
+    .filter((variant) => `.${variant.format}` === extension)
+    .sort((left, right) => left.width - right.width);
+
+  if (!fallbackVariants.length) {
+    return "";
+  }
+
+  const srcset = fallbackVariants
+    .map((variant) => `${ensureDotSlash(variant.outputPath)} ${variant.width}w`)
+    .join(", ");
+
+  return ` srcset="${escapeAttr(srcset)}" sizes="${escapeAttr(sizes)}"`;
+}
+
+function renderContentImage(assetPath, options) {
+  const delivery = contentImageDeliveryMap.get(normalizeAssetPath(assetPath));
+  const attrs = [
+    `src="${escapeAttr(delivery ? delivery.fallback : assetPath)}"`,
+    `alt="${escapeAttr(options.alt)}"`,
+  ];
+
+  if (options.className) {
+    attrs.push(`class="${escapeAttr(options.className)}"`);
+  }
+
+  if (options.width) {
+    attrs.push(`width="${escapeAttr(options.width)}"`);
+  }
+
+  if (options.height) {
+    attrs.push(`height="${escapeAttr(options.height)}"`);
+  }
+
+  if (options.loading) {
+    attrs.push(`loading="${escapeAttr(options.loading)}"`);
+  }
+
+  if (options.fetchpriority) {
+    attrs.push(`fetchpriority="${escapeAttr(options.fetchpriority)}"`);
+  }
+
+  attrs.push('decoding="async"');
+
+  if (!delivery) {
+    return `<img ${attrs.join(" ")}>`;
+  }
+
+  const sourceLines = [];
+
+  if (delivery.avif) {
+    sourceLines.push(`  <source srcset="${escapeAttr(delivery.avif)}" type="image/avif">`);
+  }
+
+  if (delivery.webp) {
+    sourceLines.push(`  <source srcset="${escapeAttr(delivery.webp)}" type="image/webp">`);
+  }
+
+  return `<picture style="display:block;">
+${sourceLines.join("\n")}
+  <img ${attrs.join(" ")}>
+</picture>`;
+}
+
+function normalizeAssetPath(assetPath) {
+  return String(assetPath).replace(/^\.\//, "").replace(/\\/g, "/");
+}
+
+function normalizeExtension(extension) {
+  return extension === ".jpeg" ? ".jpg" : extension;
+}
+
+function ensureDotSlash(assetPath) {
+  return assetPath.startsWith("./") ? assetPath : `./${assetPath}`;
 }

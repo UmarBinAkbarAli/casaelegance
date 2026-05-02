@@ -145,9 +145,13 @@ function setupHeroSlider() {
     const activeIndex = swiper.realIndex ?? 0;
     const { prev: prevIndex, next: nextIndex } = getNeighborIndexes(activeIndex);
     const leftImage = slides[nextIndex].style.getPropertyValue("--hero-image");
+    const leftFallback = slides[nextIndex].style.getPropertyValue("--hero-image-fallback") || leftImage;
     const rightImage = slides[prevIndex].style.getPropertyValue("--hero-image");
+    const rightFallback = slides[prevIndex].style.getPropertyValue("--hero-image-fallback") || rightImage;
 
+    slider.style.setProperty("--hero-prev-image-fallback", leftFallback);
     slider.style.setProperty("--hero-prev-image", leftImage);
+    slider.style.setProperty("--hero-next-image-fallback", rightFallback);
     slider.style.setProperty("--hero-next-image", rightImage);
 
     slides.forEach((slide, slideIndex) => {

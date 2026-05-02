@@ -70,7 +70,7 @@
     <header class="mrittik-header" data-mrittik-header>
       <div class="mrittik-header__inner">
         <a href="./index.html" class="mrittik-header__brand" aria-label="Casa Elegance home">
-          <img src="./assets/casa-elegance-logo.png" alt="Casa Elegance" class="mrittik-header__logo" width="1757" height="873" decoding="async">
+          <img src="./assets/casa-elegance-logo.png" srcset="./assets/optimized/assets/casa-elegance-logo-144w.png 144w, ./assets/optimized/assets/casa-elegance-logo-288w.png 288w, ./assets/optimized/assets/casa-elegance-logo-432w.png 432w" sizes="(max-width: 479px) 116px, (max-width: 991px) 120px, 144px" alt="Casa Elegance" class="mrittik-header__logo" width="1757" height="873" decoding="async">
         </a>
 
         <nav class="mrittik-nav" aria-label="Primary">
@@ -103,7 +103,7 @@
         <div class="mrittik-hero__side mrittik-hero__side--right" aria-hidden="true"></div>
         <div class="mrittik-hero__viewport swiper" data-hero-viewport>
           <div class="swiper-wrapper">
-                <article class="mrittik-hero__slide swiper-slide" data-hero-slide style="--hero-image:url('./assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69cae23ab7cefcc49aedc3fe_10.BK115.jpg');">
+                <article class="mrittik-hero__slide swiper-slide" data-hero-slide style="--hero-image-fallback:url('./assets/delivery/burj115-corridor.jpg');--hero-image:image-set(url('./assets/delivery/burj115-corridor.avif') type('image/avif'), url('./assets/delivery/burj115-corridor.webp') type('image/webp'), url('./assets/delivery/burj115-corridor.jpg') type('image/jpeg'));">
               <div class="mrittik-hero__frame">
                 <div class="mrittik-hero__image"></div>
                 <div class="mrittik-hero__card">
@@ -122,7 +122,7 @@
               </div>
             </article>
                                         
-                <article class="mrittik-hero__slide swiper-slide" data-hero-slide style="--hero-image:url('./assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/1.jpg');">
+                <article class="mrittik-hero__slide swiper-slide" data-hero-slide style="--hero-image-fallback:url('./assets/delivery/genetec-office-hero.jpg');--hero-image:image-set(url('./assets/delivery/genetec-office-hero.avif') type('image/avif'), url('./assets/delivery/genetec-office-hero.webp') type('image/webp'), url('./assets/delivery/genetec-office-hero.jpg') type('image/jpeg'));">
               <div class="mrittik-hero__frame">
                 <div class="mrittik-hero__image"></div>
                 <div class="mrittik-hero__card">
@@ -141,7 +141,7 @@
               </div>
             </article>
                                         
-            <article class="mrittik-hero__slide swiper-slide is-active" data-hero-slide style="--hero-image:url('https://demo.bravisthemes.com/mrittik/wp-content/uploads/2023/11/home14-bg-09.jpg');">
+            <article class="mrittik-hero__slide swiper-slide is-active" data-hero-slide style="--hero-image-fallback:url('https://demo.bravisthemes.com/mrittik/wp-content/uploads/2023/11/home14-bg-09.jpg');--hero-image:url('https://demo.bravisthemes.com/mrittik/wp-content/uploads/2023/11/home14-bg-09.jpg');">
               <div class="mrittik-hero__frame">
                 <div class="mrittik-hero__image"></div>
                 <div class="mrittik-hero__card">
@@ -316,7 +316,10 @@
                 <a href="./project-details.html" class="work-card w-inline-block">
                   <div>
                     <div class="work-card-image-wrapper">
-                      <img src="./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8f7e0b317dbdb8e3231_02. Khyber Restaurant.png" alt="Turnkey Fitout" class="work-card-image" width="1200" height="800" loading="lazy" decoding="async">
+                      <picture style="display:block;">
+                        <source srcset="./assets/delivery/khyber-restaurant-detail.webp" type="image/webp">
+                        <img src="./assets/delivery/khyber-restaurant-detail.png" alt="Turnkey Fitout" class="work-card-image" width="1200" height="800" loading="lazy" decoding="async">
+                      </picture>
                     </div>
                     <div><h3 class="work-card-title">Turnkey Fitout</h3></div>
                   </div>
@@ -332,7 +335,11 @@
                 <a href="./project-details.html" class="work-card w-inline-block">
                   <div>
                     <div class="work-card-image-wrapper">
-                      <img src="./assets/website-used/Commercial Projects/Office Space/Genetec Office &amp; Experience Center (Business Bay)/2.jpg" alt="Design and Build" class="work-card-image" width="1080" height="608" loading="lazy" decoding="async">
+                      <picture style="display:block;">
+                        <source srcset="./assets/delivery/genetec-office-meeting-room.avif" type="image/avif">
+                        <source srcset="./assets/delivery/genetec-office-meeting-room.webp" type="image/webp">
+                        <img src="./assets/delivery/genetec-office-meeting-room.jpg" alt="Design and Build" class="work-card-image" width="1080" height="608" loading="lazy" decoding="async">
+                      </picture>
                     </div>
                     <div><h3 class="work-card-title">Design and Build</h3></div>
                   </div>
@@ -348,7 +355,11 @@
                 <a href="./project-details.html" class="work-card w-inline-block">
                   <div>
                     <div class="work-card-image-wrapper">
-                      <img src="./assets/website-used/Commercial Projects/Office Space/Genetec Office &amp; Experience Center (Business Bay)/8.jpg" alt="Furniture Works" class="work-card-image" width="1080" height="608" loading="lazy" decoding="async">
+                      <picture style="display:block;">
+                        <source srcset="./assets/delivery/genetec-office-furniture.avif" type="image/avif">
+                        <source srcset="./assets/delivery/genetec-office-furniture.webp" type="image/webp">
+                        <img src="./assets/delivery/genetec-office-furniture.jpg" alt="Furniture Works" class="work-card-image" width="1080" height="608" loading="lazy" decoding="async">
+                      </picture>
                     </div>
                     <div><h3 class="work-card-title">Furniture Works</h3></div>
                   </div>
@@ -675,7 +686,7 @@
         </div>
         <div class="mrittik-footer__col mrittik-footer__col--brand">
           <a href="./index.html" class="mrittik-footer__logo">
-            <img src="assets/casa-elegance-logo.png" alt="Casa Elegance" width="1757" height="873" loading="lazy" decoding="async">
+            <img src="assets/casa-elegance-logo.png" srcset="./assets/optimized/assets/casa-elegance-logo-144w.png 144w, ./assets/optimized/assets/casa-elegance-logo-288w.png 288w, ./assets/optimized/assets/casa-elegance-logo-432w.png 432w" sizes="144px" alt="Casa Elegance" width="1757" height="873" loading="lazy" decoding="async">
           </a>
           <ul class="mrittik-footer__links">
             <li><a href="./about.html"><span>ABOUT</span></a></li>
@@ -692,7 +703,7 @@
       <button class="mrittik-mobile-menu__backdrop" type="button" aria-label="Close menu" data-nav-close></button>
       <div class="mrittik-mobile-menu__panel">
         <div class="mrittik-mobile-menu__top">
-          <img src="./assets/casa-elegance-logo.png" alt="Casa Elegance" class="mrittik-mobile-menu__logo">
+          <img src="./assets/casa-elegance-logo.png" srcset="./assets/optimized/assets/casa-elegance-logo-144w.png 144w, ./assets/optimized/assets/casa-elegance-logo-288w.png 288w, ./assets/optimized/assets/casa-elegance-logo-432w.png 432w" sizes="(max-width: 479px) 116px, 144px" alt="Casa Elegance" class="mrittik-mobile-menu__logo">
           <button class="mrittik-mobile-menu__close" type="button" aria-label="Close menu" data-nav-close></button>
         </div>
         <nav class="mrittik-mobile-menu__nav" aria-label="Mobile">

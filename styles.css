@@ -2583,8 +2583,16 @@ html.js-ready [data-w-id].is-visible {
   padding: 0 6.25rem;
 }
 
+.clone-member picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 0.82;
+}
+
 .clone-member img {
   width: 100%;
+  height: 100%;
   aspect-ratio: 0.82;
   object-fit: cover;
   display: block;

@@ -10,7 +10,35 @@ const services = readJson("services.json");
 const site = readJson("site.json");
 const testimonials = readJson("testimonials.json");
 const projects = readJson("projects.json");
-const optimizedAssets = readRootJson("phase-5-optimization-report.json");
+const fallbackOptimizedAssets = [
+  {
+    path: "assets/casa-elegance-icon.png",
+    status: "optimized",
+    variants: [
+      {
+        format: "png",
+        width: 96,
+        outputPath: "assets/optimized/assets/casa-elegance-icon-96w.png",
+      },
+      {
+        format: "png",
+        width: 192,
+        outputPath: "assets/optimized/assets/casa-elegance-icon-192w.png",
+      },
+      {
+        format: "png",
+        width: 288,
+        outputPath: "assets/optimized/assets/casa-elegance-icon-288w.png",
+      },
+      {
+        format: "png",
+        width: 537,
+        outputPath: "assets/optimized/assets/casa-elegance-icon-537w.png",
+      },
+    ],
+  },
+];
+const optimizedAssets = readOptionalRootJson("phase-5-optimization-report.json", fallbackOptimizedAssets);
 const optimizedAssetMap = new Map(
   optimizedAssets
     .filter((entry) => entry.status === "optimized")
@@ -636,6 +664,16 @@ function readJson(fileName) {
 
 function readRootJson(fileName) {
   return JSON.parse(fs.readFileSync(path.join(rootDir, fileName), "utf8"));
+}
+
+function readOptionalRootJson(fileName, fallback) {
+  const filePath = path.join(rootDir, fileName);
+
+  if (!fs.existsSync(filePath)) {
+    return fallback;
+  }
+
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
 function readTemplate(relativePath) {

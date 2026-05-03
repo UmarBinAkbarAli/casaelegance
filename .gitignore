@@ -5,6 +5,8 @@
 .chrome-*/
 .asset-tools/
 Microsoft/
+.visual-baseline/
+.visual-split/
 
 # Local audit/report artifacts
 phase-*-report.md
@@ -15,3 +17,4 @@ phase-*-image-worker.html
 # Common OS/editor noise
 .DS_Store
 Thumbs.db
+assets.zip

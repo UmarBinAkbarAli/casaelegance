@@ -506,6 +506,115 @@
   background: #b6986f;
 }
 
+.mrittik-about-clone .clone-member {
+  margin: 0;
+}
+
+.mrittik-about-clone .clone-member__frame {
+  position: relative;
+  aspect-ratio: 634 / 763;
+  overflow: hidden;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+.mrittik-about-clone .clone-member__stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mrittik-about-clone .clone-member__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.mrittik-about-clone .clone-member__front picture,
+.mrittik-about-clone .clone-member__front img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mrittik-about-clone .clone-member__front img {
+  object-fit: cover;
+}
+
+.mrittik-about-clone .clone-member__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transform: rotateY(180deg);
+  background: rgba(11, 11, 11, 0.94);
+}
+
+.mrittik-about-clone .clone-member__back-inner {
+  width: min(100%, 18rem);
+  text-align: center;
+}
+
+.mrittik-about-clone .clone-member__name {
+  margin: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.mrittik-about-clone .clone-member__role {
+  position: static;
+  display: block;
+  margin: 1rem 0 0;
+  padding-right: 0;
+  color: #b6986f;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18rem;
+}
+
+.mrittik-about-clone .clone-member__role::after {
+  display: none;
+}
+
+.mrittik-about-clone .clone-member__description {
+  position: static;
+  display: block;
+  margin: 1rem 0 0;
+  padding-right: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.mrittik-about-clone .clone-member__description::after {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mrittik-about-clone .clone-member:hover .clone-member__stage,
+  .mrittik-about-clone .clone-member:focus-within .clone-member__stage {
+    transform: rotateY(180deg);
+  }
+
+  .mrittik-about-clone .clone-member:hover .clone-member__frame,
+  .mrittik-about-clone .clone-member:focus-within .clone-member__frame {
+    transform: translateY(-4px);
+  }
+}
+
+@media screen and (max-width: 991px), (hover: none), (pointer: coarse) {
+  .mrittik-about-clone .clone-member__stage {
+    transform: none;
+  }
+
+  .mrittik-about-clone .clone-member__back {
+    transform: none;
+  }
+}
+
 .clone-slider-btn {
   position: absolute;
   top: 40%;

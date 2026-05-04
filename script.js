@@ -578,6 +578,281 @@ function setupAboutClone() {
   }
 }
 
+function calculateRenovationCost({ area, scope, finish }) {
+  const scopeBaseRates = {
+    Light: 80,
+    Standard: 120,
+    Turnkey: 160
+  };
+
+  const finishMultipliers = {
+    Light: 1,
+    Standard: 1.3,
+    Premium: 1.5,
+    Ultra: 1.8
+  };
+
+  const baseRate = scopeBaseRates[scope];
+  const finishMultiplier = finishMultipliers[finish];
+
+  if (!baseRate || !finishMultiplier || !Number.isFinite(area) || area <= 0) {
+    return 0;
+  }
+
+  return area * baseRate * finishMultiplier;
+}
+
+function setupCostCalculator() {
+  const root = document.querySelector("[data-cost-calculator]");
+
+  if (!root) {
+    return;
+  }
+
+  const form = root.querySelector("[data-calculator-form]");
+  const stepPanels = Array.from(root.querySelectorAll("[data-step-panel]"));
+  const resultPanel = root.querySelector("[data-result-panel]");
+  const progressSteps = Array.from(root.querySelectorAll("[data-progress-step]"));
+  const progressFill = root.querySelector("[data-progress-fill]");
+  const nextButton = root.querySelector("[data-step-next]");
+  const backButton = root.querySelector("[data-step-back]");
+  const stepActions = root.querySelector("[data-step-actions]");
+  const editButton = root.querySelector("[data-edit-result]");
+  const restartButton = root.querySelector("[data-restart-calculator]");
+
+  if (
+    !form ||
+    !stepPanels.length ||
+    !resultPanel ||
+    !progressSteps.length ||
+    !progressFill ||
+    !nextButton ||
+    !backButton ||
+    !stepActions
+  ) {
+    return;
+  }
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 0
+  });
+
+  const state = {
+    currentStep: 0,
+    propertyType: "Apartment",
+    area: "",
+    scope: "Light",
+    finish: "Light",
+    bathrooms: ""
+  };
+
+  const resultFields = {
+    cost: root.querySelector("[data-result-cost]"),
+    propertyType: root.querySelector("[data-result-propertyType]"),
+    area: root.querySelector("[data-result-area]"),
+    scope: root.querySelector("[data-result-scope]"),
+    finish: root.querySelector("[data-result-finish]"),
+    bathrooms: root.querySelector("[data-result-bathrooms]")
+  };
+
+  const getStepError = (stepIndex) =>
+    stepPanels[stepIndex]?.querySelector("[data-step-error]");
+
+  const clearStepError = (stepIndex) => {
+    const error = getStepError(stepIndex);
+    if (error) {
+      error.textContent = "";
+    }
+  };
+
+  const setStepError = (stepIndex, message) => {
+    const error = getStepError(stepIndex);
+    if (error) {
+      error.textContent = message;
+    }
+  };
+
+  const formatCurrency = (value) => `AED ${formatter.format(value)}`;
+
+  const updateProgress = () => {
+    progressSteps.forEach((step, index) => {
+      step.classList.toggle("is-active", index === state.currentStep);
+      step.classList.toggle("is-complete", index < state.currentStep);
+    });
+
+    const fillPercent =
+      stepPanels.length > 1 ? (state.currentStep / (stepPanels.length - 1)) * 100 : 0;
+    progressFill.style.width = `${fillPercent}%`;
+  };
+
+  const updateStepVisibility = () => {
+    stepPanels.forEach((panel, index) => {
+      const isActive = index === state.currentStep;
+      panel.hidden = !isActive;
+      panel.classList.toggle("is-active", isActive);
+    });
+
+    resultPanel.hidden = true;
+    stepActions.hidden = false;
+    backButton.disabled = state.currentStep === 0;
+    nextButton.textContent =
+      state.currentStep === stepPanels.length - 1 ? "See Estimate" : "Continue";
+    updateProgress();
+  };
+
+  const showResult = () => {
+    const area = Number(state.area);
+    const bathrooms = Number(state.bathrooms);
+    const estimate = calculateRenovationCost({
+      area,
+      scope: state.scope,
+      finish: state.finish
+    });
+
+    resultFields.cost.textContent = formatCurrency(estimate);
+    resultFields.propertyType.textContent = state.propertyType;
+    resultFields.area.textContent = `${formatter.format(area)} sqft`;
+    resultFields.scope.textContent = state.scope;
+    resultFields.finish.textContent = state.finish;
+    resultFields.bathrooms.textContent = formatter.format(bathrooms);
+
+    stepPanels.forEach((panel) => {
+      panel.hidden = true;
+      panel.classList.remove("is-active");
+    });
+
+    progressSteps.forEach((step) => {
+      step.classList.add("is-complete");
+      step.classList.remove("is-active");
+    });
+
+    progressFill.style.width = "100%";
+    resultPanel.hidden = false;
+    stepActions.hidden = true;
+  };
+
+  const validateStep = (stepIndex) => {
+    clearStepError(stepIndex);
+
+    if (stepIndex === 1) {
+      const area = Number(state.area);
+
+      if (!state.area.trim()) {
+        setStepError(stepIndex, "Area is required.");
+        return false;
+      }
+
+      if (!Number.isFinite(area) || area <= 0) {
+        setStepError(stepIndex, "Area must be a positive number.");
+        return false;
+      }
+    }
+
+    if (stepIndex === 4) {
+      const bathrooms = Number(state.bathrooms);
+
+      if (!state.bathrooms.trim()) {
+        setStepError(stepIndex, "Bathrooms are required.");
+        return false;
+      }
+
+      if (!Number.isFinite(bathrooms) || bathrooms < 0) {
+        setStepError(stepIndex, "Bathrooms must be 0 or greater.");
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  root.querySelectorAll("[data-option-group]").forEach((group) => {
+    const stateKey = group.dataset.optionGroup;
+    const buttons = Array.from(group.querySelectorAll("[data-option-value]"));
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const nextValue = button.dataset.optionValue ?? "";
+        state[stateKey] = nextValue;
+
+        buttons.forEach((item) => {
+          item.classList.toggle("is-selected", item === button);
+        });
+      });
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+
+  form.elements.area?.addEventListener("input", (event) => {
+    state.area = event.target.value;
+    clearStepError(1);
+  });
+
+  form.elements.bathrooms?.addEventListener("input", (event) => {
+    state.bathrooms = event.target.value;
+    clearStepError(4);
+  });
+
+  nextButton.addEventListener("click", () => {
+    if (!validateStep(state.currentStep)) {
+      return;
+    }
+
+    if (state.currentStep === stepPanels.length - 1) {
+      showResult();
+      return;
+    }
+
+    state.currentStep += 1;
+    updateStepVisibility();
+  });
+
+  backButton.addEventListener("click", () => {
+    if (state.currentStep === 0) {
+      return;
+    }
+
+    clearStepError(state.currentStep);
+    state.currentStep -= 1;
+    updateStepVisibility();
+  });
+
+  editButton?.addEventListener("click", () => {
+    state.currentStep = stepPanels.length - 1;
+    updateStepVisibility();
+  });
+
+  restartButton?.addEventListener("click", () => {
+    state.currentStep = 0;
+    state.propertyType = "Apartment";
+    state.area = "";
+    state.scope = "Light";
+    state.finish = "Light";
+    state.bathrooms = "";
+
+    form.reset();
+    form.elements.area.value = "";
+    form.elements.bathrooms.value = "";
+
+    root.querySelectorAll("[data-option-group]").forEach((group) => {
+      const stateKey = group.dataset.optionGroup;
+      const buttons = Array.from(group.querySelectorAll("[data-option-value]"));
+
+      buttons.forEach((button, index) => {
+        const isSelected = button.dataset.optionValue === state[stateKey];
+        button.classList.toggle("is-selected", isSelected || (!state[stateKey] && index === 0));
+      });
+    });
+
+    stepPanels.forEach((_, index) => clearStepError(index));
+    updateStepVisibility();
+  });
+
+  updateStepVisibility();
+}
+
 setupMrittikHeader();
 setupHeroSlider();
 setupScrollReveal();
@@ -586,3 +861,4 @@ setupSlider();
 setupFaq();
 setupProjectsFilter();
 setupAboutClone();
+setupCostCalculator();

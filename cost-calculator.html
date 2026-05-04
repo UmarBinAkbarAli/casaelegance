@@ -48,7 +48,166 @@
       </div>
     </header>
 
-    <main class="mrittik-page-main--empty"></main>
+    <main class="mrittik-page-main mrittik-about-clone cost-calculator-page">
+      <section class="cost-calculator-hero">
+        <div class="clone-shell">
+          <div class="cost-calculator-hero__inner">
+            <div class="cost-calculator-hero__content" data-w-id="calculator-hero-content" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+              <span class="clone-kicker">Renovation Calculator</span>
+              <h1 class="cost-calculator-hero__title">Plan your renovation budget with a clear five-step estimate.</h1>
+              <p class="cost-calculator-hero__text">Choose your property type, scope, finish level, and area to get an instant estimate aligned with Casa Elegance project planning.</p>
+              <div class="cost-calculator-hero__meta">
+                <div class="cost-calculator-hero__meta-card">
+                  <strong>Fast estimate</strong>
+                  <span>One question at a time, with a final summary at the end.</span>
+                </div>
+                <div class="cost-calculator-hero__meta-card">
+                  <strong>Ready for next steps</strong>
+                  <span>Use the result to start a consultation or request a formal quote.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cost-calculator-section">
+        <div class="clone-shell">
+          <div class="cost-calculator" data-cost-calculator data-w-id="calculator-shell" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+            <div class="cost-calculator__progress" aria-label="Calculator progress">
+              <div class="cost-calculator__progress-track" aria-hidden="true">
+                <span class="cost-calculator__progress-fill" data-progress-fill></span>
+              </div>
+              <ol class="cost-calculator__progress-list">
+                <li class="cost-calculator__progress-step is-active" data-progress-step>
+                  <span class="cost-calculator__progress-number">1</span>
+                  <span class="cost-calculator__progress-label">Property</span>
+                </li>
+                <li class="cost-calculator__progress-step" data-progress-step>
+                  <span class="cost-calculator__progress-number">2</span>
+                  <span class="cost-calculator__progress-label">Area</span>
+                </li>
+                <li class="cost-calculator__progress-step" data-progress-step>
+                  <span class="cost-calculator__progress-number">3</span>
+                  <span class="cost-calculator__progress-label">Scope</span>
+                </li>
+                <li class="cost-calculator__progress-step" data-progress-step>
+                  <span class="cost-calculator__progress-number">4</span>
+                  <span class="cost-calculator__progress-label">Finish</span>
+                </li>
+                <li class="cost-calculator__progress-step" data-progress-step>
+                  <span class="cost-calculator__progress-number">5</span>
+                  <span class="cost-calculator__progress-label">Bathrooms</span>
+                </li>
+              </ol>
+            </div>
+
+            <form class="cost-calculator__card" data-calculator-form novalidate>
+              <div class="cost-calculator__steps">
+                <section class="cost-calculator__step is-active" data-step-panel>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Step 1 of 5</span>
+                    <h2>Select Property Type</h2>
+                    <p>Choose the property category for this estimate.</p>
+                  </div>
+                  <div class="cost-calculator__options" data-option-group="propertyType">
+                    <button type="button" class="cost-calculator__option is-selected" data-option-value="Apartment">Apartment</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Townhouse">Townhouse</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Villa">Villa</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Commercial">Commercial</button>
+                  </div>
+                </section>
+
+                <section class="cost-calculator__step" data-step-panel hidden>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Step 2 of 5</span>
+                    <h2>Enter Area</h2>
+                    <p>Provide the total renovation area in square feet.</p>
+                  </div>
+                  <label class="cost-calculator__field">
+                    <span class="cost-calculator__field-label">Area in sqft</span>
+                    <input class="cost-calculator__input" type="number" name="area" min="1" step="1" inputmode="numeric" placeholder="e.g. 3000" required>
+                  </label>
+                  <p class="cost-calculator__error" data-step-error></p>
+                </section>
+
+                <section class="cost-calculator__step" data-step-panel hidden>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Step 3 of 5</span>
+                    <h2>Select Scope</h2>
+                    <p>Pick the renovation scope level for the estimate.</p>
+                  </div>
+                  <div class="cost-calculator__options" data-option-group="scope">
+                    <button type="button" class="cost-calculator__option is-selected" data-option-value="Light">Light</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Standard">Standard</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Turnkey">Turnkey</button>
+                  </div>
+                </section>
+
+                <section class="cost-calculator__step" data-step-panel hidden>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Step 4 of 5</span>
+                    <h2>Select Finish</h2>
+                    <p>Choose the finish quality to refine the estimate.</p>
+                  </div>
+                  <div class="cost-calculator__options" data-option-group="finish">
+                    <button type="button" class="cost-calculator__option is-selected" data-option-value="Light">Light</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Standard">Standard</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Premium">Premium</button>
+                    <button type="button" class="cost-calculator__option" data-option-value="Ultra">Ultra</button>
+                  </div>
+                </section>
+
+                <section class="cost-calculator__step" data-step-panel hidden>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Step 5 of 5</span>
+                    <h2>Bathrooms</h2>
+                    <p>Enter the number of bathrooms in the project.</p>
+                  </div>
+                  <label class="cost-calculator__field">
+                    <span class="cost-calculator__field-label">Number of bathrooms</span>
+                    <input class="cost-calculator__input" type="number" name="bathrooms" min="0" step="1" inputmode="numeric" placeholder="e.g. 4" required>
+                  </label>
+                  <p class="cost-calculator__error" data-step-error></p>
+                </section>
+
+                <section class="cost-calculator__result" data-result-panel hidden>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Estimate Ready</span>
+                    <h2>Your renovation estimate</h2>
+                    <p>This estimate uses area, scope, and finish only. Property type and bathrooms are shown for project context.</p>
+                  </div>
+
+                  <div class="cost-calculator__result-total">
+                    <span>Estimated Cost</span>
+                    <strong data-result-cost>AED 0</strong>
+                  </div>
+
+                  <dl class="cost-calculator__summary">
+                    <div><dt>Property Type</dt><dd data-result-propertyType></dd></div>
+                    <div><dt>Area</dt><dd data-result-area></dd></div>
+                    <div><dt>Scope</dt><dd data-result-scope></dd></div>
+                    <div><dt>Finish</dt><dd data-result-finish></dd></div>
+                    <div><dt>Bathrooms</dt><dd data-result-bathrooms></dd></div>
+                  </dl>
+
+                  <div class="cost-calculator__result-actions">
+                    <a class="about-mrittik__button" href="./contact.html">Request Quote</a>
+                    <button type="button" class="cost-calculator__secondary-button" data-edit-result>Edit Details</button>
+                    <button type="button" class="cost-calculator__ghost-button" data-restart-calculator>Restart</button>
+                  </div>
+                </section>
+              </div>
+
+              <div class="cost-calculator__actions" data-step-actions>
+                <button type="button" class="cost-calculator__ghost-button" data-step-back disabled>Back</button>
+                <button type="button" class="cost-calculator__primary-button" data-step-next>Continue</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
 
 
     <footer class="mrittik-footer">

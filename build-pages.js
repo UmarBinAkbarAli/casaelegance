@@ -225,7 +225,7 @@ function renderPage(page, sourceHtml) {
 }
 
 function renderPartnerMarquee(partnersHtml) {
-  return duplicatePartnerItems(partnersHtml);
+  return partnersHtml;
 }
 
 function renderCertificationStrip() {

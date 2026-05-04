@@ -1019,109 +1019,35 @@
    ============================================================ */
 
 .mrittik-footer {
-  background: var(--bgdark-color, #1b1b1b);
-  padding: 0 1.25rem 3.5rem;
+  background:
+    radial-gradient(circle at top left, rgba(181, 142, 93, 0.14), transparent 30%),
+    linear-gradient(180deg, #111111 0%, #070707 100%);
+  padding: 0 1.25rem;
+  overflow: hidden;
 }
 
-/* 5-column grid â€” matches partner logos strip cadence above */
 .mrittik-footer__inner {
   width: min(100%, 88rem);
-  min-height: 34rem;
   margin: 0 auto;
+  padding: 5rem 0 0;
+}
+
+.mrittik-footer__top {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  background: #050505;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr);
+  gap: 4rem 3rem;
+  align-items: start;
 }
 
-.mrittik-footer__col {
-  padding: 4rem 3rem;
-}
-
-/* Cols 3â€“4: empty â€” only purpose is to render the vertical grid lines */
-.mrittik-footer__col--empty {
-  display: none;
-}
-
-/* â”€â”€ Column 1: Rotated "Contact" label â”€â”€ */
-
-.mrittik-footer__col--label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34rem;
-  padding-left: 3.5rem;
-  padding-right: 2rem;
-}
-
-.mrittik-footer__rotated-label {
-  display: block;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: clamp(4rem, 5.5vw, 6.5rem);
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.1);
-  letter-spacing: 0.00em;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* â”€â”€ Column 2: Contact info, single vertical stack â”€â”€ */
-
-.mrittik-footer__col--info {
+.mrittik-footer__brand-block {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  justify-content: center;
-  padding-left: 2.25rem;
-  padding-right: 2.25rem;
-}
-
-.mrittik-footer__contact-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.mrittik-footer__contact-title {
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.45);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.mrittik-footer__contact-value {
-  font-size: 1rem;
-  color: #fff;
-  line-height: 1.5;
-}
-
-.mrittik-footer__contact-value a {
-  color: #fff;
-  text-decoration: none;
-  transition: opacity 0.25s;
-}
-
-.mrittik-footer__contact-value a:hover {
-  opacity: 0.6;
-}
-
-/* â”€â”€ Column 5: Brand â€” content anchored to the bottom â”€â”€ */
-
-.mrittik-footer__col--brand {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.0rem;
-  align-items: flex-start;
-  padding-left: 2rem;
-  padding-right: 3.5rem;
-  padding-bottom: 6rem;
+  gap: 1.75rem;
+  max-width: 29rem;
 }
 
 .mrittik-footer__logo {
   display: inline-block;
-  margin-bottom: 0.0rem;
 }
 
 .mrittik-footer__logo img {
@@ -1131,71 +1057,118 @@
   filter: brightness(0) invert(1);
 }
 
-.mrittik-footer__links {
+.mrittik-footer__brand-copy {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.mrittik-footer__nav-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.mrittik-footer__nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.mrittik-footer__nav-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f8f4ef;
+}
+
+.mrittik-footer__nav-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 1rem;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.mrittik-footer__links a {
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 500;
-  transition: color 0.25s;
-}
-
-.mrittik-footer__links a:hover {
-  color: #fff;
-}
-
-.mrittik-footer__copyright {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
   margin: 0;
-  letter-spacing: 0.03em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
 }
 
-/* â”€â”€ Responsive â”€â”€ */
+.mrittik-footer__nav-list a {
+  color: rgba(255, 255, 255, 0.68);
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.mrittik-footer__nav-list a:hover,
+.mrittik-footer__nav-list a:focus-visible {
+  color: var(--accent-color, #b58e5d);
+  transform: translateX(0.15rem);
+}
+
+.mrittik-footer__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 3rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 3.75rem;
+}
+
+.mrittik-footer__copyright,
+.mrittik-footer__credit {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.46);
+}
+
+.mrittik-footer__credit {
+  text-align: right;
+}
+
+.mrittik-footer__wordmark-wrap {
+  overflow: hidden;
+  padding: 0.5rem 0 1.25rem;
+}
+
+.mrittik-footer__wordmark {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(3.9rem, 10.6vw, 8.5rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(181, 142, 93, 0.88);
+  user-select: none;
+  pointer-events: none;
+}
 
 @media screen and (max-width: 991px) {
-
-  .mrittik-footer {
-    padding-bottom: 2.5rem;
-  }
-
   .mrittik-footer__inner {
-    grid-template-columns: 1fr 1fr;
-    min-height: 0;
+    padding-top: 4rem;
   }
 
-  .mrittik-footer__col--label {
-    grid-column: 1 / -1;
-    min-height: auto;
-    padding: 2.5rem 2rem;
+  .mrittik-footer__top {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
-  .mrittik-footer__rotated-label {
-    writing-mode: horizontal-tb;
-    transform: none;
-    font-size: clamp(2.8rem, 9vw, 4rem);
+  .mrittik-footer__nav-groups {
+    gap: 1.5rem;
   }
 
-  .mrittik-footer__col {
-    min-height: 0;
-  }
-
-  .mrittik-footer__col--info,
-  .mrittik-footer__col--brand {
-    padding: 3rem 2rem;
-  }
-
-  .mrittik-footer__col--brand {
-    justify-content: flex-start;
+  .mrittik-footer__meta {
+    padding: 2.5rem 0 1.5rem;
   }
 }
 
@@ -1205,31 +1178,36 @@
   }
 
   .mrittik-footer {
-    padding: 0 1.25rem 2rem;
+    padding: 0 1rem;
   }
 
   .mrittik-footer__inner {
+    padding-top: 3.25rem;
+  }
+
+  .mrittik-footer__brand-copy {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .mrittik-footer__nav-groups {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
-  .mrittik-footer__col--label,
-  .mrittik-footer__col--info,
-  .mrittik-footer__col--brand {
-    padding: 2.5rem 1.75rem;
+  .mrittik-footer__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.25rem 0 1.25rem;
   }
 
-  .mrittik-footer__col--label {
-    justify-content: flex-start;
-  }
-
-  .mrittik-footer__rotated-label {
-    width: 100%;
+  .mrittik-footer__credit {
     text-align: left;
   }
 
-  .mrittik-footer__col--brand {
-    border-bottom: none;
-    justify-content: flex-start;
+  .mrittik-footer__wordmark {
+    font-size: clamp(3rem, 11vw, 5.6rem);
+    letter-spacing: 0.035em;
   }
 }
 
@@ -1240,6 +1218,26 @@
 
   .mrittik-partners__item {
     padding: 2rem 1.25rem;
+  }
+
+  .mrittik-footer__inner {
+    padding-top: 2.75rem;
+  }
+
+  .mrittik-footer__brand-copy,
+  .mrittik-footer__nav-list a {
+    font-size: 0.92rem;
+  }
+
+  .mrittik-footer__nav-title,
+  .mrittik-footer__copyright,
+  .mrittik-footer__credit {
+    font-size: 0.78rem;
+  }
+
+  .mrittik-footer__wordmark {
+    font-size: clamp(2.35rem, 10.8vw, 4.1rem);
+    letter-spacing: 0.03em;
   }
 }
 

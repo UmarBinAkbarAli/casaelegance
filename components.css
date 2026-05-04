@@ -1187,7 +1187,9 @@ footer {
   }
 
   .mrittik-hero__slide {
-    width: min(72rem, 58vw);
+    width: min(56rem, 64vw);
+    min-width: min(56rem, 64vw);
+    height: var(--hero-image-height);
     opacity: 0.55;
     transform: scale(0.92);
   }
@@ -1216,6 +1218,15 @@ footer {
     opacity: 1;
     pointer-events: auto;
     transform: translate(calc(50% - var(--hero-card-overhang)), -50%);
+  }
+
+  .mrittik-hero__dots,
+  .mrittik-hero__dots.swiper-pagination-horizontal {
+    left: 50%;
+    top: calc(12.125rem + var(--hero-image-height) - 2rem);
+    bottom: auto;
+    width: auto;
+    transform: translateX(-50%);
   }
 }
 
@@ -1282,6 +1293,15 @@ html.js-ready [data-w-id].is-visible {
 .work-card:focus-visible .work-card-image,
 .work-card:focus-within .work-card-image {
   transform: scale(1.05);
+}
+
+.section-work .button {
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.section-work .button:hover,
+.section-work .button:focus-visible {
+  color: #b6986f;
 }
 
 .testimonial-slider {

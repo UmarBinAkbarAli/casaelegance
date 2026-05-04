@@ -6,6 +6,7 @@
       "alt": "Turnkey Fitout",
       "width": "1200",
       "height": "800",
+      "filter": "turnkey-fitout",
       "category": "Sustainable",
       "year": "2021-23",
       "location": "Tokyo"
@@ -16,6 +17,7 @@
       "alt": "Design and Build",
       "width": "1080",
       "height": "608",
+      "filter": "design-build",
       "category": "Interior",
       "year": "2022",
       "location": "San Francisco"
@@ -26,6 +28,7 @@
       "alt": "Furniture Works",
       "width": "1080",
       "height": "608",
+      "filter": "furniture-works",
       "category": "Residential",
       "year": "2021",
       "location": "London, UK"

@@ -197,8 +197,8 @@ function renderPage(page, sourceHtml) {
     searchModal: shared.searchModal,
     main: indentBlock(main, 4),
     partners: [
-      page.includeCertifications ? renderCertificationStrip(shared.partners) : "",
-      page.includePartners ? shared.partners : "",
+      page.includeCertifications ? renderCertificationStrip() : "",
+      page.includePartners ? renderPartnerMarquee(shared.partners) : "",
     ].filter(Boolean).map((section) => `\n${section}`).join(""),
     footer: `\n${shared.footer}`,
     swiperJs: page.needsSwiper
@@ -215,18 +215,33 @@ function renderPage(page, sourceHtml) {
   });
 }
 
-function renderCertificationStrip(partnersHtml) {
-  return partnersHtml
-    .replace(
-      '<section class="mrittik-partners" aria-label="Partner brands">',
-      [
-        '<section class="mrittik-partners mrittik-partners--certifications" aria-label="Certification logos">',
-        '      <div class="mrittik-partners__header">',
-        '        <span>Certifications</span>',
-        '      </div>',
-      ].join("\n")
-    )
-    .replace(/Partner brand/g, "Certification logo");
+function renderPartnerMarquee(partnersHtml) {
+  return duplicatePartnerItems(partnersHtml);
+}
+
+function renderCertificationStrip() {
+  const icons = Array.from({ length: 6 }, (_, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    return `        <div class="mrittik-partners__item">
+          <span class="mrittik-certification-icon" aria-label="Certification icon ${number}" role="img">CE ${number}</span>
+        </div>`;
+  }).join("\n");
+
+  return duplicatePartnerItems(`<section class="mrittik-partners mrittik-partners--certifications" aria-label="Certification logos">
+      <div class="mrittik-partners__header">
+        <span>Certifications</span>
+      </div>
+      <div class="mrittik-partners__grid">
+${icons}
+      </div>
+    </section>`);
+}
+
+function duplicatePartnerItems(sectionHtml) {
+  return sectionHtml.replace(
+    /(<div class="mrittik-partners__grid">\n)([\s\S]*?)(\n\s*<\/div>\s*<\/section>)/,
+    (_, open, items, close) => `${open}${items}\n${items}${close}`
+  );
 }
 
 function extractMain(html) {
@@ -464,9 +479,11 @@ function renderHomeProjectsSection() {
 
       <div class="spacer-xlarge"></div>
 
+      ${renderProjectFilter("Filter featured projects")}
+
       <div>
-        <div class="work-list">
-${projects.home.map((project) => renderProjectCard(project, { indent: 10, wId: "d0339084-321d-c54a-cd66-167a365879f0" })).join("\n\n")}
+        <div class="work-list projects-grid">
+${projects.home.map((project) => renderProjectCard(project, { indent: 10, wId: "d0339084-321d-c54a-cd66-167a365879f0", filter: project.filter })).join("\n\n")}
         </div>
       </div>
     </div>
@@ -494,7 +511,17 @@ function renderProjectsSection() {
   return `<section class="projects-section">
   <div class="clone-shell">
 
-    <div class="projects-filter-wrap" data-w-id="projects-filter-wrap" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
+    ${renderProjectFilter("Filter projects by category")}
+
+    <div class="work-list projects-grid" id="projects-grid">
+${projects.listing.map((project, index) => renderProjectCard(project, { indent: 6, wId: `projects-card-${index + 1}`, filter: project.filter })).join("\n\n")}
+    </div>
+  </div>
+</section>`;
+}
+
+function renderProjectFilter(ariaLabel) {
+  return `<div class="projects-filter-wrap" data-w-id="projects-filter-wrap" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
       <div class="projects-filter" role="group" aria-label="Filter projects by category">
         <button class="projects-filter__btn is-active" data-filter="all">All Projects</button>
         <button class="projects-filter__btn" data-filter="turnkey-fitout">Turnkey Fitout</button>
@@ -503,13 +530,7 @@ function renderProjectsSection() {
         <button class="projects-filter__btn" data-filter="project-management">Project Management</button>
         <button class="projects-filter__btn" data-filter="renovation-remodeling">Renovation &amp; Remodeling</button>
       </div>
-    </div>
-
-    <div class="work-list projects-grid" id="projects-grid">
-${projects.listing.map((project, index) => renderProjectCard(project, { indent: 6, wId: `projects-card-${index + 1}`, filter: project.filter })).join("\n\n")}
-    </div>
-  </div>
-</section>`;
+    </div>`.replace('aria-label="Filter projects by category"', `aria-label="${escapeAttr(ariaLabel)}"`);
 }
 
 function renderProjectCard(project, { indent, wId, filter = "" }) {

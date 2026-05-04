@@ -182,7 +182,7 @@ function setupHeroSlider() {
       992: {
         slidesPerView: "auto",
         centeredSlides: true,
-        spaceBetween: 240
+        spaceBetween: 96
       }
     },
     autoplay: false,
@@ -413,59 +413,67 @@ function setupFaq() {
 }
 
 function setupProjectsFilter() {
-  const bar = document.querySelector(".projects-filter");
-  const buttons = Array.from(bar?.querySelectorAll(".projects-filter__btn") || []);
-  const cards = Array.from(document.querySelectorAll("#projects-grid .work-item"));
+  const bars = Array.from(document.querySelectorAll(".projects-filter"));
 
-  if (!bar || !buttons.length || !cards.length) {
+  if (!bars.length) {
     return;
   }
 
-  const slider = document.createElement("span");
-  slider.className = "projects-filter__slider";
-  bar.insertBefore(slider, bar.firstChild);
+  bars.forEach((bar) => {
+    const buttons = Array.from(bar.querySelectorAll(".projects-filter__btn"));
+    const section = bar.closest("section") || document;
+    const cards = Array.from(section.querySelectorAll(".work-list .work-item"));
 
-  const moveSlider = (button) => {
-    slider.style.width = `${button.offsetWidth}px`;
-    slider.style.height = `${button.offsetHeight}px`;
-    slider.style.top = `${button.offsetTop}px`;
-    slider.style.left = `${button.offsetLeft}px`;
-  };
+    if (!buttons.length || !cards.length) {
+      return;
+    }
 
-  const activeButton = bar.querySelector(".projects-filter__btn.is-active");
-  if (activeButton) {
-    slider.style.transition = "none";
-    moveSlider(activeButton);
-    requestAnimationFrame(() => {
-      slider.style.transition = "";
-    });
-  }
+    const slider = document.createElement("span");
+    slider.className = "projects-filter__slider";
+    bar.insertBefore(slider, bar.firstChild);
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((item) => item.classList.remove("is-active"));
-      button.classList.add("is-active");
-      moveSlider(button);
+    const moveSlider = (button) => {
+      slider.style.width = `${button.offsetWidth}px`;
+      slider.style.height = `${button.offsetHeight}px`;
+      slider.style.top = `${button.offsetTop}px`;
+      slider.style.left = `${button.offsetLeft}px`;
+    };
 
-      const filter = button.dataset.filter;
-      cards.forEach((card) => {
-        if (filter === "all" || card.dataset.projectCategory === filter) {
-          card.removeAttribute("hidden");
-        } else {
-          card.setAttribute("hidden", "");
-        }
+    const activeButton = bar.querySelector(".projects-filter__btn.is-active");
+    if (activeButton) {
+      slider.style.transition = "none";
+      moveSlider(activeButton);
+      requestAnimationFrame(() => {
+        slider.style.transition = "";
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.remove("is-active"));
+        button.classList.add("is-active");
+        moveSlider(button);
+
+        const filter = button.dataset.filter;
+        cards.forEach((card) => {
+          if (filter === "all" || card.dataset.projectCategory === filter) {
+            card.removeAttribute("hidden");
+          } else {
+            card.setAttribute("hidden", "");
+          }
+        });
       });
     });
-  });
 
-  const syncSliderToActiveButton = scheduleAnimationFrame(() => {
-    const active = bar.querySelector(".projects-filter__btn.is-active");
-    if (active) {
-      moveSlider(active);
-    }
-  });
+    const syncSliderToActiveButton = scheduleAnimationFrame(() => {
+      const active = bar.querySelector(".projects-filter__btn.is-active");
+      if (active) {
+        moveSlider(active);
+      }
+    });
 
-  window.addEventListener("resize", syncSliderToActiveButton);
+    window.addEventListener("resize", syncSliderToActiveButton);
+  });
 }
 
 function setupAboutClone() {

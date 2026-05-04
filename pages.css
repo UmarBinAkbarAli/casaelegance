@@ -418,6 +418,11 @@
   justify-content: center;
 }
 
+.section-work .projects-filter-wrap {
+  justify-content: flex-start;
+  margin-bottom: 2.5rem;
+}
+
 .projects-filter-wrap::-webkit-scrollbar {
   display: none;
 }

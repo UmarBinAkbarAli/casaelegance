@@ -279,11 +279,7 @@ function renderPageComponents(page, main) {
   if (page.file === "about.html") {
     return replaceSection(
       replaceSection(
-        replaceSection(
-          main,
-          "clone-services",
-          renderCloneServicesSection({ wIdPrefix: "about-service" })
-        ),
+        main,
         "section-testimonial-mrittik",
         renderTestimonialSection({
           wId: "about-testimonial-shell",
@@ -295,6 +291,7 @@ function renderPageComponents(page, main) {
       renderContactSection({
         introWId: "about-contact-intro",
         formWId: "about-contact-form",
+        idPrefix: "ab",
         includePartners: true,
       })
     );
@@ -335,6 +332,7 @@ function renderPageComponents(page, main) {
       renderContactSection({
         introWId: "contact-intro",
         formWId: "contact-form",
+        idPrefix: "cf",
       })
     );
   }
@@ -611,27 +609,61 @@ function renderProjectDetailCta() {
 </section>`;
 }
 
-function renderContactSection({ introWId, formWId, includePartners = false }) {
+function renderContactSection({ introWId, formWId, idPrefix = "cf", includePartners = false }) {
   return `<section class="clone-contact">
   <div class="clone-shell">
     <div class="clone-contact__grid">
       <div class="clone-contact__intro" data-w-id="${escapeAttr(introWId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
-        <h2>${escapeHtml(site.contact.heading)}</h2>
-        <p>${escapeHtml(site.contact.description)}</p>
+        <span class="clone-kicker">Get In Touch</span>
+        <h2>Start a Conversation</h2>
+        <p>Tell us about your project and we'll get back to you within one business day to discuss how Casa Elegance can bring your vision to life.</p>
       </div>
-      ${renderContactForm(formWId)}
+      ${renderContactForm(formWId, idPrefix)}
     </div>${includePartners ? `\n${renderAboutPartnerStrip()}` : ""}
   </div>
 </section>`;
 }
 
-function renderContactForm(wId) {
-  return `<form class="clone-contact__form" data-about-form data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
-        <input type="text" placeholder="Your Name*" aria-label="Your Name" required>
-        <input type="tel" placeholder="Your Phone No" aria-label="Your Phone Number">
-        <input type="email" placeholder="Your Email*" aria-label="Your Email" required>
-        <textarea rows="4" placeholder="Your Message" aria-label="Your Message"></textarea>
-        <button type="submit">Send Mail</button>
+function renderContactForm(wId, idPrefix = "cf") {
+  const p = escapeAttr(idPrefix);
+  return `<form class="clone-contact__form ce-form" data-about-form data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);" novalidate>
+        <div class="ce-form__row">
+          <div class="ce-form__field">
+            <label class="ce-form__label" for="${p}-name">Full Name <span class="ce-form__required" aria-hidden="true">*</span></label>
+            <input class="ce-form__input" id="${p}-name" type="text" name="name" placeholder="e.g. Sarah Al Mansouri" required>
+          </div>
+          <div class="ce-form__field">
+            <label class="ce-form__label" for="${p}-phone">Phone Number</label>
+            <input class="ce-form__input" id="${p}-phone" type="tel" name="phone" placeholder="e.g. +971 50 000 0000">
+          </div>
+        </div>
+        <div class="ce-form__field">
+          <label class="ce-form__label" for="${p}-email">Email Address <span class="ce-form__required" aria-hidden="true">*</span></label>
+          <input class="ce-form__input" id="${p}-email" type="email" name="email" placeholder="e.g. hello@example.com" required>
+        </div>
+        <div class="ce-form__field">
+          <label class="ce-form__label" for="${p}-service">Project Type</label>
+          <div class="ce-form__select-wrap">
+            <select class="ce-form__input ce-form__select" id="${p}-service" name="service">
+              <option value="" disabled selected>Select a project type</option>
+              <option value="residential">Residential Interior Design</option>
+              <option value="commercial">Commercial Interior Design</option>
+              <option value="hospitality">Hospitality &amp; Retail</option>
+              <option value="renovation">Renovation &amp; Fit-Out</option>
+              <option value="consultation">Initial Consultation</option>
+              <option value="other">Other</option>
+            </select>
+            <svg class="ce-form__select-arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 5.5 8 11l5-5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <div class="ce-form__field">
+          <label class="ce-form__label" for="${p}-message">Message</label>
+          <textarea class="ce-form__input ce-form__textarea" id="${p}-message" name="message" rows="5" placeholder="Briefly describe your project, timeline, or any questions you have…"></textarea>
+        </div>
+        <button class="ce-form__submit" type="submit">
+          <span>Request Consultation</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" width="18" height="18"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </form>`;
 }
 

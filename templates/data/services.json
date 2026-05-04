@@ -1,7 +1,7 @@
 [
   {
-    "title": "Turnkey Fitout",
-    "ariaLabel": "Turnkey Fitout",
+    "title": "Tunkey Fitout",
+    "ariaLabel": "Tunkey Fitout",
     "homeCount": "1.",
     "cloneCount": "01",
     "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
@@ -20,8 +20,8 @@
     "homeImageAlt": "Furniture Design"
   },
   {
-    "title": "Furniture Works",
-    "ariaLabel": "Furniture Works",
+    "title": "Bespoke Joinery & Furniture",
+    "ariaLabel": "Bespoke Joinery and Furniture",
     "homeCount": "3.",
     "cloneCount": "03",
     "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
@@ -30,8 +30,8 @@
     "homeImageAlt": "Interior Design"
   },
   {
-    "title": "Project Management",
-    "ariaLabel": "Project Management",
+    "title": "Architectural & Interior Design",
+    "ariaLabel": "Architectural and Interior Design",
     "homeCount": "4.",
     "cloneCount": "04",
     "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
@@ -40,9 +40,9 @@
     "homeImageAlt": "Space Planning"
   },
   {
-    "title": "Renovation & Remodeling",
-    "ariaLabel": "Renovation and Remodeling",
-    "homeCount": "4.",
+    "title": "Outdoor Living & Landscaping Design",
+    "ariaLabel": "Outdoor Living and Landscaping Design",
+    "homeCount": "5.",
     "cloneCount": "05",
     "homeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
     "cloneDescription": "Mrittik Architects is a full-service design firm providing architecture, master planning, urban design, interior architecture.",

@@ -1,9 +1,9 @@
 {
   "home": [
     {
-      "title": "Turnkey Fitout",
+      "title": "Khyber Restaurant",
       "image": "./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8f7e0b317dbdb8e3231_02. Khyber Restaurant.png",
-      "alt": "Turnkey Fitout",
+      "alt": "Khyber Restaurant",
       "width": "1200",
       "height": "800",
       "filter": "turnkey-fitout",
@@ -12,9 +12,9 @@
       "location": "Tokyo"
     },
     {
-      "title": "Design and Build",
+      "title": "Genetec Office & Experience Center",
       "image": "./assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/2.jpg",
-      "alt": "Design and Build",
+      "alt": "Genetec Office & Experience Center",
       "width": "1080",
       "height": "608",
       "filter": "design-build",
@@ -23,9 +23,9 @@
       "location": "San Francisco"
     },
     {
-      "title": "Furniture Works",
+      "title": "Genetec Experience Lounge",
       "image": "./assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/8.jpg",
-      "alt": "Furniture Works",
+      "alt": "Genetec Experience Lounge",
       "width": "1080",
       "height": "608",
       "filter": "furniture-works",

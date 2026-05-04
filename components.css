@@ -925,7 +925,7 @@ footer {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  transform: translateX(-50%) scale(1.015);
+  transform: translateX(-50%) scale(1);
   transition: transform 5s ease;
 }
 
@@ -1178,6 +1178,11 @@ footer {
 }
 
 @media screen and (min-width: 992px) {
+  .mrittik-hero {
+    --hero-image-height: min(38.25rem, calc(66vw / 1.627627628));
+    min-height: calc(12.5rem + var(--hero-image-height) + 9rem);
+  }
+
   .mrittik-hero__viewport {
     overflow: visible;
   }
@@ -1191,18 +1196,18 @@ footer {
     min-width: min(56rem, 64vw);
     height: var(--hero-image-height);
     opacity: 0.55;
-    transform: scale(0.92);
+    transform: none;
   }
 
   .mrittik-hero__viewport .swiper-slide-active {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 
   .mrittik-hero__viewport .swiper-slide-prev,
   .mrittik-hero__viewport .swiper-slide-next {
     opacity: 0.72;
-    transform: scale(0.96);
+    transform: none;
   }
 
   .mrittik-hero__side {
@@ -1223,7 +1228,7 @@ footer {
   .mrittik-hero__dots,
   .mrittik-hero__dots.swiper-pagination-horizontal {
     left: 50%;
-    top: calc(12.125rem + var(--hero-image-height) - 2rem);
+    top: calc(12.125rem + var(--hero-image-height) + 1.5rem);
     bottom: auto;
     width: auto;
     transform: translateX(-50%);

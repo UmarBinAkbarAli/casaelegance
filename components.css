@@ -586,6 +586,33 @@ footer {
   gap: 0.75rem;
 }
 
+.mrittik-header__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0 1.1rem;
+  border: 1px solid rgba(182, 152, 111, 0.72);
+  border-radius: 999px;
+  background: #b6986f;
+  color: #111;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.mrittik-header__cta:hover,
+.mrittik-header__cta:focus-visible {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+  transform: translateY(-1px);
+}
+
 .mrittik-header__divider {
   width: 1px;
   height: 2.125rem;
@@ -845,12 +872,7 @@ footer {
   position: relative;
   min-height: calc(12.5rem + var(--hero-image-height) + 8rem);
   padding: 12.125rem 0 6rem;
-  background:
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.065) 0 0.18rem, transparent 0.2rem),
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    #0a0a0a;
-  background-size: 8rem 8rem, 1rem 1rem, 1rem 1rem, auto;
+  background: #0a0a0a;
   overflow: hidden;
 }
 
@@ -1847,6 +1869,7 @@ html.js-ready [data-w-id].is-visible {
     gap: 0;
   }
 
+  .mrittik-header__cta,
   .mrittik-header__divider,
   .mrittik-header__actions [data-search-open] {
     display: none;

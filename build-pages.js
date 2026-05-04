@@ -166,6 +166,15 @@ const pages = [
     includePartners: false,
     needsSwiper: false,
   },
+  {
+    file: "cost-calculator.html",
+    title: "Cost Calculator | Casa Elegance",
+    description:
+      "Estimate your Casa Elegance project scope with our upcoming cost calculator.",
+    beforeHeader: "",
+    includePartners: false,
+    needsSwiper: false,
+  },
 ];
 
 const shared = {

@@ -523,12 +523,11 @@ ${projects.listing.map((project, index) => renderProjectCard(project, { indent: 
 function renderProjectFilter(ariaLabel) {
   return `<div class="projects-filter-wrap" data-w-id="projects-filter-wrap" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
       <div class="projects-filter" role="group" aria-label="Filter projects by category">
-        <button class="projects-filter__btn is-active" data-filter="all">All Projects</button>
-        <button class="projects-filter__btn" data-filter="turnkey-fitout">Turnkey Fitout</button>
-        <button class="projects-filter__btn" data-filter="design-build">Design &amp; Build</button>
-        <button class="projects-filter__btn" data-filter="furniture-works">Furniture Works</button>
-        <button class="projects-filter__btn" data-filter="project-management">Project Management</button>
-        <button class="projects-filter__btn" data-filter="renovation-remodeling">Renovation &amp; Remodeling</button>
+        <button class="projects-filter__btn is-active" data-filter="all">All</button>
+        <button class="projects-filter__btn" data-filter="apartment">Apartment</button>
+        <button class="projects-filter__btn" data-filter="villa">Villa</button>
+        <button class="projects-filter__btn" data-filter="commercial">Commercial</button>
+        <button class="projects-filter__btn" data-filter="hospitality">Hospitality</button>
       </div>
     </div>`.replace('aria-label="Filter projects by category"', `aria-label="${escapeAttr(ariaLabel)}"`);
 }

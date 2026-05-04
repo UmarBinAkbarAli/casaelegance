@@ -1240,6 +1240,10 @@ html.js-ready [data-w-id].is-visible {
   transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0) !important;
 }
 
+.services-list {
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
 .services-list .services-item {
   position: relative;
   background-color: transparent;
@@ -1794,6 +1798,10 @@ html.js-ready [data-w-id].is-visible {
 }
 
 @media screen and (max-width: 767px) {
+  .services-list {
+    padding-bottom: 0;
+  }
+
   .mrittik-header,
   .mrittik-header.is-fixed {
     position: fixed;

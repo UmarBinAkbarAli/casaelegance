@@ -185,11 +185,7 @@ function setupHeroSlider() {
         spaceBetween: 240
       }
     },
-    autoplay: slides.length > 1 ? {
-      delay: 5000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true
-    } : false,
+    autoplay: false,
     navigation: {
       prevEl: prev,
       nextEl: next

@@ -117,6 +117,7 @@ const pages = [
     description:
       "Arsy interior design services, selected work, testimonials, FAQs, and contact CTA.",
     beforeHeader: readPartial("home-global-styles.html"),
+    includeCertifications: true,
     includePartners: true,
     needsSwiper: true,
   },
@@ -195,7 +196,10 @@ function renderPage(page, sourceHtml) {
     mobileMenu: shared.mobileMenu,
     searchModal: shared.searchModal,
     main: indentBlock(main, 4),
-    partners: page.includePartners ? `\n${shared.partners}` : "",
+    partners: [
+      page.includeCertifications ? renderCertificationStrip(shared.partners) : "",
+      page.includePartners ? shared.partners : "",
+    ].filter(Boolean).map((section) => `\n${section}`).join(""),
     footer: `\n${shared.footer}`,
     swiperJs: page.needsSwiper
       ? '  <script defer src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>'
@@ -209,6 +213,20 @@ function renderPage(page, sourceHtml) {
 
     return replacements[key];
   });
+}
+
+function renderCertificationStrip(partnersHtml) {
+  return partnersHtml
+    .replace(
+      '<section class="mrittik-partners" aria-label="Partner brands">',
+      [
+        '<section class="mrittik-partners mrittik-partners--certifications" aria-label="Certification logos">',
+        '      <div class="mrittik-partners__header">',
+        '        <span>Certifications</span>',
+        '      </div>',
+      ].join("\n")
+    )
+    .replace(/Partner brand/g, "Certification logo");
 }
 
 function extractMain(html) {

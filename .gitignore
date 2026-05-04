@@ -3,6 +3,9 @@
 
 # Browser profiles and audit scratch output
 .chrome-*/
+.codex-validation/
+.codex-http*.log
+.dots-check.png
 .asset-tools/
 Microsoft/
 .visual-baseline/

@@ -722,8 +722,157 @@
   background: #b6986f;
 }
 
+.contact-showcase {
+  position: relative;
+  padding: 180px 0 3.5rem;
+}
+
+.contact-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(182, 152, 111, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.contact-showcase__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 0.75fr);
+  gap: 3rem 4.5rem;
+  align-items: center;
+}
+
+.contact-showcase__content {
+  max-width: 45rem;
+}
+
+.contact-showcase__title {
+  margin: 1rem 0 1.5rem;
+  color: #fff;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: clamp(3rem, 5.8vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.contact-showcase__lead {
+  margin: 0;
+  max-width: 42rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1.08rem;
+  line-height: 1.9;
+}
+
+.contact-showcase__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 3rem;
+  margin-top: 3.5rem;
+}
+
+.contact-showcase__item span {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+}
+
+.contact-showcase__item a,
+.contact-showcase__item p {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.contact-showcase__item a {
+  transition: color 0.25s ease;
+}
+
+.contact-showcase__item a:hover {
+  color: #b6986f;
+}
+
+.contact-showcase__social {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 3.25rem;
+}
+
+.contact-showcase__social > span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.98rem;
+}
+
+.contact-showcase__social-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.contact-showcase__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.contact-showcase__social-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(182, 152, 111, 0.6);
+  background: rgba(182, 152, 111, 0.14);
+  color: #b6986f;
+}
+
+.contact-showcase__social-link svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.contact-showcase__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  min-height: 42rem;
+  box-shadow: 0 1.75rem 4.5rem rgba(0, 0, 0, 0.28);
+}
+
+.contact-showcase__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.04), rgba(12, 12, 12, 0.16));
+  pointer-events: none;
+}
+
+.contact-showcase__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 42rem;
+  object-fit: cover;
+}
+
 .contact-map-section {
-  padding: 230px 0px 120px 0px;
+  padding: 0 0 120px;
 }
 
 .contact-map-section__frame {
@@ -905,8 +1054,25 @@
     width: min(calc(100% - 2rem), 1290px);
   }
 
-  .contact-map-section {
+  .contact-showcase {
     padding-top: 150px;
+  }
+
+  .contact-showcase__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-showcase__content {
+    max-width: none;
+  }
+
+  .contact-showcase__media,
+  .contact-showcase__image {
+    min-height: 32rem;
+  }
+
+  .contact-map-section {
+    padding-top: 1rem;
   }
 
   .contact-map-section__frame,
@@ -965,8 +1131,45 @@
 }
 
 @media screen and (max-width: 767px) {
+  .contact-showcase {
+    padding-top: 122px;
+    padding-bottom: 2.5rem;
+  }
+
+  .contact-showcase__title {
+    font-size: clamp(2.5rem, 12vw, 3.4rem);
+  }
+
+  .contact-showcase__lead {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .contact-showcase__meta {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-showcase__item a,
+  .contact-showcase__item p {
+    font-size: 1.05rem;
+  }
+
+  .contact-showcase__social {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-showcase__media,
+  .contact-showcase__image {
+    min-height: 24rem;
+  }
+
   .contact-map-section {
-    padding-top: 110px;
+    padding-top: 0.5rem;
   }
 
   .contact-map-section__frame,

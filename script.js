@@ -685,16 +685,27 @@ function setupCostCalculator() {
     progressFill.style.width = `${fillPercent}%`;
   };
 
-  const updateStepVisibility = () => {
+  const updateStepVisibility = (direction = "forward") => {
+    const enterClass = direction === "back" ? "is-entering-back" : "is-entering";
+
     stepPanels.forEach((panel, index) => {
       const isActive = index === state.currentStep;
+      panel.classList.remove("is-active", "is-entering", "is-entering-back");
       panel.hidden = !isActive;
-      panel.classList.toggle("is-active", isActive);
+      if (isActive) {
+        panel.classList.add("is-active", enterClass);
+        panel.addEventListener("animationend", () => {
+          panel.classList.remove("is-entering", "is-entering-back");
+        }, { once: true });
+      }
     });
 
     resultPanel.hidden = true;
     stepActions.hidden = false;
     backButton.disabled = state.currentStep === 0;
+    const currentPanel = stepPanels[state.currentStep];
+    const isOptionStep = !!currentPanel?.querySelector("[data-option-group]");
+    nextButton.hidden = isOptionStep;
     nextButton.textContent =
       state.currentStep === stepPanels.length - 1 ? "See Estimate" : "Continue";
     updateProgress();
@@ -728,6 +739,8 @@ function setupCostCalculator() {
 
     progressFill.style.width = "100%";
     resultPanel.hidden = false;
+    resultPanel.classList.add("is-entering");
+    resultPanel.addEventListener("animationend", () => resultPanel.classList.remove("is-entering"), { once: true });
     stepActions.hidden = true;
   };
 
@@ -777,6 +790,15 @@ function setupCostCalculator() {
         buttons.forEach((item) => {
           item.classList.toggle("is-selected", item === button);
         });
+
+        setTimeout(() => {
+          if (state.currentStep === stepPanels.length - 1) {
+            showResult();
+          } else {
+            state.currentStep += 1;
+            updateStepVisibility("forward");
+          }
+        }, 260);
       });
     });
   });
@@ -806,7 +828,7 @@ function setupCostCalculator() {
     }
 
     state.currentStep += 1;
-    updateStepVisibility();
+    updateStepVisibility("forward");
   });
 
   backButton.addEventListener("click", () => {
@@ -816,12 +838,12 @@ function setupCostCalculator() {
 
     clearStepError(state.currentStep);
     state.currentStep -= 1;
-    updateStepVisibility();
+    updateStepVisibility("back");
   });
 
   editButton?.addEventListener("click", () => {
     state.currentStep = stepPanels.length - 1;
-    updateStepVisibility();
+    updateStepVisibility("back");
   });
 
   restartButton?.addEventListener("click", () => {

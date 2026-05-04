@@ -737,13 +737,50 @@
 }
 
 .cost-calculator__steps {
+  position: relative;
   min-height: 29rem;
+  overflow: hidden;
 }
 
+/* All panels sit in the same grid cell; inactive ones are clipped by overflow:hidden */
 .cost-calculator__step,
 .cost-calculator__result {
   display: grid;
   gap: 1.75rem;
+}
+
+/* Fix: display:grid on the rule above overrides the UA [hidden] rule, so be explicit */
+.cost-calculator__step[hidden],
+.cost-calculator__result[hidden] {
+  display: none;
+}
+
+/* Slide animations — JS toggles these classes */
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-out-left {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-60px); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-out-right {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(60px); }
+}
+
+.cost-calculator__step.is-entering {
+  animation: slide-in-right 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cost-calculator__step.is-entering-back {
+  animation: slide-in-left 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cost-calculator__result.is-entering {
+  animation: slide-in-right 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .cost-calculator__step-head h2 {

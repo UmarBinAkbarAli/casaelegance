@@ -1306,7 +1306,9 @@ html.js-ready [data-w-id].is-visible {
 
 .section-work .button:hover,
 .section-work .button:focus-visible {
-  color: #b6986f;
+  background-color: #b6986f;
+  border-color: #b6986f;
+  color: #111;
 }
 
 .testimonial-slider {

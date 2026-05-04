@@ -1085,6 +1085,161 @@
   }
 }
 
+/* ── Contact form redesign ─────────────────────────────── */
+
+.ce-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ce-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.5rem;
+}
+
+.ce-form__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.75rem;
+}
+
+.ce-form__label {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ce-form__required {
+  color: #b6986f;
+}
+
+/* Override the heavy layout.css input styles */
+.ce-form .ce-form__input {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0 1.1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 0;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ce-form .ce-form__input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+}
+
+.ce-form .ce-form__input:focus {
+  border-color: rgba(182, 152, 111, 0.7);
+  box-shadow: 0 0 0 3px rgba(182, 152, 111, 0.1);
+}
+
+.ce-form__select-wrap {
+  position: relative;
+  display: block;
+}
+
+.ce-form__select-wrap .ce-form__input {
+  width: 100%;
+  padding-right: 2.8rem;
+  cursor: pointer;
+}
+
+.ce-form__select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.ce-form__select-wrap:focus-within .ce-form__select-arrow {
+  color: #b6986f;
+}
+
+.ce-form .ce-form__textarea {
+  height: auto;
+  min-height: 8.5rem;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.ce-form__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0 2rem;
+  height: 3.5rem;
+  background: #b6986f;
+  border: 1px solid #b6986f;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.22s ease, border-color 0.22s ease, gap 0.22s ease;
+  border-radius: 2px;
+}
+
+.ce-form__submit:hover {
+  background: transparent;
+  border-color: rgba(182, 152, 111, 0.7);
+  gap: 1rem;
+}
+
+/* override layout.css clone-contact__intro heading to drop ALL-CAPS */
+.mrittik-contact-page .clone-contact__intro h2 {
+  text-transform: none;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+
+.mrittik-contact-page .clone-contact__intro .clone-kicker {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .ce-form__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .ce-form__submit {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 479px) {
   .cost-calculator-hero__title {
     font-size: 2.3rem;

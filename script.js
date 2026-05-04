@@ -586,10 +586,9 @@ function calculateRenovationCost({ area, scope, finish }) {
   };
 
   const finishMultipliers = {
-    Light: 1,
-    Standard: 1.3,
-    Premium: 1.5,
-    Ultra: 1.8
+    Standard: 1,
+    Premium: 1.25,
+    "Ultra-Premium": 1.55
   };
 
   const baseRate = scopeBaseRates[scope];
@@ -640,10 +639,12 @@ function setupCostCalculator() {
   const state = {
     currentStep: 0,
     propertyType: "Apartment",
-    area: "",
+    areaUnit: "sqft",
+    area: "3000",
     scope: "Light",
-    finish: "Light",
-    bathrooms: ""
+    finish: "Standard",
+    bathrooms: "2",
+    bedrooms: "2"
   };
 
   const resultFields = {
@@ -652,8 +653,28 @@ function setupCostCalculator() {
     area: root.querySelector("[data-result-area]"),
     scope: root.querySelector("[data-result-scope]"),
     finish: root.querySelector("[data-result-finish]"),
-    bathrooms: root.querySelector("[data-result-bathrooms]")
+    bathrooms: root.querySelector("[data-result-bathrooms]"),
+    bedrooms: root.querySelector("[data-result-bedrooms]")
   };
+
+  const reviewFields = {
+    propertyType: root.querySelector("[data-review-propertyType]"),
+    area: root.querySelector("[data-review-area]"),
+    scope: root.querySelector("[data-review-scope]"),
+    finish: root.querySelector("[data-review-finish]"),
+    bathrooms: root.querySelector("[data-review-bathrooms]"),
+    bedrooms: root.querySelector("[data-review-bedrooms]")
+  };
+
+  const areaInput = form.elements.area;
+  const areaRange = form.elements.areaRange;
+  const areaUnitSelect = form.elements.areaUnit;
+  const bathroomsRange = form.elements.bathrooms;
+  const bedroomsRange = form.elements.bedrooms;
+  const areaValueOutput = root.querySelector('[data-range-value="area"]');
+  const bathroomsValueOutput = root.querySelector('[data-range-value="bathrooms"]');
+  const bedroomsValueOutput = root.querySelector('[data-range-value="bedrooms"]');
+  const rangeInputs = Array.from(root.querySelectorAll(".cost-calculator__range"));
 
   const getStepError = (stepIndex) =>
     stepPanels[stepIndex]?.querySelector("[data-step-error]");
@@ -673,6 +694,75 @@ function setupCostCalculator() {
   };
 
   const formatCurrency = (value) => `AED ${formatter.format(value)}`;
+  const formatBedrooms = (value) => {
+    const count = Number(value);
+    return count <= 0 ? "Studio" : String(count);
+  };
+  const formatAreaLabel = () => `${formatter.format(Number(state.area) || 0)} ${state.areaUnit === "sqm" ? "m2" : "sqft"}`;
+  const getAreaInSqft = () => {
+    const numericArea = Number(state.area);
+
+    if (!Number.isFinite(numericArea) || numericArea <= 0) {
+      return 0;
+    }
+
+    return state.areaUnit === "sqm" ? numericArea * 10.7639 : numericArea;
+  };
+  const updateRangeProgress = (input) => {
+    if (!input) {
+      return;
+    }
+
+    const min = Number(input.min || 0);
+    const max = Number(input.max || 100);
+    const value = Number(input.value || min);
+    const ratio = max > min ? ((value - min) / (max - min)) * 100 : 0;
+    input.style.setProperty("--range-progress", `${ratio}%`);
+  };
+  const syncDetailOutputs = () => {
+    if (areaInput) {
+      areaInput.value = state.area;
+    }
+
+    if (areaRange) {
+      areaRange.value = state.area;
+      updateRangeProgress(areaRange);
+    }
+
+    if (areaUnitSelect) {
+      areaUnitSelect.value = state.areaUnit;
+    }
+
+    if (bathroomsRange) {
+      bathroomsRange.value = state.bathrooms;
+      updateRangeProgress(bathroomsRange);
+    }
+
+    if (bedroomsRange) {
+      bedroomsRange.value = state.bedrooms;
+      updateRangeProgress(bedroomsRange);
+    }
+
+    if (areaValueOutput) {
+      areaValueOutput.textContent = formatAreaLabel();
+    }
+
+    if (bathroomsValueOutput) {
+      bathroomsValueOutput.textContent = state.bathrooms;
+    }
+
+    if (bedroomsValueOutput) {
+      bedroomsValueOutput.textContent = formatBedrooms(state.bedrooms);
+    }
+  };
+  const syncReview = () => {
+    reviewFields.propertyType.textContent = state.propertyType;
+    reviewFields.area.textContent = formatAreaLabel();
+    reviewFields.scope.textContent = state.scope;
+    reviewFields.finish.textContent = state.finish;
+    reviewFields.bathrooms.textContent = state.bathrooms;
+    reviewFields.bedrooms.textContent = formatBedrooms(state.bedrooms);
+  };
 
   const updateProgress = () => {
     progressSteps.forEach((step, index) => {
@@ -703,29 +793,33 @@ function setupCostCalculator() {
     resultPanel.hidden = true;
     stepActions.hidden = false;
     backButton.disabled = state.currentStep === 0;
-    const currentPanel = stepPanels[state.currentStep];
-    const isOptionStep = !!currentPanel?.querySelector("[data-option-group]");
-    nextButton.hidden = isOptionStep;
     nextButton.textContent =
       state.currentStep === stepPanels.length - 1 ? "See Estimate" : "Continue";
+
+    if (state.currentStep === stepPanels.length - 1) {
+      syncReview();
+    }
+
     updateProgress();
   };
 
   const showResult = () => {
-    const area = Number(state.area);
+    const areaInSqft = getAreaInSqft();
     const bathrooms = Number(state.bathrooms);
+    const bedrooms = Number(state.bedrooms);
     const estimate = calculateRenovationCost({
-      area,
+      area: areaInSqft,
       scope: state.scope,
       finish: state.finish
-    });
+    }) + (bathrooms * 3500) + (Math.max(bedrooms, 0) * 5000);
 
     resultFields.cost.textContent = formatCurrency(estimate);
     resultFields.propertyType.textContent = state.propertyType;
-    resultFields.area.textContent = `${formatter.format(area)} sqft`;
+    resultFields.area.textContent = formatAreaLabel();
     resultFields.scope.textContent = state.scope;
     resultFields.finish.textContent = state.finish;
     resultFields.bathrooms.textContent = formatter.format(bathrooms);
+    resultFields.bedrooms.textContent = formatBedrooms(state.bedrooms);
 
     stepPanels.forEach((panel) => {
       panel.hidden = true;
@@ -749,6 +843,8 @@ function setupCostCalculator() {
 
     if (stepIndex === 1) {
       const area = Number(state.area);
+      const bathrooms = Number(state.bathrooms);
+      const bedrooms = Number(state.bedrooms);
 
       if (!state.area.trim()) {
         setStepError(stepIndex, "Area is required.");
@@ -759,18 +855,14 @@ function setupCostCalculator() {
         setStepError(stepIndex, "Area must be a positive number.");
         return false;
       }
-    }
-
-    if (stepIndex === 4) {
-      const bathrooms = Number(state.bathrooms);
-
-      if (!state.bathrooms.trim()) {
-        setStepError(stepIndex, "Bathrooms are required.");
-        return false;
-      }
 
       if (!Number.isFinite(bathrooms) || bathrooms < 0) {
         setStepError(stepIndex, "Bathrooms must be 0 or greater.");
+        return false;
+      }
+
+      if (!Number.isFinite(bedrooms) || bedrooms < 0) {
+        setStepError(stepIndex, "Bedrooms must be 0 or greater.");
         return false;
       }
     }
@@ -790,15 +882,6 @@ function setupCostCalculator() {
         buttons.forEach((item) => {
           item.classList.toggle("is-selected", item === button);
         });
-
-        setTimeout(() => {
-          if (state.currentStep === stepPanels.length - 1) {
-            showResult();
-          } else {
-            state.currentStep += 1;
-            updateStepVisibility("forward");
-          }
-        }, 260);
       });
     });
   });
@@ -807,14 +890,33 @@ function setupCostCalculator() {
     event.preventDefault();
   });
 
-  form.elements.area?.addEventListener("input", (event) => {
+  areaInput?.addEventListener("input", (event) => {
     state.area = event.target.value;
+    syncDetailOutputs();
     clearStepError(1);
   });
 
-  form.elements.bathrooms?.addEventListener("input", (event) => {
+  areaRange?.addEventListener("input", (event) => {
+    state.area = event.target.value;
+    syncDetailOutputs();
+    clearStepError(1);
+  });
+
+  areaUnitSelect?.addEventListener("change", (event) => {
+    state.areaUnit = event.target.value;
+    syncDetailOutputs();
+  });
+
+  bathroomsRange?.addEventListener("input", (event) => {
     state.bathrooms = event.target.value;
-    clearStepError(4);
+    syncDetailOutputs();
+    clearStepError(1);
+  });
+
+  bedroomsRange?.addEventListener("input", (event) => {
+    state.bedrooms = event.target.value;
+    syncDetailOutputs();
+    clearStepError(1);
   });
 
   nextButton.addEventListener("click", () => {
@@ -849,14 +951,14 @@ function setupCostCalculator() {
   restartButton?.addEventListener("click", () => {
     state.currentStep = 0;
     state.propertyType = "Apartment";
-    state.area = "";
+    state.areaUnit = "sqft";
+    state.area = "3000";
     state.scope = "Light";
-    state.finish = "Light";
-    state.bathrooms = "";
+    state.finish = "Standard";
+    state.bathrooms = "2";
+    state.bedrooms = "2";
 
     form.reset();
-    form.elements.area.value = "";
-    form.elements.bathrooms.value = "";
 
     root.querySelectorAll("[data-option-group]").forEach((group) => {
       const stateKey = group.dataset.optionGroup;
@@ -869,9 +971,12 @@ function setupCostCalculator() {
     });
 
     stepPanels.forEach((_, index) => clearStepError(index));
+    syncDetailOutputs();
     updateStepVisibility();
   });
 
+  rangeInputs.forEach((input) => updateRangeProgress(input));
+  syncDetailOutputs();
   updateStepVisibility();
 }
 

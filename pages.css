@@ -799,6 +799,21 @@
   line-height: 1.8;
 }
 
+.cost-calculator__step-copy {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.cost-calculator__step-copy p {
+  margin: 0;
+  max-width: 46rem;
+}
+
+.cost-calculator__step-copy strong {
+  color: #fff;
+}
+
 .cost-calculator__step-count {
   display: inline-block;
   color: #b6986f;
@@ -812,6 +827,10 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.cost-calculator__options--feature {
+  align-items: stretch;
 }
 
 .cost-calculator__option {
@@ -839,6 +858,204 @@
   border-color: rgba(182, 152, 111, 0.9);
   background: linear-gradient(180deg, rgba(182, 152, 111, 0.18), rgba(182, 152, 111, 0.05));
   color: #fff;
+}
+
+.cost-calculator__option--feature.is-selected {
+  border-color: #f5c778;
+  background: linear-gradient(180deg, #f0b75a, #e3a946);
+  color: #111;
+}
+
+.cost-calculator__option--feature {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 10rem;
+  text-align: center;
+  padding: 1.75rem 1.5rem;
+}
+
+.cost-calculator__option--wide {
+  grid-column: 1 / -1;
+}
+
+.cost-calculator__option-title {
+  display: block;
+  color: inherit;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.cost-calculator__option-copy {
+  display: block;
+  max-width: 26rem;
+  margin: 0.8rem auto 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  letter-spacing: 0;
+}
+
+.cost-calculator__option.is-selected .cost-calculator__option-copy {
+  color: rgba(17, 17, 17, 0.82);
+}
+
+.cost-calculator__details {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.cost-calculator__details-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cost-calculator__unit-select-wrap,
+.cost-calculator__value-pill-wrap {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.cost-calculator__unit-select,
+.cost-calculator__value-pill-input {
+  min-width: 8rem;
+  height: 3.9rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.cost-calculator__unit-select:focus,
+.cost-calculator__value-pill-input:focus {
+  outline: 0;
+  border-color: rgba(182, 152, 111, 0.88);
+}
+
+.cost-calculator__value-pill-input {
+  width: min(11rem, 100%);
+  text-align: center;
+}
+
+.cost-calculator__range-group {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.cost-calculator__range-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.cost-calculator__range-title {
+  color: #fff;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.cost-calculator__range-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.8rem;
+  min-height: 3rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cost-calculator__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(182, 152, 111, 0.98) var(--range-progress, 0%), rgba(255, 255, 255, 0.12) var(--range-progress, 0%));
+  outline: none;
+}
+
+.cost-calculator__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0.35rem rgba(182, 152, 111, 0.18);
+  cursor: pointer;
+}
+
+.cost-calculator__range::-moz-range-thumb {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0.35rem rgba(182, 152, 111, 0.18);
+  cursor: pointer;
+}
+
+.cost-calculator__range::-moz-range-track {
+  height: 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cost-calculator__range-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.cost-calculator__review {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cost-calculator__review-card {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.2rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cost-calculator__review-card span {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cost-calculator__review-card strong {
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .cost-calculator__field {
@@ -1018,7 +1235,8 @@
 
   .cost-calculator-hero__meta,
   .cost-calculator__options,
-  .cost-calculator__summary {
+  .cost-calculator__summary,
+  .cost-calculator__review {
     grid-template-columns: 1fr;
   }
 
@@ -1033,6 +1251,10 @@
 
   .cost-calculator__card {
     padding: 1.5rem;
+  }
+
+  .cost-calculator__details-toolbar {
+    flex-direction: column;
   }
 }
 
@@ -1071,6 +1293,15 @@
 
   .cost-calculator__steps {
     min-height: auto;
+  }
+
+  .cost-calculator__step-head h2 {
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .cost-calculator__range-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .cost-calculator__actions,
@@ -1657,5 +1888,13 @@
   .cost-calculator__option {
     min-height: 5.5rem;
     font-size: 1.05rem;
+  }
+
+  .cost-calculator__option--feature {
+    min-height: 8.75rem;
+  }
+
+  .cost-calculator__option-copy {
+    font-size: 0.9rem;
   }
 }

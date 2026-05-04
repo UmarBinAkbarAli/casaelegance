@@ -1215,7 +1215,8 @@
 }
 
 /* override layout.css clone-contact__intro heading to drop ALL-CAPS */
-.mrittik-contact-page .clone-contact__intro h2 {
+.mrittik-contact-page .clone-contact__intro h2,
+.mrittik-about-clone .clone-contact__intro h2 {
   text-transform: none;
   font-size: clamp(1.9rem, 4.5vw, 3rem);
   letter-spacing: -0.03em;
@@ -1223,7 +1224,8 @@
   margin-bottom: 1.25rem;
 }
 
-.mrittik-contact-page .clone-contact__intro .clone-kicker {
+.mrittik-contact-page .clone-contact__intro .clone-kicker,
+.mrittik-about-clone .clone-contact__intro .clone-kicker {
   display: inline-block;
   margin-bottom: 1rem;
 }

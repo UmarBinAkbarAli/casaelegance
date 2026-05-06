@@ -481,7 +481,7 @@ function renderHomeProjectsSection() {
     <div class="container-large">
       <div class="_2-col-content-top">
         <div data-w-id="9316677b-5f04-5d8f-1abc-1b599d2fa8af" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
-          <div class="pill white">our Work</div>
+          <div class="pill white is-gold">our Work</div>
           <div class="spacer-medium"></div>
           <h2 class="heading-style-h2 text-color-alternate">Spaces We&rsquo;ve Brought to Life</h2>
           <div class="spacer-small"></div>
@@ -689,15 +689,15 @@ function renderContactForm(wId, idPrefix = "cf") {
 
 function renderAboutPartnerStrip() {
   const partners = [
-    ["5", "123", "55"],
-    ["2", "209", "44"],
-    ["4", "126", "54"],
-    ["1", "87", "38"],
-    ["3", "138", "48"],
+    { name: "Emaar", src: "./assets/partners/emaar-logo.svg" },
+    { name: "Damac", src: "./assets/partners/DAMAC-logo.svg" },
+    { name: "Binghatti", src: "./assets/partners/Binghatti-logo.svg" },
+    { name: "Sobha", src: "./assets/partners/Sobha-logo.svg" },
+    { name: "Select Group", src: "./assets/partners/Select-group-logo.svg" },
   ];
 
   return `    <div class="clone-partners">
-${partners.map(([name, width, height], index) => indentBlock(`<div class="clone-partners__item" data-w-id="about-partner-${index + 1}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);"><img src="./assets/partner/${name}.svg" alt="Partner ${name}" width="${width}" height="${height}" loading="lazy" decoding="async"><img src="./assets/partner/${name}${name}.svg" alt="Partner ${name} active" width="${width}" height="${height}" loading="lazy" decoding="async"></div>`, 6)).join("\n")}
+${partners.map((partner, index) => indentBlock(`<div class="clone-partners__item" data-w-id="about-partner-${index + 1}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);"><img src="${escapeAttr(partner.src)}" alt="${escapeAttr(partner.name)}" loading="lazy" decoding="async"></div>`, 6)).join("\n")}
     </div>`;
 }
 

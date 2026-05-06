@@ -870,6 +870,51 @@ footer {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.mrittik-mobile-menu__group {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mrittik-mobile-menu__accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 0;
+  border-bottom: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mrittik-mobile-menu__chevron {
+  width: 0.58rem;
+  height: 0.58rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.mrittik-mobile-menu__group.is-open .mrittik-mobile-menu__chevron {
+  transform: rotate(225deg);
+}
+
+.mrittik-mobile-menu__submenu {
+  display: grid;
+  gap: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.32s ease, opacity 0.22s ease, padding 0.32s ease;
+}
+
+.mrittik-mobile-menu__group.is-open .mrittik-mobile-menu__submenu {
+  max-height: var(--mobile-submenu-height, 24rem);
+  opacity: 1;
+  padding-bottom: 0.6rem;
+}
+
 .mrittik-mobile-menu__sublink {
   color: rgba(255, 255, 255, 0.62);
   text-decoration: none;
@@ -1989,6 +2034,10 @@ html.js-ready [data-w-id].is-visible {
     font-size: 0.98rem;
     font-weight: 600;
     letter-spacing: 0.18em;
+    padding: 1rem 0;
+  }
+
+  .mrittik-mobile-menu__accordion-trigger {
     padding: 1rem 0;
   }
 

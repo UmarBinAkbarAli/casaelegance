@@ -26,6 +26,9 @@ function setupMrittikHeader() {
   const searchOpen = Array.from(document.querySelectorAll("[data-search-open]"));
   const searchClose = Array.from(document.querySelectorAll("[data-search-close]"));
   const searchForm = searchModal?.querySelector("form");
+  const mobileAccordions = Array.from(
+    mobileMenu?.querySelectorAll("[data-mobile-accordion]") ?? []
+  );
 
   let lastScrollY = window.scrollY;
 
@@ -56,6 +59,11 @@ function setupMrittikHeader() {
 
   const closeMenu = () => {
     mobileMenu?.classList.remove("is-open");
+    mobileAccordions.forEach((accordion) => {
+      const trigger = accordion.querySelector("[data-mobile-accordion-trigger]");
+      accordion.classList.remove("is-open");
+      trigger?.setAttribute("aria-expanded", "false");
+    });
     syncBodyLock();
   };
 
@@ -79,6 +87,30 @@ function setupMrittikHeader() {
   navClose.forEach((button) => button.addEventListener("click", closeMenu));
   searchOpen.forEach((button) => button.addEventListener("click", openSearch));
   searchClose.forEach((button) => button.addEventListener("click", closeSearch));
+
+  mobileAccordions.forEach((accordion) => {
+    const trigger = accordion.querySelector("[data-mobile-accordion-trigger]");
+    const panel = accordion.querySelector("[data-mobile-accordion-panel]");
+
+    if (!trigger || !panel) {
+      return;
+    }
+
+    const syncPanelHeight = () => {
+      accordion.style.setProperty("--mobile-submenu-height", `${panel.scrollHeight}px`);
+    };
+
+    syncPanelHeight();
+
+    trigger.addEventListener("click", () => {
+      const shouldOpen = !accordion.classList.contains("is-open");
+      syncPanelHeight();
+      accordion.classList.toggle("is-open", shouldOpen);
+      trigger.setAttribute("aria-expanded", String(shouldOpen));
+    });
+
+    window.addEventListener("resize", scheduleAnimationFrame(syncPanelHeight));
+  });
 
   mobileMenu?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMenu);

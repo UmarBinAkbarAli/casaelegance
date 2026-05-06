@@ -1,37 +1,48 @@
 {
   "home": [
     {
+      "title": "Bluewaters Apartment",
+      "image": "./assets/website-used/Residential Projects/Apartments/2BHK Apartment (Bluewaters)/1.jpg",
+      "alt": "Bluewaters Apartment",
+      "width": "1080",
+      "height": "1350",
+      "filter": "apartment",
+      "category": "Apartment",
+      "year": "2024",
+      "location": "Bluewaters, Dubai"
+    },
+    {
+      "title": "Grand Vista Villa",
+      "image": "./assets/project-grand-vista.png",
+      "alt": "Grand Vista Villa",
+      "width": "383",
+      "height": "418",
+      "filter": "villa",
+      "category": "Villa",
+      "year": "2023",
+      "location": "Dubai"
+    },
+    {
+      "title": "Burj115 Premium Office",
+      "image": "./assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69ce946be65481932970df49_69cae22c68939cf61015796d_01.BK115_Hero-p-1080.jpg",
+      "alt": "Burj115 Premium Office",
+      "width": "1080",
+      "height": "720",
+      "filter": "commercial",
+      "category": "Commercial",
+      "year": "2024",
+      "location": "Burj Khalifa District"
+    },
+    {
       "title": "Khyber Restaurant",
-      "image": "./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8f7e0b317dbdb8e3231_02. Khyber Restaurant.png",
+      "image": "./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8eeb18c917589f966d7_01. Khyber Restaurant_Hero.jpeg",
       "alt": "Khyber Restaurant",
-      "width": "1200",
-      "height": "800",
-      "filter": "turnkey-fitout",
-      "category": "Sustainable",
-      "year": "2021-23",
-      "location": "Tokyo"
-    },
-    {
-      "title": "Genetec Office & Experience Center",
-      "image": "./assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/2.jpg",
-      "alt": "Genetec Office & Experience Center",
-      "width": "1080",
-      "height": "608",
-      "filter": "design-build",
-      "category": "Interior",
-      "year": "2022",
-      "location": "San Francisco"
-    },
-    {
-      "title": "Genetec Experience Lounge",
-      "image": "./assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/8.jpg",
-      "alt": "Genetec Experience Lounge",
-      "width": "1080",
-      "height": "608",
-      "filter": "furniture-works",
-      "category": "Residential",
-      "year": "2021",
-      "location": "London, UK"
+      "width": "1189",
+      "height": "792",
+      "filter": "hospitality",
+      "category": "Hospitality",
+      "year": "2023",
+      "location": "Palm Jumeirah"
     }
   ],
   "listing": [

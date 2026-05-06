@@ -251,7 +251,7 @@ body {
 }
 
 .about-mrittik__stat-number {
-  color: #fff;
+  color: #b6986f;
   font-family: "Mona Sans", Arial, sans-serif;
   font-size: 64px;
   font-weight: 800;
@@ -264,6 +264,10 @@ body {
   font-size: 20px;
   font-weight: 600;
   line-height: 1.2;
+}
+
+.about-mrittik__stat-accent {
+  color: #b6986f;
 }
 
 .section-testimonial-mrittik {
@@ -582,6 +586,14 @@ footer {
   gap: 3.65rem;
 }
 
+.mrittik-nav__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1.25rem 0;
+  margin: -1.25rem 0;
+}
+
 .mrittik-nav__link {
   position: relative;
   display: inline-flex;
@@ -634,6 +646,51 @@ footer {
 .mrittik-nav__link.has-caret:hover::after,
 .mrittik-nav__link.has-caret:focus-visible::after {
   transform: rotate(45deg) translate(0.12rem, 0.02rem);
+}
+
+.mrittik-nav__dropdown {
+  position: absolute;
+  top: calc(100% - 0.25rem);
+  left: 50%;
+  z-index: 40;
+  min-width: 16rem;
+  padding: 0.75rem 0;
+  background: rgba(12, 12, 12, 0.96);
+  border: 1px solid rgba(182, 152, 111, 0.28);
+  box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.34);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.75rem);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.mrittik-nav__item:hover .mrittik-nav__dropdown,
+.mrittik-nav__item:focus-within .mrittik-nav__dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.mrittik-nav__dropdown-link {
+  display: block;
+  padding: 0.7rem 1rem;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  line-height: 1.35;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.mrittik-nav__dropdown-link:hover,
+.mrittik-nav__dropdown-link:focus-visible {
+  color: #ffffff;
+  background: rgba(182, 152, 111, 0.14);
 }
 
 .mrittik-header__actions {
@@ -839,6 +896,20 @@ footer {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.mrittik-mobile-menu__sublink {
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  padding: 0.15rem 0 0.75rem 1rem;
+}
+
+.pill.is-gold {
+  color: #b6986f;
+}
+
 .mrittik-search-modal__dialog {
   position: absolute;
   top: 50%;
@@ -1007,6 +1078,7 @@ footer {
 .mrittik-hero__eyebrow,
 .mrittik-hero__rule,
 .mrittik-hero__title,
+.mrittik-hero__text,
 .mrittik-hero__button {
   opacity: 0;
   transform: translateY(2rem);
@@ -1018,6 +1090,7 @@ footer {
 .mrittik-hero__slide.is-active .mrittik-hero__eyebrow,
 .mrittik-hero__slide.is-active .mrittik-hero__rule,
 .mrittik-hero__slide.is-active .mrittik-hero__title,
+.mrittik-hero__slide.is-active .mrittik-hero__text,
 .mrittik-hero__slide.is-active .mrittik-hero__button {
   opacity: 1;
   transform: translateY(0);
@@ -1028,7 +1101,7 @@ footer {
 }
 
 .mrittik-hero__slide.is-active .mrittik-hero__button {
-  transition-delay: 0.24s;
+  transition-delay: 0.32s;
 }
 
 .mrittik-hero__eyebrow {
@@ -1058,6 +1131,15 @@ footer {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.04em;
+}
+
+.mrittik-hero__text {
+  max-width: 23rem;
+  margin: 1.25rem 0 2.5rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1rem;
+  line-height: 1.7;
+  transition-delay: 0.2s;
 }
 
 .mrittik-hero__button {
@@ -4097,6 +4179,11 @@ html.js-ready [data-w-id].is-visible {
   gap: 2.5rem 2rem;
 }
 
+.section-work .home-featured-projects {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.25rem 1.5rem;
+}
+
 .projects-grid .work-item {
   opacity: 1 !important;
   transform: none !important;
@@ -4109,6 +4196,10 @@ html.js-ready [data-w-id].is-visible {
 @media screen and (max-width: 991px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-work .home-featured-projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

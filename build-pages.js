@@ -346,12 +346,12 @@ function renderHomeServicesSection() {
     <div class="container-large">
       <div class="_2-col-content-top">
         <div data-w-id="91406df7-4871-4ba7-a32c-3a5d828d24ca" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
-          <div class="pill white">our services</div>
+          <div class="pill white is-gold">our services</div>
           <div class="spacer-medium"></div>
-          <h2 class="heading-style-h2 text-color-alternate">Crafting Possibilities ?<br>Our Architectural Palette</h2>
+          <h2 class="heading-style-h2 text-color-alternate">What does your perfect space look and feel like?</h2>
         </div>
         <div data-w-id="19557f39-0333-1a19-01a6-68b6a515d637" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
-          <p class="text-style-muted">Our team of skilled professionals is dedicated to turning your vision into reality, combining creativity, innovation, and expertise to deliver exceptional results.</p>
+          <p class="text-style-muted">Our team of skilled professionals is dedicated to turning your vision into reality, combining creativity, innovation and expertise to deliver exceptional results.</p>
           <div class="spacer-xxsmall"></div>
         </div>
       </div>
@@ -461,23 +461,23 @@ function renderHomeProjectsSection() {
         <div data-w-id="9316677b-5f04-5d8f-1abc-1b599d2fa8af" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
           <div class="pill white">our Work</div>
           <div class="spacer-medium"></div>
-          <h2 class="heading-style-h2 text-color-alternate">Design Chronicles ?<br>Our Latest Masterpieces</h2>
+          <h2 class="heading-style-h2 text-color-alternate">Spaces We&rsquo;ve Brought to Life</h2>
           <div class="spacer-small"></div>
           <div class="max-width-medium">
-            <p class="text-style-muted">Explore a selection of our latest projects, each a testament to our commitment to innovation, creativity, and excellence in design.</p>
+            <p class="text-style-muted">A curated selection of our recent work across residential and commercial spaces in Dubai.</p>
           </div>
         </div>
         <div id="w-node-_9316677b-5f04-5d8f-1abc-1b599d2fa8b7-a6e5fc78" data-w-id="9316677b-5f04-5d8f-1abc-1b599d2fa8b7" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
           <div class="button-group">
-            <a href="#" class="button is-secondary w-inline-block">
-              <div>Get a Quote</div>
+            <a href="./contact.html" class="button is-secondary w-inline-block">
+              <div>Start Your Project</div>
               <div class="button-icon-wrap">
                 <img src="https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663a78af9494684e9f0e93e1_arrow%20upright%20(3).svg" alt="Arrow" class="button-icon" loading="lazy" decoding="async">
                 <img src="https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663a78af9494684e9f0e93e1_arrow%20upright%20(3).svg" alt="Arrow" class="button-icon below" loading="lazy" decoding="async">
               </div>
             </a>
-            <a href="#" class="button w-inline-block">
-              <div>Browse Portfolio</div>
+            <a href="./projects.html" class="button w-inline-block">
+              <div>View All Projects</div>
             </a>
           </div>
           <div class="spacer-xxsmall"></div>
@@ -486,10 +486,8 @@ function renderHomeProjectsSection() {
 
       <div class="spacer-xlarge"></div>
 
-      ${renderProjectFilter("Filter featured projects")}
-
       <div>
-        <div class="work-list projects-grid">
+        <div class="work-list projects-grid home-featured-projects">
 ${projects.home.map((project) => renderProjectCard(project, { indent: 10, wId: "d0339084-321d-c54a-cd66-167a365879f0", filter: project.filter })).join("\n\n")}
         </div>
       </div>

@@ -1275,8 +1275,8 @@
 }
 
 .mrittik-partners--certifications .mrittik-partners__item {
-  flex: 0 0 14rem;
-  flex-basis: 14rem;
+  flex: 0 0 16rem;
+  flex-basis: 16rem;
 }
 
 .mrittik-partners--certifications:hover .mrittik-partners__grid {
@@ -1297,9 +1297,55 @@
   transition: opacity 0.3s, filter 0.3s ease;
 }
 
+.mrittik-partners__logo--wordmark {
+  max-width: 170px;
+  max-height: 68px;
+  color: #fff;
+  filter: none;
+  overflow: visible;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.mrittik-partners__logo--certification {
+  max-width: 184px;
+  max-height: 72px;
+}
+
+.mrittik-partners__logo-title {
+  fill: currentColor;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: 1.16rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.mrittik-partners__logo-subtitle {
+  fill: rgba(255, 255, 255, 0.76);
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+}
+
+.mrittik-partners__logo-frame,
+.mrittik-partners__logo-border {
+  fill: none;
+  stroke: #b6986f;
+  stroke-width: 1;
+  opacity: 0.5;
+  vector-effect: non-scaling-stroke;
+}
+
 .mrittik-partners__item:hover .mrittik-partners__logo {
   opacity: 1;
   filter: brightness(0) saturate(100%) invert(72%) sepia(18%) saturate(625%) hue-rotate(3deg) brightness(92%) contrast(88%);
+}
+
+.mrittik-partners__item:hover .mrittik-partners__logo--wordmark {
+  color: #b6986f;
+  filter: none;
 }
 
 .mrittik-certification-icon {
@@ -1346,7 +1392,7 @@
 
 .mrittik-footer__top {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr);
   gap: 4rem 3rem;
   align-items: start;
 }
@@ -1354,19 +1400,29 @@
 .mrittik-footer__brand-block {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  justify-content: flex-start;
+  align-self: start;
+  gap: 1.1rem;
   max-width: 29rem;
 }
 
 .mrittik-footer__logo {
   display: inline-block;
+  align-self: flex-start;
+  line-height: 0;
 }
 
 .mrittik-footer__logo img {
-  max-width: 150px;
-  max-height: 160px;
+  max-width: 132px;
+  max-height: 72px;
   object-fit: contain;
   filter: brightness(0) invert(1);
+}
+
+.mrittik-footer__brand-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
 }
 
 .mrittik-footer__brand-copy {
@@ -1378,8 +1434,8 @@
 
 .mrittik-footer__nav-groups {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
+  grid-template-columns: 0.9fr 0.75fr 1.45fr 0.65fr;
+  gap: 2rem 1.6rem;
 }
 
 .mrittik-footer__nav-group {
@@ -1418,6 +1474,100 @@
 .mrittik-footer__nav-list a:focus-visible {
   color: var(--accent-color, #b58e5d);
   transform: translateX(0.15rem);
+}
+
+.mrittik-footer__contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.mrittik-footer__contact-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.mrittik-footer__contact-list span {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mrittik-footer__contact-list a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.mrittik-footer__contact-list a:hover,
+.mrittik-footer__contact-list a:focus-visible {
+  color: var(--accent-color, #b58e5d);
+  transform: translateX(0.12rem);
+}
+
+.mrittik-footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.mrittik-footer__socials a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+  transition: color 0.28s ease, border-color 0.28s ease, transform 0.28s ease, background 0.28s ease;
+}
+
+.mrittik-footer__socials a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(181, 142, 93, 0.14);
+  opacity: 0;
+  transform: scale(0.55);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.mrittik-footer__socials a:hover,
+.mrittik-footer__socials a:focus-visible {
+  color: #f8f4ef;
+  border-color: rgba(181, 142, 93, 0.72);
+  background: rgba(181, 142, 93, 0.08);
+  transform: translateY(-0.18rem);
+}
+
+.mrittik-footer__socials a:hover::before,
+.mrittik-footer__socials a:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mrittik-footer__socials svg {
+  position: relative;
+  z-index: 1;
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .mrittik-footer__meta {
@@ -1476,7 +1626,8 @@
   }
 
   .mrittik-footer__nav-groups {
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
   }
 
   .mrittik-footer__meta {
@@ -1504,7 +1655,7 @@
 
   .mrittik-footer__nav-groups {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.15rem;
   }
 
   .mrittik-footer__meta {
@@ -1537,14 +1688,21 @@
   }
 
   .mrittik-footer__brand-copy,
-  .mrittik-footer__nav-list a {
+  .mrittik-footer__nav-list a,
+  .mrittik-footer__contact-list a {
     font-size: 0.92rem;
   }
 
   .mrittik-footer__nav-title,
+  .mrittik-footer__contact-list span,
   .mrittik-footer__copyright,
   .mrittik-footer__credit {
     font-size: 0.78rem;
+  }
+
+  .mrittik-footer__socials a {
+    width: 2.45rem;
+    height: 2.45rem;
   }
 
   .mrittik-footer__wordmark {

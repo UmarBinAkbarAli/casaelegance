@@ -229,12 +229,19 @@ function renderPartnerMarquee(partnersHtml) {
 }
 
 function renderCertificationStrip() {
-  const icons = Array.from({ length: 6 }, (_, index) => {
-    const number = String(index + 1).padStart(2, "0");
-    return `        <div class="mrittik-partners__item">
-          <span class="mrittik-certification-icon" aria-label="Certification icon ${number}" role="img">CE ${number}</span>
-        </div>`;
-  }).join("\n");
+  const certifications = [
+    { label: "ISO 9001 Certified", primary: "ISO 9001", secondary: "Certified" },
+    { label: "ISO 14001 Certified", primary: "ISO 14001", secondary: "Certified" },
+    { label: "ISO 45001 Certified", primary: "ISO 45001", secondary: "Certified" },
+    { label: "SBID Award 2023", primary: "SBID", secondary: "Award 2023" },
+    { label: "Luxury Lifestyle Award 2025", primary: "Luxury", secondary: "Lifestyle Award", tertiary: "2025" },
+    { label: "Dubai Municipality", primary: "Dubai", secondary: "Municipality" },
+    { label: "Trakhees", primary: "Trakhees", secondary: "Approved" },
+  ];
+
+  const icons = certifications.map((certification) => `        <div class="mrittik-partners__item">
+          ${renderCertificationLogo(certification)}
+        </div>`).join("\n");
 
   return duplicatePartnerItems(`<section class="mrittik-partners mrittik-partners--certifications" aria-label="Certification logos">
       <div class="mrittik-partners__header">
@@ -244,6 +251,21 @@ function renderCertificationStrip() {
 ${icons}
       </div>
     </section>`);
+}
+
+function renderCertificationLogo({ label, primary, secondary, tertiary = "" }) {
+  const primaryY = tertiary ? 35 : 40;
+  const secondaryY = tertiary ? 53 : 58;
+  const tertiaryMarkup = tertiary
+    ? `\n            <text x="110" y="69" text-anchor="middle" class="mrittik-partners__logo-subtitle">${escapeHtml(tertiary)}</text>`
+    : "";
+
+  return `<svg class="mrittik-partners__logo mrittik-partners__logo--wordmark mrittik-partners__logo--certification" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 86" aria-label="${escapeAttr(label)}" role="img">
+            <rect x="18" y="12" width="184" height="62" class="mrittik-partners__logo-border" />
+            <path class="mrittik-partners__logo-frame" d="M36 24h148M36 62h148" />
+            <text x="110" y="${primaryY}" text-anchor="middle" class="mrittik-partners__logo-title">${escapeHtml(primary)}</text>
+            <text x="110" y="${secondaryY}" text-anchor="middle" class="mrittik-partners__logo-subtitle">${escapeHtml(secondary)}</text>${tertiaryMarkup}
+          </svg>`;
 }
 
 function duplicatePartnerItems(sectionHtml) {

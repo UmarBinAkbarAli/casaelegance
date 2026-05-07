@@ -639,9 +639,9 @@ function renderContactSection({ introWId, formWId, idPrefix = "cf", includePartn
         <p>Tell us about your project and we'll get back to you within one business day to discuss how Casa Elegance can bring your vision to life.</p>
       </div>
       ${renderContactForm(formWId, idPrefix)}
-    </div>${includePartners ? `\n${renderAboutPartnerStrip()}` : ""}
+    </div>
   </div>
-</section>`;
+</section>${includePartners ? `\n${renderAboutPartnerStrip()}` : ""}`;
 }
 
 function renderContactForm(wId, idPrefix = "cf") {
@@ -696,9 +696,13 @@ function renderAboutPartnerStrip() {
     { name: "Select Group", src: "./assets/partners/Select-group-logo.svg" },
   ];
 
-  return `    <div class="clone-partners">
-${partners.map((partner, index) => indentBlock(`<div class="clone-partners__item" data-w-id="about-partner-${index + 1}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);"><img src="${escapeAttr(partner.src)}" alt="${escapeAttr(partner.name)}" loading="lazy" decoding="async"></div>`, 6)).join("\n")}
-    </div>`;
+  return `<section class="mrittik-partners" aria-label="Client logos">
+      <div class="mrittik-partners__grid">
+${partners.map((partner) => indentBlock(`<div class="mrittik-partners__item">
+  <img src="${escapeAttr(partner.src)}" alt="${escapeAttr(partner.name)}" class="mrittik-partners__logo" loading="lazy" decoding="async">
+</div>`, 8)).join("\n")}
+      </div>
+    </section>`;
 }
 
 function renderBreadcrumb({ className, separator, items }) {

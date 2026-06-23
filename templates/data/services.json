@@ -6,8 +6,8 @@
     "cloneCount": "01",
     "homeDescription": "From approvals and construction to final styling, we manage every stage of the fitout process through a single point of contact—ensuring quality, efficiency and complete peace of mind.",
     "cloneDescription": "From approvals and construction to final styling, we manage every stage of the fitout process through a single point of contact—ensuring quality, efficiency and complete peace of mind.",
-    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdac529ded0938acfe6f1_0_1%20(2).webp",
-    "homeImageAlt": "Architecture Design"
+    "homeImage": "./assets/final/service-turnkey-fitout.png",
+    "homeImageAlt": "Turnkey Fitout"
   },
   {
     "title": "Design & Build",
@@ -16,8 +16,8 @@
     "cloneCount": "02",
     "homeDescription": "A fully integrated approach where creative vision and technical execution work seamlessly together to deliver spaces that are both beautiful and buildable.",
     "cloneDescription": "A fully integrated approach where creative vision and technical execution work seamlessly together to deliver spaces that are both beautiful and buildable.",
-    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdb4cc93a0bc041e7110d_0_3%20(2).webp",
-    "homeImageAlt": "Design and build interior"
+    "homeImage": "./assets/final/service-design-build.png",
+    "homeImageAlt": "Design and Build interior"
   },
   {
     "title": "Bespoke Joinery & Furniture",
@@ -26,8 +26,8 @@
     "cloneCount": "03",
     "homeDescription": "Custom-crafted joinery, wardrobes, kitchens and furniture pieces designed to complement the architecture and character of each space.",
     "cloneDescription": "Custom-crafted joinery, wardrobes, kitchens and furniture pieces designed to complement the architecture and character of each space.",
-    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdb94b6e8ee7693812200_0_0%20(2).webp",
-    "homeImageAlt": "Bespoke joinery and furniture"
+    "homeImage": "./assets/final/service-bespoke-joinery.png",
+    "homeImageAlt": "Bespoke Joinery and Furniture"
   },
   {
     "title": "Architecture & Interior Design",
@@ -36,8 +36,8 @@
     "cloneCount": "04",
     "homeDescription": "Thoughtfully designed environments where spatial planning, materiality and functionality come together to create timeless interiors.",
     "cloneDescription": "Thoughtfully designed environments where spatial planning, materiality and functionality come together to create timeless interiors.",
-    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdbd913e6407ad512401b_0_2%20(2).webp",
-    "homeImageAlt": "Architecture and interior design"
+    "homeImage": "./assets/final/service-architecture-interior.png",
+    "homeImageAlt": "Architecture and Interior Design"
   },
   {
     "title": "Outdoor Living & Landscaping",
@@ -46,7 +46,7 @@
     "cloneCount": "05",
     "homeDescription": "Transforming outdoor areas into refined extensions of the home through landscaping, pergolas, pools, terraces and custom outdoor features.",
     "cloneDescription": "Transforming outdoor areas into refined extensions of the home through landscaping, pergolas, pools, terraces and custom outdoor features.",
-    "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdbd913e6407ad512401b_0_2%20(2).webp",
-    "homeImageAlt": "Outdoor living and landscaping"
+    "homeImage": "./assets/final/service-outdoor-living.png",
+    "homeImageAlt": "Outdoor Living and Landscaping"
   }
 ]

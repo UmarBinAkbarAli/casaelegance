@@ -2,149 +2,222 @@
   "home": [
     {
       "title": "Bluewater Residence",
-      "image": "./assets/website-used/Residential Projects/Apartments/2BHK Apartment (Bluewaters)/1.jpg",
+      "image": "./assets/final/project-bluewater-residence.jpg",
       "alt": "Bluewater Residence living area",
       "width": "1080",
       "height": "1350",
       "filter": "apartment",
       "category": "Apartment",
       "year": "2022",
-      "location": "Bluewaters, Dubai"
+      "location": "Bluewaters, Dubai",
+      "detailUrl": "./project-bluewater-residence.html"
     },
     {
       "title": "Golf Grove Villa",
-      "image": "./assets/project-grand-vista.png",
+      "image": "./assets/final/project-golf-grove.jpg",
       "alt": "Golf Grove Villa exterior",
-      "width": "383",
-      "height": "418",
+      "width": "2560",
+      "height": "1707",
       "filter": "villa",
       "category": "Villa",
       "year": "2026",
-      "location": "Dubai Hills Estate"
+      "location": "Dubai Hills Estate",
+      "detailUrl": "./project-golf-grove-villa.html"
     },
     {
-      "title": "Burj117 Premium Office",
-      "image": "./assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69ce946be65481932970df49_69cae22c68939cf61015796d_01.BK115_Hero-p-1080.jpg",
-      "alt": "Burj117 Premium Office interior",
+      "title": "Khyber Restaurant",
+      "image": "./assets/final/project-khyber-restaurant.png",
+      "alt": "Khyber Restaurant interior",
+      "width": "1200",
+      "height": "800",
+      "filter": "hospitality",
+      "category": "Hospitality",
+      "year": "2017",
+      "location": "Palm Jumeirah",
+      "detailUrl": "./project-khyber-restaurant.html"
+    },
+    {
+      "title": "Burj 117 Premium Office",
+      "image": "./assets/final/project-burj117-office.jpg",
+      "alt": "Burj 117 Premium Office interior",
       "width": "1080",
       "height": "720",
       "filter": "commercial",
       "category": "Commercial",
       "year": "2024",
-      "location": "Burj Khalifa District"
-    },
-    {
-      "title": "Khyber Restaurant",
-      "image": "./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8eeb18c917589f966d7_01. Khyber Restaurant_Hero.jpeg",
-      "alt": "Khyber Restaurant interior",
-      "width": "1189",
-      "height": "792",
-      "filter": "hospitality",
-      "category": "Hospitality",
-      "year": "2017",
-      "location": "Palm Jumeirah"
+      "location": "Burj Khalifa District, Dubai",
+      "detailUrl": "./project-details.html"
     }
   ],
   "listing": [
     {
       "title": "Bluewater Residence",
       "filter": "apartment",
-      "image": "./assets/website-used/Residential Projects/Apartments/2BHK Apartment (Bluewaters)/1.jpg",
+      "image": "./assets/final/project-bluewater-residence.jpg",
       "alt": "Bluewater Residence living area",
       "width": "1080",
       "height": "1350",
       "priority": true,
       "category": "Apartment",
       "year": "2022",
-      "location": "Bluewaters, Dubai"
+      "location": "Bluewaters, Dubai",
+      "detailUrl": "./project-bluewater-residence.html"
     },
     {
       "title": "City Walk Penthouse",
       "filter": "apartment",
-      "image": "./assets/website-used/Residential Projects/Apartments/2BHK Apartment (Dubai Creek Harbor)/4077486C-8922-41F5-B621-1B6DB225E5DA.jpeg",
+      "image": "./assets/final/project-city-walk-penthouse.jpg",
       "alt": "City Walk Penthouse interior",
-      "width": "1080",
-      "height": "1346",
+      "width": "1200",
+      "height": "1200",
       "category": "Apartment",
       "year": "2023",
-      "location": "City Walk, Dubai"
+      "location": "City Walk, Dubai",
+      "detailUrl": "./project-city-walk-penthouse.html"
     },
     {
       "title": "Pagani Residence",
       "filter": "apartment",
-      "image": "./assets/project-modern-marvel.png",
+      "image": "./assets/final/project-pagani-residence.png",
       "alt": "Pagani Residence interior",
-      "width": "296",
-      "height": "418",
+      "width": "1536",
+      "height": "1024",
       "category": "Apartment",
       "year": "2025",
-      "location": "Downtown, Dubai"
+      "location": "Downtown, Dubai",
+      "detailUrl": "./project-pagani-residence.html"
     },
     {
       "title": "Burj Crown Emaar",
       "filter": "apartment",
-      "image": "./assets/project-elegant-retreat.png",
+      "image": "./assets/final/project-burj-crown-emaar.png",
       "alt": "Burj Crown Emaar apartment interior",
-      "width": "384",
-      "height": "418",
+      "width": "1535",
+      "height": "1024",
       "category": "Apartment",
       "year": "2025",
-      "location": "Downtown, Dubai"
+      "location": "Downtown, Dubai",
+      "detailUrl": "./project-burj-crown-emaar.html"
+    },
+    {
+      "title": "JBR Luxe Residence",
+      "filter": "apartment",
+      "image": "./assets/final/project-jbr-luxe-residence.jpg",
+      "alt": "JBR Luxe Residence interior",
+      "width": "1080",
+      "height": "1350",
+      "category": "Apartment",
+      "year": "2026",
+      "location": "JBR, Dubai",
+      "detailUrl": "./project-jbr-luxe-residence.html"
+    },
+    {
+      "title": "Trillionaire Residence 1",
+      "filter": "apartment",
+      "image": "./assets/final/project-trillionaire-1.png",
+      "alt": "Trillionaire Residence 1 interior",
+      "width": "1537",
+      "height": "1023",
+      "category": "Apartment",
+      "year": "2025",
+      "location": "Business Bay, Dubai",
+      "detailUrl": "./project-trillionaire-residence-1.html"
+    },
+    {
+      "title": "Trillionaire Residence 2",
+      "filter": "apartment",
+      "image": "./assets/final/project-trillionaire-2.png",
+      "alt": "Trillionaire Residence 2 interior",
+      "width": "1535",
+      "height": "1024",
+      "category": "Apartment",
+      "year": "2025",
+      "location": "Business Bay, Dubai",
+      "detailUrl": "./project-trillionaire-residence-2.html"
     },
     {
       "title": "Golf Grove Villa",
       "filter": "villa",
-      "image": "./assets/project-grand-vista.png",
+      "image": "./assets/final/project-golf-grove.jpg",
       "alt": "Golf Grove Villa exterior",
-      "width": "383",
-      "height": "418",
+      "width": "2560",
+      "height": "1707",
       "category": "Villa",
       "year": "2026",
-      "location": "Dubai Hills Estate"
+      "location": "Dubai Hills Estate",
+      "detailUrl": "./project-golf-grove-villa.html"
     },
     {
-      "title": "Burj117 Premium Office",
-      "filter": "commercial",
-      "image": "./assets/website-used/Commercial Projects/Office Space/Burj115 Premium Office (Burj Khalifa)/69ce946be65481932970df49_69cae22c68939cf61015796d_01.BK115_Hero-p-1080.jpg",
-      "alt": "Burj117 Premium Office interior",
-      "width": "1080",
-      "height": "720",
-      "category": "Commercial",
-      "year": "2024",
-      "location": "Burj Khalifa District"
+      "title": "Palm Hills Villa",
+      "filter": "villa",
+      "image": "./assets/final/project-palm-hills.jpg",
+      "alt": "Palm Hills Villa interior",
+      "width": "2560",
+      "height": "1707",
+      "category": "Villa",
+      "year": "2026",
+      "location": "Dubai Hills Estate, Dubai",
+      "detailUrl": "./project-palm-hills-villa.html"
     },
     {
       "title": "Real Estate Development Firm",
       "filter": "commercial",
-      "image": "./assets/website-used/Commercial Projects/Office Space/Genetec Office & Experience Center (Business Bay)/1.jpg",
+      "image": "./assets/final/project-real-estate-firm.webp",
       "alt": "Real Estate Development Firm office interior",
-      "width": "1080",
-      "height": "720",
+      "width": "1200",
+      "height": "800",
       "category": "Commercial",
       "year": "2022",
-      "location": "Dubai South"
+      "location": "Dubai South",
+      "detailUrl": "./project-real-estate-development.html"
+    },
+    {
+      "title": "Swarovski x Ariana Grande",
+      "filter": "commercial",
+      "image": "./assets/final/project-swarovski-ariana.jpg",
+      "alt": "Swarovski x Ariana Grande boutique interior",
+      "width": "1725",
+      "height": "1549",
+      "category": "Commercial",
+      "year": "2024",
+      "location": "Mall of Emirates, Dubai",
+      "detailUrl": "./project-swarovski-ariana-grande.html"
     },
     {
       "title": "Khyber Restaurant",
       "filter": "hospitality",
-      "image": "./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8eeb18c917589f966d7_01. Khyber Restaurant_Hero.jpeg",
+      "image": "./assets/final/project-khyber-restaurant.png",
       "alt": "Khyber Restaurant interior",
-      "width": "1189",
-      "height": "792",
+      "width": "1200",
+      "height": "800",
       "category": "Hospitality",
       "year": "2017",
-      "location": "Palm Jumeirah"
+      "location": "Palm Jumeirah",
+      "detailUrl": "./project-khyber-restaurant.html"
     },
     {
       "title": "Sur. Dubai",
       "filter": "hospitality",
-      "image": "./assets/website-used/Hospitality Projects/Restaurants/Khyber Restaurant (Palm Jumeirah)/69caf8f7e0b317dbdb8e3231_02. Khyber Restaurant.png",
+      "image": "./assets/final/project-sur-dubai.jpg",
       "alt": "Sur. Dubai restaurant interior",
-      "width": "1080",
-      "height": "720",
+      "width": "1200",
+      "height": "800",
       "category": "Hospitality",
       "year": "2023",
-      "location": "Palm Jumeirah"
+      "location": "Palm Jumeirah",
+      "detailUrl": "./project-sur-dubai.html"
+    },
+    {
+      "title": "Costa Coffee",
+      "filter": "hospitality",
+      "image": "./assets/final/project-costa-coffee.jpg",
+      "alt": "Costa Coffee interior",
+      "width": "2560",
+      "height": "1700",
+      "category": "Hospitality",
+      "year": "2023",
+      "location": "Madinat Jumeirah, Dubai",
+      "detailUrl": "./project-costa-coffee.html"
     }
   ],
   "detail": {

@@ -107,6 +107,26 @@ const contentImageDeliveryMap = new Map(
       fallback: "./assets/delivery/project-modern-marvel.png",
       webp: "./assets/delivery/project-modern-marvel.webp",
     },
+    "assets/delivery/bluewaters-apartment.jpg": {
+      fallback: "./assets/delivery/bluewaters-apartment.jpg",
+      webp: "./assets/delivery/bluewaters-apartment.webp",
+      avif: "./assets/delivery/bluewaters-apartment.avif",
+    },
+    "assets/delivery/dubai-creek-apartment.jpg": {
+      fallback: "./assets/delivery/dubai-creek-apartment.jpg",
+      webp: "./assets/delivery/dubai-creek-apartment.webp",
+      avif: "./assets/delivery/dubai-creek-apartment.avif",
+    },
+    "assets/delivery/burj115-hero.jpg": {
+      fallback: "./assets/delivery/burj115-hero.jpg",
+      webp: "./assets/delivery/burj115-hero.webp",
+      avif: "./assets/delivery/burj115-hero.avif",
+    },
+    "assets/delivery/burj115-breakout-area.jpg": {
+      fallback: "./assets/delivery/burj115-breakout-area.jpg",
+      webp: "./assets/delivery/burj115-breakout-area.webp",
+      avif: "./assets/delivery/burj115-breakout-area.avif",
+    },
   })
 );
 
@@ -574,8 +594,9 @@ function renderProjectCard(project, { indent, wId, filter = "" }) {
     fetchpriority: project.priority ? "high" : "",
   });
 
+  const cardHref = project.detailUrl || "./project-details.html";
   return indentBlock(`<div class="work-item"${filterAttribute} data-w-id="${escapeAttr(wId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
-  <a href="./project-details.html" class="work-card w-inline-block">
+  <a href="${escapeAttr(cardHref)}" class="work-card w-inline-block">
     <div>
       <div class="work-card-image-wrapper">
 ${indentBlock(imageMarkup, 8)}

@@ -926,7 +926,11 @@ footer {
 }
 
 .pill.is-gold {
-  color: #b6986f;
+  color: #c9a97a;
+  border-color: rgba(182, 152, 111, 0.55);
+  background: rgba(182, 152, 111, 0.1);
+  letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .mrittik-search-modal__dialog {
@@ -1418,7 +1422,7 @@ html.js-ready [data-w-id].is-visible {
 }
 
 .services-list .services-item.is-active {
-  background-color: #5d695d;
+  background-color: rgba(182, 152, 111, 0.14);
 }
 
 .services-list .services-item.is-active .services-desc-wrap {

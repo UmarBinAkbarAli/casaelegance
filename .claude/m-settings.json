@@ -1,0 +1,13 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.minimax.io/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "sk-cp-wuTBZG2BlN0DZ8LIZzZGQEwCMJPDNHZg3v2kWo34Tlgd4jyf78Jowsig-WdTY127yCHQcxo0GsbiPjzyAThiUxMDxM6HmVjuR9M4FDJj0gKvwsop2cjUhaQ",
+    "ANTHROPIC_MODEL": "MiniMax-M3",
+    "ANTHROPIC_SMALL_FAST_MODEL": "MiniMax-M3",
+
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+
+    "API_TIMEOUT_MS": "300000"
+  }
+}

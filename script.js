@@ -173,34 +173,53 @@ function setupHeroSlider() {
     };
   }
 
+  // Snapshot image values from original slide elements before Swiper touches the DOM.
+  // Swiper loop mode clones and repositions slides, which can make getPropertyValue
+  // unreliable once the constructor runs. Reading here guarantees the raw inline values.
+  const slideImageCache = slides.map((slide) => ({
+    image: slide.style.getPropertyValue("--hero-image"),
+    fallback: slide.style.getPropertyValue("--hero-image-fallback")
+  }));
+
+  function applySideImages(activeIndex) {
+    const { prev: prevIndex, next: nextIndex } = getNeighborIndexes(activeIndex);
+    const left = slideImageCache[nextIndex];
+    const right = slideImageCache[prevIndex];
+    slider.style.setProperty("--hero-prev-image-fallback", left.fallback || left.image);
+    slider.style.setProperty("--hero-prev-image", left.image);
+    slider.style.setProperty("--hero-next-image-fallback", right.fallback || right.image);
+    slider.style.setProperty("--hero-next-image", right.image);
+  }
+
+  // Apply before Swiper initialises so side panels are filled on the very first frame.
+  applySideImages(initialIndex);
+
   function syncHeroState(swiper) {
     const activeIndex = swiper.realIndex ?? 0;
-    const { prev: prevIndex, next: nextIndex } = getNeighborIndexes(activeIndex);
-    const leftImage = slides[nextIndex].style.getPropertyValue("--hero-image");
-    const leftFallback = slides[nextIndex].style.getPropertyValue("--hero-image-fallback") || leftImage;
-    const rightImage = slides[prevIndex].style.getPropertyValue("--hero-image");
-    const rightFallback = slides[prevIndex].style.getPropertyValue("--hero-image-fallback") || rightImage;
-
-    slider.style.setProperty("--hero-prev-image-fallback", leftFallback);
-    slider.style.setProperty("--hero-prev-image", leftImage);
-    slider.style.setProperty("--hero-next-image-fallback", rightFallback);
-    slider.style.setProperty("--hero-next-image", rightImage);
+    applySideImages(activeIndex);
 
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", slideIndex === activeIndex);
     });
 
-    swiper.slides.forEach((slide) => {
-      const slideIndex = Number(
-        slide.getAttribute("data-swiper-slide-index") ?? "-1"
-      );
+    swiper.slides.forEach((slide, domIndex) => {
+      // data-swiper-slide-index is only present in loop mode; without it (loop
+      // disabled) fall back to the slide's DOM position so the active slide
+      // still receives is-active and its card text is revealed.
+      const attr = slide.getAttribute("data-swiper-slide-index");
+      const slideIndex = attr !== null ? Number(attr) : domIndex;
       slide.classList.toggle("is-active", slideIndex === activeIndex);
     });
   }
 
   const swiper = new window.Swiper(viewport, {
     initialSlide: initialIndex,
-    loop: slides.length > 1,
+    // With only 3 slides, Swiper's loop cannot place a peek on both sides of
+    // the first slide (the left clone is never generated), leaving the left
+    // column empty on load. Centering the middle slide instead guarantees a
+    // real neighbour on each side; rewind keeps navigation wrapping at the ends.
+    loop: false,
+    rewind: slides.length > 1,
     speed: 900,
     grabCursor: true,
     slidesPerView: 1,
@@ -237,6 +256,11 @@ function setupHeroSlider() {
       },
       resize(instance) {
         syncHeroState(instance);
+        // Re-centre the active slide after a resize so the centered-slide peek
+        // transforms are rebuilt against the new viewport width.
+        requestAnimationFrame(() => {
+          instance.slideTo(instance.activeIndex ?? 0, 0, false);
+        });
       }
     }
   });
@@ -538,6 +562,18 @@ function setupAboutClone() {
 
   aboutForm?.addEventListener("submit", (event) => {
     event.preventDefault();
+    const nameInput = aboutForm.querySelector("[name='name']");
+    const emailInput = aboutForm.querySelector("[name='email']");
+    if (!nameInput?.value.trim() || !emailInput?.value.trim()) {
+      return;
+    }
+    const successEl = aboutForm.querySelector("[data-form-success]");
+    if (successEl) {
+      aboutForm.querySelectorAll(".ce-form__field, .ce-form__row, .ce-form__submit").forEach((el) => {
+        el.style.display = "none";
+      });
+      successEl.style.display = "block";
+    }
   });
 
   if (typeof window.Swiper !== "function") {

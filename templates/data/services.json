@@ -4,8 +4,8 @@
     "ariaLabel": "Turnkey Fitout",
     "homeCount": "1.",
     "cloneCount": "01",
-    "homeDescription": "End-to-end fitout delivered with precision, control and refined detailing -- ensuring every space is executed to perfection.",
-    "cloneDescription": "End-to-end fitout delivered with precision, control and refined detailing -- ensuring every space is executed to perfection.",
+    "homeDescription": "From approvals and construction to final styling, we manage every stage of the fitout process through a single point of contact—ensuring quality, efficiency and complete peace of mind.",
+    "cloneDescription": "From approvals and construction to final styling, we manage every stage of the fitout process through a single point of contact—ensuring quality, efficiency and complete peace of mind.",
     "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdac529ded0938acfe6f1_0_1%20(2).webp",
     "homeImageAlt": "Architecture Design"
   },
@@ -14,28 +14,28 @@
     "ariaLabel": "Design and Build",
     "homeCount": "2.",
     "cloneCount": "02",
-    "homeDescription": "A seamless integration of design and execution, where vision, planning and delivery comes together with clarity and efficiency.",
-    "cloneDescription": "A seamless integration of design and execution, where vision, planning and delivery comes together with clarity and efficiency.",
+    "homeDescription": "A fully integrated approach where creative vision and technical execution work seamlessly together to deliver spaces that are both beautiful and buildable.",
+    "cloneDescription": "A fully integrated approach where creative vision and technical execution work seamlessly together to deliver spaces that are both beautiful and buildable.",
     "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdb4cc93a0bc041e7110d_0_3%20(2).webp",
     "homeImageAlt": "Design and build interior"
   },
   {
-    "title": "Bespoke Joinery & Interiors",
-    "ariaLabel": "Bespoke Joinery and Interiors",
+    "title": "Bespoke Joinery & Furniture",
+    "ariaLabel": "Bespoke Joinery and Furniture",
     "homeCount": "3.",
     "cloneCount": "03",
-    "homeDescription": "Custom-crafted joinery and furniture designed with precision, tailored to elevate both function and aesthetic.",
-    "cloneDescription": "Custom-crafted joinery and furniture designed with precision, tailored to elevate both function and aesthetic.",
+    "homeDescription": "Custom-crafted joinery, wardrobes, kitchens and furniture pieces designed to complement the architecture and character of each space.",
+    "cloneDescription": "Custom-crafted joinery, wardrobes, kitchens and furniture pieces designed to complement the architecture and character of each space.",
     "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdb94b6e8ee7693812200_0_0%20(2).webp",
-    "homeImageAlt": "Bespoke joinery and interiors"
+    "homeImageAlt": "Bespoke joinery and furniture"
   },
   {
     "title": "Architecture & Interior Design",
     "ariaLabel": "Architecture and Interior Design",
     "homeCount": "4.",
     "cloneCount": "04",
-    "homeDescription": "Thoughtfully designed spaces that balance form, function, and atmosphere -- tailored to reflect your lifestyle and vision.",
-    "cloneDescription": "Thoughtfully designed spaces that balance form, function, and atmosphere -- tailored to reflect your lifestyle and vision.",
+    "homeDescription": "Thoughtfully designed environments where spatial planning, materiality and functionality come together to create timeless interiors.",
+    "cloneDescription": "Thoughtfully designed environments where spatial planning, materiality and functionality come together to create timeless interiors.",
     "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdbd913e6407ad512401b_0_2%20(2).webp",
     "homeImageAlt": "Architecture and interior design"
   },
@@ -44,8 +44,8 @@
     "ariaLabel": "Outdoor Living and Landscaping",
     "homeCount": "5.",
     "cloneCount": "05",
-    "homeDescription": "Elegant outdoor environments designed to extend your living experience with harmony, comfort, and luxury.",
-    "cloneDescription": "Elegant outdoor environments designed to extend your living experience with harmony, comfort, and luxury.",
+    "homeDescription": "Transforming outdoor areas into refined extensions of the home through landscaping, pergolas, pools, terraces and custom outdoor features.",
+    "cloneDescription": "Transforming outdoor areas into refined extensions of the home through landscaping, pergolas, pools, terraces and custom outdoor features.",
     "homeImage": "https://cdn.prod.website-files.com/663a544c6dc5267ca6e5fc10/663fdbd913e6407ad512401b_0_2%20(2).webp",
     "homeImageAlt": "Outdoor living and landscaping"
   }

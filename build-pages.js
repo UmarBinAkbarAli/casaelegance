@@ -368,9 +368,9 @@ function renderHomeServicesSection() {
     <div class="container-large">
       <div class="_2-col-content-top">
         <div data-w-id="91406df7-4871-4ba7-a32c-3a5d828d24ca" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
-          <div class="pill white is-gold">our services</div>
+          <span class="clone-kicker">Our Services</span>
           <div class="spacer-medium"></div>
-          <h2 class="heading-style-h2 text-color-alternate">What does your perfect space look and feel like?</h2>
+          <h2 class="heading-style-h2 text-color-alternate">Spaces Defined by Design, Detail &amp; Craftsmanship</h2>
         </div>
         <div data-w-id="19557f39-0333-1a19-01a6-68b6a515d637" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
           <p class="text-style-muted">Our team of skilled professionals is dedicated to turning your vision into reality, combining creativity, innovation and expertise to deliver exceptional results.</p>
@@ -410,9 +410,14 @@ function renderCloneServicesSection({ includeHeader = false, wIdPrefix }) {
   const header = includeHeader
     ? `      <div class="_2-col-content-top" data-w-id="services-page-head" style="margin-bottom:4rem;opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
         <div>
-          <div class="pill white">our services</div>
+          <span class="clone-kicker">Our Services</span>
           <div class="spacer-medium"></div>
-      </div>
+          <h2 class="heading-style-h2 text-color-alternate">Spaces Defined by Design, Detail &amp; Craftsmanship</h2>
+        </div>
+        <div>
+          <p class="text-style-muted">Our team of skilled professionals is dedicated to turning your vision into reality, combining creativity, innovation and expertise to deliver exceptional results.</p>
+          <div class="spacer-xxsmall"></div>
+        </div>
       </div>
 `
     : "";
@@ -433,7 +438,6 @@ function renderCloneServiceCard(service, wId) {
   <img src="./assets/casa-elegance-icon.png" alt="Casa Elegance icon" class="clone-service__icon" width="537" height="653"${iconResponsiveAttrs} loading="lazy" decoding="async">
   <h3>${escapeHtml(service.title)}</h3>
   <p>${escapeHtml(service.cloneDescription)}</p>
-  <a href="./services.html" class="clone-service__arrow" aria-label="${escapeAttr(service.ariaLabel)}"></a>
 </article>`, 6);
 }
 
@@ -481,7 +485,7 @@ function renderHomeProjectsSection() {
     <div class="container-large">
       <div class="_2-col-content-top">
         <div data-w-id="9316677b-5f04-5d8f-1abc-1b599d2fa8af" style="opacity:0;transform:translate3d(0, 0, 0) scale3d(0.95, 0.95, 1);">
-          <div class="pill white is-gold">our Work</div>
+          <span class="clone-kicker">Our Work</span>
           <div class="spacer-medium"></div>
           <h2 class="heading-style-h2 text-color-alternate">Spaces We&rsquo;ve Brought to Life</h2>
           <div class="spacer-small"></div>
@@ -592,7 +596,7 @@ function renderProjectDetailHero() {
   return `<section class="project-detail-hero">
   <div class="clone-shell project-detail-hero__inner">
     <div class="project-detail-hero__content" data-w-id="project-detail-hero-content" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
-      <div class="pill white">${escapeHtml(detail.eyebrow)}</div>
+      <span class="clone-kicker">${escapeHtml(detail.eyebrow)}</span>
       ${renderBreadcrumb({
         className: "project-detail-breadcrumb",
         separator: "/",
@@ -630,18 +634,19 @@ function renderProjectDetailCta() {
 }
 
 function renderContactSection({ introWId, formWId, idPrefix = "cf", includePartners = false }) {
+  const partnersContent = includePartners ? `\n  ${renderAboutPartnerContent()}` : "";
   return `<section class="clone-contact">
   <div class="clone-shell">
     <div class="clone-contact__grid">
       <div class="clone-contact__intro" data-w-id="${escapeAttr(introWId)}" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
         <span class="clone-kicker">Get In Touch</span>
-        <h2>Start a Conversation</h2>
-        <p>Tell us about your project and we'll get back to you within one business day to discuss how Casa Elegance can bring your vision to life.</p>
+        <h2>Tell us about your Project</h2>
+        <p>We would be pleased to hear more about your vision. You can contact us by email, phone or by completing the project enquiry form. Whether you are at the early planning stage or ready to begin, our team is here to guide the conversation and support the next steps.</p>
       </div>
       ${renderContactForm(formWId, idPrefix)}
     </div>
-  </div>
-</section>${includePartners ? `\n${renderAboutPartnerStrip()}` : ""}`;
+  </div>${partnersContent}
+</section>`;
 }
 
 function renderContactForm(wId, idPrefix = "cf") {
@@ -681,7 +686,7 @@ function renderContactForm(wId, idPrefix = "cf") {
           <textarea class="ce-form__input ce-form__textarea" id="${p}-message" name="message" rows="5" placeholder="Briefly describe your project, timeline, or any questions you have…"></textarea>
         </div>
         <button class="ce-form__submit" type="submit">
-          <span>Request Consultation</span>
+          <span>Send Message</span>
           <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" width="18" height="18"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>`;
@@ -703,6 +708,24 @@ ${partners.map((partner) => indentBlock(`<div class="mrittik-partners__item">
 </div>`, 8)).join("\n")}
       </div>
     </section>`;
+}
+
+function renderAboutPartnerContent() {
+  const partners = [
+    { name: "Emaar", src: "./assets/partners/emaar-logo.svg" },
+    { name: "Damac", src: "./assets/partners/DAMAC-logo.svg" },
+    { name: "Binghatti", src: "./assets/partners/Binghatti-logo.svg" },
+    { name: "Sobha", src: "./assets/partners/Sobha-logo.svg" },
+    { name: "Select Group", src: "./assets/partners/Select-group-logo.svg" },
+  ];
+
+  return `<div class="mrittik-partners" aria-label="Client logos">
+      <div class="mrittik-partners__grid">
+${partners.map((partner) => indentBlock(`<div class="mrittik-partners__item">
+  <img src="${escapeAttr(partner.src)}" alt="${escapeAttr(partner.name)}" class="mrittik-partners__logo" loading="lazy" decoding="async">
+</div>`, 8)).join("\n")}
+      </div>
+    </div>`;
 }
 
 function renderBreadcrumb({ className, separator, items }) {

@@ -1048,6 +1048,175 @@ function setupCostCalculator() {
   updateStepVisibility();
 }
 
+function setupProcessTimeline() {
+  const section = document.querySelector("[data-process-section]");
+  if (!section) return;
+
+  const runner = section.querySelector("[data-htimeline-runner]");
+  const fill = section.querySelector("[data-htimeline-fill]");
+  const stepEls = Array.from(section.querySelectorAll("[data-htimeline-step]"));
+  const stepNumEl = section.querySelector("[data-htimeline-step-num]");
+  const pipEls = Array.from(section.querySelectorAll("[data-htimeline-pip]"));
+
+  if (!runner) return;
+
+  let sectionOffsetTop = 0;
+  let scrollTravel = 0;
+  let maxShift = 0;
+
+  function measure() {
+    section.style.height = "";
+    const runnerW = runner.offsetWidth;
+    const overflow = Math.max(0, runnerW - window.innerWidth);
+    section.style.height = window.innerHeight + overflow + "px";
+    sectionOffsetTop = section.getBoundingClientRect().top + window.scrollY;
+    scrollTravel = section.offsetHeight - window.innerHeight;
+    maxShift = overflow;
+  }
+
+  function onScroll() {
+    if (scrollTravel <= 0) return;
+    const progress = Math.max(0, Math.min(1, (window.scrollY - sectionOffsetTop) / scrollTravel));
+
+    runner.style.transform = "translateX(" + (-progress * maxShift) + "px)";
+
+    if (fill) fill.style.width = progress * 100 + "%";
+
+    const activeIdx = Math.min(stepEls.length - 1, Math.floor(progress * stepEls.length + 0.12));
+    stepEls.forEach(function (el, i) { el.classList.toggle("is-active", i <= activeIdx); });
+    pipEls.forEach(function (el, i) { el.classList.toggle("is-active", i <= activeIdx); });
+    if (stepNumEl) stepNumEl.textContent = String(activeIdx + 1).padStart(2, "0");
+  }
+
+  measure();
+  onScroll();
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", function () { measure(); onScroll(); });
+  window.addEventListener("load", function () { measure(); onScroll(); });
+}
+
+function setupAboutTimeline() {
+  const timeline = document.querySelector("[data-about-timeline]");
+  if (!timeline || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const isMobile = window.innerWidth < 768;
+  const fill = timeline.querySelector("[data-ab-timeline-fill]");
+
+  if (fill) {
+    if (!isMobile) {
+      gsap.to(fill, {
+        width: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: timeline,
+          start: "top 70%",
+          end: "top 20%",
+          scrub: 1.2,
+        },
+      });
+    } else {
+      gsap.to(fill, {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: timeline,
+          start: "top 65%",
+          end: "bottom 55%",
+          scrub: 1.2,
+        },
+      });
+    }
+  }
+
+  const items = Array.from(timeline.querySelectorAll("[data-ab-timeline-item]"));
+
+  if (!isMobile) {
+    const dots = items.map((item) => item.querySelector("[data-ab-timeline-dot]")).filter(Boolean);
+
+    gsap.fromTo(
+      dots,
+      { scale: 0, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.45,
+        ease: "back.out(2.5)",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: timeline,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    items.forEach((item, i) => {
+      const card = item.querySelector("[data-ab-timeline-card]");
+      if (!card) return;
+      const isAbove = !!item.querySelector(".ab-htimeline__cell--top .ab-htimeline__card");
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: isAbove ? -40 : 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.72,
+          ease: "power3.out",
+          delay: i * 0.12 + 0.06,
+          scrollTrigger: {
+            trigger: timeline,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+  } else {
+    items.forEach((item) => {
+      const dot = item.querySelector("[data-ab-timeline-dot]");
+      const card = item.querySelector("[data-ab-timeline-card]");
+      if (dot) {
+        gsap.fromTo(
+          dot,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.45,
+            ease: "back.out(2.5)",
+            scrollTrigger: {
+              trigger: dot,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+      if (card) {
+        gsap.fromTo(
+          card,
+          { opacity: 0, x: -24 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 86%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+    });
+  }
+}
+
 setupMrittikHeader();
 setupHeroSlider();
 setupScrollReveal();
@@ -1057,3 +1226,5 @@ setupFaq();
 setupProjectsFilter();
 setupAboutClone();
 setupCostCalculator();
+setupProcessTimeline();
+setupAboutTimeline();

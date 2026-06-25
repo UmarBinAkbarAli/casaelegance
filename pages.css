@@ -1682,7 +1682,6 @@
   display: flex;
   align-items: stretch;
   height: 42rem;
-  overflow-x: auto;
 }
 
 .ab-htimeline__track {

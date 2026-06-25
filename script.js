@@ -1110,12 +1110,12 @@ function setupAboutTimeline() {
   // Slide the pipeline track left as the user scrolls down.
   // end = the pixel overhang of the pipeline beyond the section width.
   gsap.to(pipeline, {
-    x: () => -(pipeline.scrollWidth - section.offsetWidth),
+    x: () => -(pipeline.scrollWidth - pipeline.parentElement.offsetWidth),
     ease: "none",
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: () => "+=" + (pipeline.scrollWidth - section.offsetWidth),
+      end: () => "+=" + (pipeline.scrollWidth - pipeline.parentElement.offsetWidth),
       pin: true,
       scrub: 1,
       anticipatePin: 1,

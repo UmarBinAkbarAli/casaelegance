@@ -605,7 +605,6 @@ ${indentBlock(imageMarkup, 8)}
     </div>
     <div class="work-card-info">
       <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.category)}</div></div>
-      <div><div class="text-size-small text-style-muted">Year</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.year)}</div></div>
       <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.location)}</div></div>
     </div>
   </a>
@@ -692,11 +691,12 @@ function renderContactForm(wId, idPrefix = "cf") {
           <div class="ce-form__select-wrap">
             <select class="ce-form__input ce-form__select" id="${p}-service" name="service">
               <option value="" disabled selected>Select a project type</option>
-              <option value="residential">Residential Interior Design</option>
-              <option value="commercial">Commercial Interior Design</option>
-              <option value="hospitality">Hospitality &amp; Retail</option>
-              <option value="renovation">Renovation &amp; Fit-Out</option>
+              <option value="interior-design">Interior Design</option>
+              <option value="turnkey-fitout">Turnkey Fitout</option>
+              <option value="renovation">Renovation</option>
               <option value="consultation">Initial Consultation</option>
+              <option value="commercial">Commercial Project</option>
+              <option value="residential">Residential Project</option>
               <option value="other">Other</option>
             </select>
             <svg class="ce-form__select-arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3 5.5 8 11l5-5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>

@@ -1097,124 +1097,31 @@ function setupProcessTimeline() {
 }
 
 function setupAboutTimeline() {
-  const timeline = document.querySelector("[data-about-timeline]");
-  if (!timeline || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  const section  = document.querySelector("[data-ab-process-scroll]");
+  const pipeline = document.querySelector("[data-ab-pipeline]");
+  if (!pipeline || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const isMobile = window.innerWidth < 768;
-  const fill = timeline.querySelector("[data-ab-timeline-fill]");
+  if (window.innerWidth < 768) return;
+  if (!section) return;
 
-  if (fill) {
-    if (!isMobile) {
-      gsap.to(fill, {
-        width: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: timeline,
-          start: "top 70%",
-          end: "top 20%",
-          scrub: 1.2,
-        },
-      });
-    } else {
-      gsap.to(fill, {
-        height: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: timeline,
-          start: "top 65%",
-          end: "bottom 55%",
-          scrub: 1.2,
-        },
-      });
-    }
-  }
-
-  const items = Array.from(timeline.querySelectorAll("[data-ab-timeline-item]"));
-
-  if (!isMobile) {
-    const dots = items.map((item) => item.querySelector("[data-ab-timeline-dot]")).filter(Boolean);
-
-    gsap.fromTo(
-      dots,
-      { scale: 0, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.45,
-        ease: "back.out(2.5)",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: timeline,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    items.forEach((item, i) => {
-      const card = item.querySelector("[data-ab-timeline-card]");
-      if (!card) return;
-      const isAbove = !!item.querySelector(".ab-htimeline__cell--top .ab-htimeline__card");
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: isAbove ? -40 : 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.72,
-          ease: "power3.out",
-          delay: i * 0.12 + 0.06,
-          scrollTrigger: {
-            trigger: timeline,
-            start: "top 75%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-  } else {
-    items.forEach((item) => {
-      const dot = item.querySelector("[data-ab-timeline-dot]");
-      const card = item.querySelector("[data-ab-timeline-card]");
-      if (dot) {
-        gsap.fromTo(
-          dot,
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.45,
-            ease: "back.out(2.5)",
-            scrollTrigger: {
-              trigger: dot,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-      if (card) {
-        gsap.fromTo(
-          card,
-          { opacity: 0, x: -24 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 86%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-    });
-  }
+  // Slide the pipeline track left as the user scrolls down.
+  // end = the pixel overhang of the pipeline beyond the section width.
+  gsap.to(pipeline, {
+    x: () => -(pipeline.scrollWidth - section.offsetWidth),
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: () => "+=" + (pipeline.scrollWidth - section.offsetWidth),
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+    },
+  });
 }
 
 setupMrittikHeader();

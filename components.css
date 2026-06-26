@@ -2090,6 +2090,7 @@ html.js-ready [data-w-id].is-visible {
   .services-list .services-item.is-active .services-item-image-wrap {
     position: static;
     width: 100%;
+    height: auto;
     max-height: 346px;
     margin-top: 0;
     opacity: 1 !important;

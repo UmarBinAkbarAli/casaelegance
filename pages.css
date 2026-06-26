@@ -1890,12 +1890,20 @@
     padding: 1.5rem 0;
   }
 
+  .ab-process {
+    overflow: visible;
+  }
+
   .ab-pipeline {
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
   .ab-pipeline::-webkit-scrollbar { display: none; }
+
+  .ab-pipeline__card {
+    flex: 0 0 min(300px, 82vw);
+  }
 
   .ab-why__copy {
     padding-left: 0;

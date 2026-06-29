@@ -951,7 +951,8 @@ function setupCostCalculator() {
 
     if (!name) { setLeadError("Please enter your first name."); return null; }
     if (!email || !EMAIL_RE.test(email)) { setLeadError("Please enter a valid email address."); return null; }
-    if (!phone || phone.length < 7) { setLeadError("Please enter a valid phone number including country code (e.g. +971 5X XXX XXXX)."); return null; }
+    const cleanPhone = phone.replace(/[\s\-().]/g, "");
+    if (!cleanPhone || cleanPhone.length < 7) { setLeadError("Please enter a valid phone number including country code (e.g. +971 5X XXX XXXX)."); return null; }
 
     clearLeadError();
     return { name, email, phone };
@@ -968,7 +969,7 @@ function setupCostCalculator() {
 
     state.leadName = fields.name;
     state.leadEmail = fields.email;
-    state.leadPhone = fields.phone;
+    state.leadPhone = fields.phone.replace(/[\s\-().]/g, "");
 
     setButtonLoading(sendOtpButton, true, "Sending…", "Send Verification Code");
 
@@ -976,7 +977,7 @@ function setupCostCalculator() {
       const res = await fetch("/api/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: fields.phone })
+        body: JSON.stringify({ phone: state.leadPhone })
       });
       const data = await res.json();
 

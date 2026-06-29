@@ -1,0 +1,8 @@
+{
+  "name": "casa-elegance",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "twilio": "^5.7.0"
+  }
+}

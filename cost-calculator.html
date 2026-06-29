@@ -292,12 +292,12 @@
                     <h2>Your renovation estimate</h2>
                     <p>This estimate uses your area, repair scope, material level, and project details to give a planning-ready budget range.</p>
                   </div>
-    
+
                   <div class="cost-calculator__result-total">
                     <span>Estimated Cost</span>
                     <strong data-result-cost>AED 0</strong>
                   </div>
-    
+
                   <dl class="cost-calculator__summary">
                     <div><dt>Property Type</dt><dd data-result-propertyType></dd></div>
                     <div><dt>Area</dt><dd data-result-area></dd></div>
@@ -306,10 +306,48 @@
                     <div><dt>Scope</dt><dd data-result-scope></dd></div>
                     <div><dt>Finish</dt><dd data-result-finish></dd></div>
                   </dl>
-    
+
                   <div class="cost-calculator__result-actions">
                     <button type="button" class="cost-calculator__secondary-button" data-edit-result>Edit Details</button>
                     <button type="button" class="cost-calculator__ghost-button" data-restart-calculator>Restart</button>
+                  </div>
+                </section>
+
+                <section class="cost-calculator__lead" data-lead-panel hidden>
+                  <div class="cost-calculator__step-head">
+                    <span class="cost-calculator__step-count">Almost There</span>
+                    <h2>One last step before your estimate</h2>
+                    <p>Enter your details below. We'll send a quick verification code to your phone, then reveal your renovation estimate.</p>
+                  </div>
+
+                  <div class="cost-calculator__lead-fields">
+                    <label class="cost-calculator__lead-field">
+                      <span class="cost-calculator__field-label">First Name</span>
+                      <input class="cost-calculator__lead-input" type="text" name="leadName" autocomplete="given-name" placeholder="Your first name" data-lead-name>
+                    </label>
+                    <label class="cost-calculator__lead-field">
+                      <span class="cost-calculator__field-label">Email Address</span>
+                      <input class="cost-calculator__lead-input" type="email" name="leadEmail" autocomplete="email" placeholder="you@example.com" data-lead-email>
+                    </label>
+                    <label class="cost-calculator__lead-field">
+                      <span class="cost-calculator__field-label">Phone Number</span>
+                      <input class="cost-calculator__lead-input" type="tel" name="leadPhone" autocomplete="tel" placeholder="+971 5X XXX XXXX" data-lead-phone>
+                    </label>
+                  </div>
+
+                  <p class="cost-calculator__error" data-lead-error></p>
+
+                  <div class="cost-calculator__lead-send" data-lead-send-wrap>
+                    <button type="button" class="cost-calculator__primary-button" data-send-otp>Send Verification Code</button>
+                  </div>
+
+                  <div class="cost-calculator__lead-otp" data-lead-otp-wrap hidden>
+                    <label class="cost-calculator__lead-field">
+                      <span class="cost-calculator__field-label">Verification Code</span>
+                      <input class="cost-calculator__lead-input cost-calculator__lead-input--otp" type="text" name="otpCode" inputmode="numeric" maxlength="6" placeholder="6-digit code" data-otp-input autocomplete="one-time-code">
+                    </label>
+                    <button type="button" class="cost-calculator__primary-button" data-verify-otp>Verify &amp; See Estimate</button>
+                    <button type="button" class="cost-calculator__ghost-button cost-calculator__resend-btn" data-resend-otp>Resend Code</button>
                   </div>
                 </section>
               </div>

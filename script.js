@@ -712,7 +712,11 @@ function setupCostCalculator() {
     scope: "Light",
     finish: "Standard",
     bathrooms: "2",
-    bedrooms: "2"
+    bedrooms: "2",
+    leadName: "",
+    leadEmail: "",
+    leadPhone: "",
+    leadVerified: false
   };
 
   const resultFields = {
@@ -906,6 +910,149 @@ function setupCostCalculator() {
     stepActions.hidden = true;
   };
 
+  const leadPanel = root.querySelector("[data-lead-panel]");
+  const leadNameInput = root.querySelector("[data-lead-name]");
+  const leadEmailInput = root.querySelector("[data-lead-email]");
+  const leadPhoneInput = root.querySelector("[data-lead-phone]");
+  const leadError = root.querySelector("[data-lead-error]");
+  const sendOtpButton = root.querySelector("[data-send-otp]");
+  const sendWrap = root.querySelector("[data-lead-send-wrap]");
+  const otpWrap = root.querySelector("[data-lead-otp-wrap]");
+  const otpInput = root.querySelector("[data-otp-input]");
+  const verifyOtpButton = root.querySelector("[data-verify-otp]");
+  const resendOtpButton = root.querySelector("[data-resend-otp]");
+
+  const setLeadError = (msg) => {
+    if (leadError) leadError.textContent = msg;
+  };
+  const clearLeadError = () => {
+    if (leadError) leadError.textContent = "";
+  };
+
+  const showLeadCapture = () => {
+    stepPanels.forEach((p) => { p.hidden = true; p.classList.remove("is-active"); });
+    progressSteps.forEach((s) => { s.classList.add("is-complete"); s.classList.remove("is-active"); });
+    progressFill.style.width = "100%";
+    resultPanel.hidden = true;
+    stepActions.hidden = true;
+    if (leadPanel) {
+      leadPanel.hidden = false;
+      leadPanel.classList.add("is-entering");
+      leadPanel.addEventListener("animationend", () => leadPanel.classList.remove("is-entering"), { once: true });
+    }
+  };
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateLeadFields = () => {
+    const name = (leadNameInput?.value || "").trim();
+    const email = (leadEmailInput?.value || "").trim();
+    const phone = (leadPhoneInput?.value || "").trim();
+
+    if (!name) { setLeadError("Please enter your first name."); return null; }
+    if (!email || !EMAIL_RE.test(email)) { setLeadError("Please enter a valid email address."); return null; }
+    if (!phone || phone.length < 7) { setLeadError("Please enter a valid phone number including country code (e.g. +971 5X XXX XXXX)."); return null; }
+
+    clearLeadError();
+    return { name, email, phone };
+  };
+
+  const setButtonLoading = (btn, loading, loadingText, defaultText) => {
+    btn.disabled = loading;
+    btn.textContent = loading ? loadingText : defaultText;
+  };
+
+  const sendOtp = async () => {
+    const fields = validateLeadFields();
+    if (!fields) return;
+
+    state.leadName = fields.name;
+    state.leadEmail = fields.email;
+    state.leadPhone = fields.phone;
+
+    setButtonLoading(sendOtpButton, true, "Sending…", "Send Verification Code");
+
+    try {
+      const res = await fetch("/api/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: fields.phone })
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        setLeadError(data.error || "Failed to send the code. Please try again.");
+        setButtonLoading(sendOtpButton, false, "", "Send Verification Code");
+        return;
+      }
+
+      if (sendWrap) sendWrap.hidden = true;
+      if (otpWrap) otpWrap.hidden = false;
+      if (otpInput) otpInput.focus();
+      clearLeadError();
+    } catch {
+      setLeadError("Network error. Please check your connection and try again.");
+      setButtonLoading(sendOtpButton, false, "", "Send Verification Code");
+    }
+  };
+
+  const verifyOtp = async () => {
+    const code = (otpInput?.value || "").trim();
+    if (!code || code.length < 4) { setLeadError("Please enter the verification code."); return; }
+    clearLeadError();
+
+    setButtonLoading(verifyOtpButton, true, "Verifying…", "Verify & See Estimate");
+
+    try {
+      const res = await fetch("/api/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: state.leadPhone, code })
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        setLeadError(data.error || "Invalid or expired code. Please try again.");
+        setButtonLoading(verifyOtpButton, false, "", "Verify & See Estimate");
+        return;
+      }
+
+      state.leadVerified = true;
+      if (leadPanel) leadPanel.hidden = true;
+      showResult();
+    } catch {
+      setLeadError("Network error. Please check your connection and try again.");
+      setButtonLoading(verifyOtpButton, false, "", "Verify & See Estimate");
+    }
+  };
+
+  const resetLeadPanel = () => {
+    state.leadName = "";
+    state.leadEmail = "";
+    state.leadPhone = "";
+    state.leadVerified = false;
+    if (leadNameInput) leadNameInput.value = "";
+    if (leadEmailInput) leadEmailInput.value = "";
+    if (leadPhoneInput) leadPhoneInput.value = "";
+    if (otpInput) otpInput.value = "";
+    if (sendWrap) sendWrap.hidden = false;
+    if (otpWrap) otpWrap.hidden = true;
+    if (sendOtpButton) { sendOtpButton.disabled = false; sendOtpButton.textContent = "Send Verification Code"; }
+    if (verifyOtpButton) { verifyOtpButton.disabled = false; verifyOtpButton.textContent = "Verify & See Estimate"; }
+    clearLeadError();
+    if (leadPanel) leadPanel.hidden = true;
+  };
+
+  sendOtpButton?.addEventListener("click", sendOtp);
+  verifyOtpButton?.addEventListener("click", verifyOtp);
+  resendOtpButton?.addEventListener("click", () => {
+    if (otpWrap) otpWrap.hidden = true;
+    if (sendWrap) sendWrap.hidden = false;
+    if (sendOtpButton) { sendOtpButton.disabled = false; sendOtpButton.textContent = "Send Verification Code"; }
+    if (otpInput) otpInput.value = "";
+    clearLeadError();
+  });
+
   const validateStep = (stepIndex) => {
     clearStepError(stepIndex);
 
@@ -993,7 +1140,7 @@ function setupCostCalculator() {
     }
 
     if (state.currentStep === stepPanels.length - 1) {
-      showResult();
+      showLeadCapture();
       return;
     }
 
@@ -1039,6 +1186,7 @@ function setupCostCalculator() {
     });
 
     stepPanels.forEach((_, index) => clearStepError(index));
+    resetLeadPanel();
     syncDetailOutputs();
     updateStepVisibility();
   });

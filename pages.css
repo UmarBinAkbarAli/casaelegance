@@ -161,12 +161,14 @@
 .project-detail-showcase__media {
   overflow: hidden;
   border-radius: 1.6rem;
+  aspect-ratio: 16 / 9;
 }
 
-.project-detail-showcase__image {
+.project-detail-showcase__media picture,
+.project-detail-showcase__media img {
   display: block;
   width: 100%;
-  min-height: 32rem;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -357,10 +359,6 @@
     grid-template-columns: 1fr;
   }
 
-  .project-detail-showcase__image {
-    min-height: 24rem;
-  }
-
   .project-detail-cta__inner {
     flex-direction: column;
     align-items: flex-start;
@@ -369,7 +367,6 @@
 }
 
 @media screen and (max-width: 767px) {
-  .project-detail-showcase__image,
   .project-detail-gallery__grid img {
     height: 20rem;
     min-height: 20rem;
@@ -398,7 +395,6 @@
     border-radius: 1rem;
   }
 
-  .project-detail-showcase__image,
   .project-detail-gallery__grid img {
     height: 16rem;
     min-height: 16rem;

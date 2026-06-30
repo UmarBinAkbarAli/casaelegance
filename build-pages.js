@@ -604,8 +604,8 @@ ${indentBlock(imageMarkup, 8)}
       <div><h3 class="work-card-title">${escapeHtml(project.title)}</h3></div>
     </div>
     <div class="work-card-info">
-      <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.category)}</div></div>
       <div><div class="text-size-small text-style-muted">Location</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.location)}</div></div>
+      <div><div class="text-size-small text-style-muted">Category</div><div class="spacer-xxsmall"></div><div class="text-size-regular">${escapeHtml(project.category)}</div></div>
     </div>
   </a>
 </div>`, indent);

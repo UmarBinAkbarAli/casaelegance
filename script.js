@@ -648,15 +648,15 @@ function setupAboutClone() {
 
 function calculateRenovationCost({ area, scope, finish }) {
   const scopeBaseRates = {
-    Light: 80,
-    Standard: 120,
-    Turnkey: 160
+    "Light Upgrade": 80,
+    "Standard Renovation": 120,
+    "Full Turnkey Fitout": 160
   };
 
   const finishMultipliers = {
-    Standard: 1,
+    Essential: 1,
     Premium: 1.25,
-    "Ultra-Premium": 1.55
+    Signature: 1.55
   };
 
   const baseRate = scopeBaseRates[scope];
@@ -707,15 +707,20 @@ function setupCostCalculator() {
   const state = {
     currentStep: 0,
     propertyType: "Apartment",
+    commercialType: "Office",
     areaUnit: "sqft",
     area: "3000",
-    scope: "Light",
-    finish: "Standard",
+    drawings: "Yes",
+    projectStatus: "New Handover",
+    timeline: "Immediately",
+    scope: "Light Upgrade",
+    finish: "Essential",
     bathrooms: "2",
     bedrooms: "2",
     leadName: "",
     leadEmail: "",
     leadPhone: "",
+    leadLocation: "",
     leadVerified: false
   };
 
@@ -726,7 +731,8 @@ function setupCostCalculator() {
     scope: root.querySelector("[data-result-scope]"),
     finish: root.querySelector("[data-result-finish]"),
     bathrooms: root.querySelector("[data-result-bathrooms]"),
-    bedrooms: root.querySelector("[data-result-bedrooms]")
+    bedrooms: root.querySelector("[data-result-bedrooms]"),
+    timeline: root.querySelector("[data-result-timeline]")
   };
 
   const reviewFields = {
@@ -735,7 +741,8 @@ function setupCostCalculator() {
     scope: root.querySelector("[data-review-scope]"),
     finish: root.querySelector("[data-review-finish]"),
     bathrooms: root.querySelector("[data-review-bathrooms]"),
-    bedrooms: root.querySelector("[data-review-bedrooms]")
+    bedrooms: root.querySelector("[data-review-bedrooms]"),
+    timeline: root.querySelector("[data-review-timeline]")
   };
 
   const areaInput = form.elements.area;
@@ -827,13 +834,30 @@ function setupCostCalculator() {
       bedroomsValueOutput.textContent = formatBedrooms(state.bedrooms);
     }
   };
+  const isCommercial = () => state.propertyType === "Commercial";
+
+  const syncResidentialVisibility = () => {
+    const isCommercialType = isCommercial();
+    root.querySelectorAll("[data-residential-fields]").forEach((el) => {
+      el.hidden = isCommercialType;
+    });
+    root.querySelectorAll("[data-review-residential]").forEach((el) => {
+      el.hidden = isCommercialType;
+    });
+    root.querySelectorAll("[data-result-residential]").forEach((el) => {
+      el.hidden = isCommercialType;
+    });
+  };
+
   const syncReview = () => {
-    reviewFields.propertyType.textContent = state.propertyType;
-    reviewFields.area.textContent = formatAreaLabel();
-    reviewFields.scope.textContent = state.scope;
-    reviewFields.finish.textContent = state.finish;
-    reviewFields.bathrooms.textContent = state.bathrooms;
-    reviewFields.bedrooms.textContent = formatBedrooms(state.bedrooms);
+    if (reviewFields.propertyType) reviewFields.propertyType.textContent = state.propertyType;
+    if (reviewFields.area) reviewFields.area.textContent = formatAreaLabel();
+    if (reviewFields.scope) reviewFields.scope.textContent = state.scope;
+    if (reviewFields.finish) reviewFields.finish.textContent = state.finish;
+    if (reviewFields.bathrooms) reviewFields.bathrooms.textContent = state.bathrooms;
+    if (reviewFields.bedrooms) reviewFields.bedrooms.textContent = formatBedrooms(state.bedrooms);
+    if (reviewFields.timeline) reviewFields.timeline.textContent = state.timeline;
+    syncResidentialVisibility();
   };
 
   const updateProgress = () => {
@@ -865,8 +889,7 @@ function setupCostCalculator() {
     resultPanel.hidden = true;
     stepActions.hidden = false;
     backButton.disabled = state.currentStep === 0;
-    nextButton.textContent =
-      state.currentStep === stepPanels.length - 1 ? "See Estimate" : "Continue";
+    nextButton.textContent = "Continue";
 
     if (state.currentStep === stepPanels.length - 1) {
       syncReview();
@@ -886,12 +909,14 @@ function setupCostCalculator() {
     }) + (bathrooms * 3500) + (Math.max(bedrooms, 0) * 5000);
 
     resultFields.cost.textContent = formatCurrency(estimate);
-    resultFields.propertyType.textContent = state.propertyType;
-    resultFields.area.textContent = formatAreaLabel();
-    resultFields.scope.textContent = state.scope;
-    resultFields.finish.textContent = state.finish;
-    resultFields.bathrooms.textContent = formatter.format(bathrooms);
-    resultFields.bedrooms.textContent = formatBedrooms(state.bedrooms);
+    if (resultFields.propertyType) resultFields.propertyType.textContent = state.propertyType;
+    if (resultFields.area) resultFields.area.textContent = formatAreaLabel();
+    if (resultFields.scope) resultFields.scope.textContent = state.scope;
+    if (resultFields.finish) resultFields.finish.textContent = state.finish;
+    if (resultFields.bathrooms) resultFields.bathrooms.textContent = formatter.format(bathrooms);
+    if (resultFields.bedrooms) resultFields.bedrooms.textContent = formatBedrooms(state.bedrooms);
+    if (resultFields.timeline) resultFields.timeline.textContent = state.timeline;
+    syncResidentialVisibility();
 
     stepPanels.forEach((panel) => {
       panel.hidden = true;
@@ -914,6 +939,7 @@ function setupCostCalculator() {
   const leadNameInput = root.querySelector("[data-lead-name]");
   const leadEmailInput = root.querySelector("[data-lead-email]");
   const leadPhoneInput = root.querySelector("[data-lead-phone]");
+  const leadLocationInput = root.querySelector("[data-lead-location]");
   const leadError = root.querySelector("[data-lead-error]");
   const sendOtpButton = root.querySelector("[data-send-otp]");
   const sendWrap = root.querySelector("[data-lead-send-wrap]");
@@ -921,6 +947,19 @@ function setupCostCalculator() {
   const otpInput = root.querySelector("[data-otp-input]");
   const verifyOtpButton = root.querySelector("[data-verify-otp]");
   const resendOtpButton = root.querySelector("[data-resend-otp]");
+
+  const PHONE_PREFIX = "+971";
+  if (leadPhoneInput) {
+    leadPhoneInput.addEventListener("keydown", (e) => {
+      const atPrefix = leadPhoneInput.selectionStart <= PHONE_PREFIX.length && leadPhoneInput.selectionEnd <= PHONE_PREFIX.length;
+      if ((e.key === "Backspace" || e.key === "Delete") && atPrefix) e.preventDefault();
+    });
+    leadPhoneInput.addEventListener("input", () => {
+      if (!leadPhoneInput.value.startsWith(PHONE_PREFIX)) {
+        leadPhoneInput.value = PHONE_PREFIX;
+      }
+    });
+  }
 
   const setLeadError = (msg) => {
     if (leadError) leadError.textContent = msg;
@@ -949,7 +988,7 @@ function setupCostCalculator() {
     const email = (leadEmailInput?.value || "").trim();
     const phone = (leadPhoneInput?.value || "").trim();
 
-    if (!name) { setLeadError("Please enter your first name."); return null; }
+    if (!name) { setLeadError("Please enter your full name."); return null; }
     if (!email || !EMAIL_RE.test(email)) { setLeadError("Please enter a valid email address."); return null; }
     const cleanPhone = phone.replace(/[\s\-().]/g, "");
     if (!cleanPhone || cleanPhone.length < 7) { setLeadError("Please enter a valid phone number including country code (e.g. +971 5X XXX XXXX)."); return null; }
@@ -970,6 +1009,7 @@ function setupCostCalculator() {
     state.leadName = fields.name;
     state.leadEmail = fields.email;
     state.leadPhone = fields.phone.replace(/[\s\-().]/g, "");
+    state.leadLocation = (leadLocationInput?.value || "").trim();
 
     setButtonLoading(sendOtpButton, true, "Sending…", "Send Verification Code");
 
@@ -1031,10 +1071,12 @@ function setupCostCalculator() {
     state.leadName = "";
     state.leadEmail = "";
     state.leadPhone = "";
+    state.leadLocation = "";
     state.leadVerified = false;
     if (leadNameInput) leadNameInput.value = "";
     if (leadEmailInput) leadEmailInput.value = "";
-    if (leadPhoneInput) leadPhoneInput.value = "";
+    if (leadPhoneInput) leadPhoneInput.value = "+971";
+    if (leadLocationInput) leadLocationInput.value = "";
     if (otpInput) otpInput.value = "";
     if (sendWrap) sendWrap.hidden = false;
     if (otpWrap) otpWrap.hidden = true;
@@ -1086,6 +1128,15 @@ function setupCostCalculator() {
     return true;
   };
 
+  const commercialSubtypesEl = root.querySelector("[data-commercial-subtypes]");
+
+  const syncCommercialUI = () => {
+    if (commercialSubtypesEl) {
+      commercialSubtypesEl.hidden = !isCommercial();
+    }
+    syncResidentialVisibility();
+  };
+
   root.querySelectorAll("[data-option-group]").forEach((group) => {
     const stateKey = group.dataset.optionGroup;
     const buttons = Array.from(group.querySelectorAll("[data-option-value]"));
@@ -1098,6 +1149,10 @@ function setupCostCalculator() {
         buttons.forEach((item) => {
           item.classList.toggle("is-selected", item === button);
         });
+
+        if (stateKey === "propertyType") {
+          syncCommercialUI();
+        }
       });
     });
   });
@@ -1167,10 +1222,14 @@ function setupCostCalculator() {
   restartButton?.addEventListener("click", () => {
     state.currentStep = 0;
     state.propertyType = "Apartment";
+    state.commercialType = "Office";
     state.areaUnit = "sqft";
     state.area = "3000";
-    state.scope = "Light";
-    state.finish = "Standard";
+    state.drawings = "Yes";
+    state.projectStatus = "New Handover";
+    state.timeline = "Immediately";
+    state.scope = "Light Upgrade";
+    state.finish = "Essential";
     state.bathrooms = "2";
     state.bedrooms = "2";
 
@@ -1189,11 +1248,37 @@ function setupCostCalculator() {
     stepPanels.forEach((_, index) => clearStepError(index));
     resetLeadPanel();
     syncDetailOutputs();
+    syncCommercialUI();
     updateStepVisibility();
+  });
+
+  const compareModalEl = document.querySelector("[data-finish-modal]");
+  const compareOpenBtn = root.querySelector("[data-compare-finish]");
+
+  compareOpenBtn?.addEventListener("click", () => {
+    if (compareModalEl) {
+      compareModalEl.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+  });
+
+  compareModalEl?.querySelectorAll("[data-finish-modal-close]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      compareModalEl.hidden = true;
+      document.body.style.overflow = "";
+    });
+  });
+
+  compareModalEl?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      compareModalEl.hidden = true;
+      document.body.style.overflow = "";
+    }
   });
 
   rangeInputs.forEach((input) => updateRangeProgress(input));
   syncDetailOutputs();
+  syncCommercialUI();
   updateStepVisibility();
 }
 

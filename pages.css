@@ -1394,6 +1394,273 @@
   }
 }
 
+/* ── Cost Calculator: New Field Groups ─────────────────── */
+
+.cost-calculator__sub-label {
+  margin: 0 0 0.75rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cost-calculator__field-group {
+  display: grid;
+  gap: 0;
+}
+
+.cost-calculator__commercial-subtypes {
+  display: grid;
+  gap: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 0.5rem;
+}
+
+.cost-calculator__commercial-subtypes[hidden] {
+  display: none;
+}
+
+[data-residential-fields][hidden] {
+  display: none;
+}
+
+.cost-calculator__review-card[hidden] {
+  display: none;
+}
+
+.cost-calculator__options--small {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cost-calculator__options--small .cost-calculator__option {
+  min-height: 3.4rem;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+}
+
+.cost-calculator__options--wrap {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cost-calculator__options--wrap .cost-calculator__option {
+  min-height: 3.4rem;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+}
+
+/* ── Cost Calculator: Compare Finish Levels ─────────────── */
+
+.cost-calculator__compare-link-wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.25rem;
+}
+
+.cost-calculator__compare-link {
+  background: none;
+  border: none;
+  color: #b6986f;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  transition: color 0.2s ease;
+}
+
+.cost-calculator__compare-link:hover,
+.cost-calculator__compare-link:focus-visible {
+  color: #e8c988;
+  outline: none;
+}
+
+/* ── Finish Compare Modal ───────────────────────────────── */
+
+.finish-compare-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.finish-compare-modal[hidden] {
+  display: none;
+}
+
+.finish-compare-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  border: none;
+  cursor: pointer;
+}
+
+.finish-compare-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 44rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #1a1a1a;
+  border: 1px solid rgba(182, 152, 111, 0.24);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+}
+
+.finish-compare-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.finish-compare-modal__close svg {
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.finish-compare-modal__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.finish-compare-modal__title {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.finish-compare-modal__subtitle {
+  margin: 0 0 1.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.finish-compare-modal__table-wrap {
+  overflow-x: auto;
+}
+
+.finish-compare-modal__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.finish-compare-modal__table thead tr {
+  border-bottom: 1px solid rgba(182, 152, 111, 0.4);
+}
+
+.finish-compare-modal__table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: #b6986f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.finish-compare-modal__table th:first-child {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.finish-compare-modal__table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.15s ease;
+}
+
+.finish-compare-modal__table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.finish-compare-modal__table td {
+  padding: 0.85rem 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+.finish-compare-modal__table td:first-child {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Cost Calculator: Review – full-width card ──────────── */
+
+.cost-calculator__review-card--wide {
+  grid-column: 1 / -1;
+}
+
+/* ── Cost Calculator: Lead Highlights ───────────────────── */
+
+.cost-calculator__lead-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cost-calculator__lead-highlight {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cost-calculator__lead-highlight strong {
+  display: block;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.cost-calculator__lead-highlight span {
+  display: block;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 767px) {
+  .cost-calculator__lead-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .cost-calculator__options--wrap,
+  .cost-calculator__options--small {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .finish-compare-modal__panel {
+    padding: 1.5rem 1rem;
+  }
+}
+
 /* ── About page: Hero ──────────────────────────────────── */
 
 .ab-hero {

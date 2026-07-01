@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -71,16 +71,16 @@
           <div class="cost-calculator-hero__inner">
             <div class="cost-calculator-hero__content" data-w-id="calculator-hero-content" style="opacity:0;transform:translate3d(0, 24px, 0) scale3d(0.95, 0.95, 1);">
               <span class="clone-kicker">Renovation Calculator</span>
-              <h1 class="cost-calculator-hero__title">Plan your renovation budget with a clear five-step estimate.</h1>
-              <p class="cost-calculator-hero__text">Choose your property type, scope, finish level, and area to get an instant estimate aligned with Casa Elegance project planning.</p>
+              <h1 class="cost-calculator-hero__title">Understand Your Project Investment Before You Build</h1>
+              <p class="cost-calculator-hero__text">Receive an estimated investment range tailored to your property, scope and finish preferences.</p>
               <div class="cost-calculator-hero__meta">
                 <div class="cost-calculator-hero__meta-card">
-                  <strong>Fast estimate</strong>
-                  <span>One question at a time, with a final summary at the end.</span>
+                  <strong>Accurate Planning</strong>
+                  <span>Designed to provide a realistic investment range based on your project requirements.</span>
                 </div>
                 <div class="cost-calculator-hero__meta-card">
-                  <strong>Ready for next steps</strong>
-                  <span>Use the result to start a consultation or request a formal quote.</span>
+                  <strong>Expert Guidance</strong>
+                  <span>Use your estimate to discuss design options, budgeting and project planning with our team.</span>
                 </div>
               </div>
             </div>
@@ -173,7 +173,7 @@
                     <div class="cost-calculator__range-group">
                       <div class="cost-calculator__range-head">
                         <span class="cost-calculator__range-title">Property Area</span>
-                        <span class="cost-calculator__range-value" data-range-value="area" style="display:none">3000 sqft</span>
+                        <span class="cost-calculator__range-value" data-range-value="area">3000 sqft</span>
                       </div>
                       <input class="cost-calculator__range" type="range" name="areaRange" min="300" max="20000" step="10" value="3000" data-range-source="area">
                       <div class="cost-calculator__range-scale">
@@ -185,34 +185,8 @@
                       </div>
                     </div>
     
-                    <div class="cost-calculator__field-group">
-                      <p class="cost-calculator__sub-label">Do you have drawings available?</p>
-                      <div class="cost-calculator__options cost-calculator__options--small" data-option-group="drawings">
-                        <button type="button" class="cost-calculator__option is-selected" data-option-value="Yes">Yes</button>
-                        <button type="button" class="cost-calculator__option" data-option-value="No">No</button>
-                      </div>
-                    </div>
-    
-                    <div class="cost-calculator__field-group">
-                      <p class="cost-calculator__sub-label">Project Status</p>
-                      <div class="cost-calculator__options cost-calculator__options--small" data-option-group="projectStatus">
-                        <button type="button" class="cost-calculator__option is-selected" data-option-value="New Handover">New Handover</button>
-                        <button type="button" class="cost-calculator__option" data-option-value="Existing Property">Existing Property</button>
-                      </div>
-                    </div>
-    
-                    <div class="cost-calculator__field-group">
-                      <p class="cost-calculator__sub-label">When are you planning to start?</p>
-                      <div class="cost-calculator__options cost-calculator__options--wrap" data-option-group="timeline">
-                        <button type="button" class="cost-calculator__option is-selected" data-option-value="Immediately">Immediately</button>
-                        <button type="button" class="cost-calculator__option" data-option-value="Within 1 Month">Within 1 Month</button>
-                        <button type="button" class="cost-calculator__option" data-option-value="Within 3 Months">Within 3 Months</button>
-                        <button type="button" class="cost-calculator__option" data-option-value="Just Exploring">Just Exploring</button>
-                      </div>
-                    </div>
-    
                     <div data-residential-fields>
-                      <div class="cost-calculator__range-group">
+                      <div class="cost-calculator__range-group" style="margin-top:1.4rem">
                         <div class="cost-calculator__range-head">
                           <span class="cost-calculator__range-title">Number of Bedrooms</span>
                           <span class="cost-calculator__range-value" data-range-value="bedrooms" style="display:none">2</span>
@@ -242,6 +216,49 @@
                         </div>
                       </div>
                     </div>
+    
+                    <div class="cost-calculator__field-group">
+                      <p class="cost-calculator__sub-label">Do you have drawings available?</p>
+                      <div class="cost-calculator__radio-group" data-option-group="drawings">
+                        <label class="cost-calculator__radio is-selected" data-option-value="Yes">
+                          <span class="cost-calculator__radio-dot"></span>Yes
+                        </label>
+                        <label class="cost-calculator__radio" data-option-value="No">
+                          <span class="cost-calculator__radio-dot"></span>No
+                        </label>
+                      </div>
+                    </div>
+    
+                    <div class="cost-calculator__field-group">
+                      <p class="cost-calculator__sub-label">Project Status</p>
+                      <div class="cost-calculator__radio-group" data-option-group="projectStatus">
+                        <label class="cost-calculator__radio is-selected" data-option-value="New Handover">
+                          <span class="cost-calculator__radio-dot"></span>New Handover
+                        </label>
+                        <label class="cost-calculator__radio" data-option-value="Existing Property">
+                          <span class="cost-calculator__radio-dot"></span>Existing Property
+                        </label>
+                      </div>
+                    </div>
+    
+                    <div class="cost-calculator__field-group">
+                      <p class="cost-calculator__sub-label">When are you planning to start?</p>
+                      <div class="cost-calculator__radio-group cost-calculator__radio-group--col" data-option-group="timeline">
+                        <label class="cost-calculator__radio is-selected" data-option-value="Immediately">
+                          <span class="cost-calculator__radio-dot"></span>Immediately
+                        </label>
+                        <label class="cost-calculator__radio" data-option-value="Within 1 Month">
+                          <span class="cost-calculator__radio-dot"></span>Within 1 Month
+                        </label>
+                        <label class="cost-calculator__radio" data-option-value="Within 3 Months">
+                          <span class="cost-calculator__radio-dot"></span>Within 3 Months
+                        </label>
+                        <label class="cost-calculator__radio" data-option-value="Just Exploring">
+                          <span class="cost-calculator__radio-dot"></span>Just Exploring
+                        </label>
+                      </div>
+                    </div>
+    
                   </div>
                   <p class="cost-calculator__error" data-step-error></p>
                 </section>
@@ -370,20 +387,6 @@
                     <p>Based on your selections, we'll prepare an estimated investment for your project and connect you with a renovation specialist for a complimentary consultation.</p>
                   </div>
     
-                  <div class="cost-calculator__lead-highlights">
-                    <div class="cost-calculator__lead-highlight">
-                      <strong>Accurate Planning</strong>
-                      <span>Designed to provide a realistic investment range based on your project requirements.</span>
-                    </div>
-                    <div class="cost-calculator__lead-highlight">
-                      <strong>Expert Guidance</strong>
-                      <span>Use your estimate to discuss design options, budgeting and project planning with our team.</span>
-                    </div>
-                    <div class="cost-calculator__lead-highlight">
-                      <strong>Understand Your Investment Before You Build</strong>
-                      <span>Receive an estimated investment range tailored to your property, scope and finish preferences.</span>
-                    </div>
-                  </div>
     
                   <div class="cost-calculator__lead-fields">
                     <label class="cost-calculator__lead-field">

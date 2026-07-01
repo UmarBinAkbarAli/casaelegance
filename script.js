@@ -887,6 +887,7 @@ function setupCostCalculator() {
     });
 
     resultPanel.hidden = true;
+    if (leadPanel) leadPanel.hidden = true;
     stepActions.hidden = false;
     backButton.disabled = state.currentStep === 0;
     nextButton.textContent = "Continue";

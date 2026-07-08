@@ -1395,6 +1395,12 @@
   gap: 0.9rem;
 }
 
+/* Fix: display:grid on the rule above overrides the UA [hidden] rule, so be explicit */
+.cost-calculator__lead-send[hidden],
+.cost-calculator__lead-otp[hidden] {
+  display: none;
+}
+
 .cost-calculator__resend-btn {
   font-size: 0.9rem;
   min-height: 3rem;
@@ -1468,12 +1474,23 @@
 
 .cost-calculator__radio-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 0.6rem;
 }
 
-.cost-calculator__radio-group--col {
-  gap: 0.5rem;
+.cost-calculator__radio-group > .cost-calculator__radio {
+  flex: 1 1 0;
+}
+
+@media screen and (max-width: 767px) {
+  .cost-calculator__radio-group {
+    flex-direction: column;
+  }
+
+  .cost-calculator__radio-group > .cost-calculator__radio {
+    flex: none;
+  }
 }
 
 .cost-calculator__radio {
@@ -1496,8 +1513,6 @@
 }
 
 .cost-calculator__radio.is-selected {
-  border-color: rgba(182, 152, 111, 0.9);
-  background: linear-gradient(180deg, rgba(182, 152, 111, 0.18), rgba(182, 152, 111, 0.05));
   color: #fff;
 }
 

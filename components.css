@@ -1461,6 +1461,29 @@ html.js-ready [data-w-id].is-visible {
   transform: scale(1.05);
 }
 
+.work-card-info.left-align {
+  gap: 1rem;
+}
+
+.work-card-info > div {
+  min-width: 0;
+}
+
+.work-card-info > div:first-child {
+  flex: 0 0 auto;
+}
+
+.work-card-info > div:last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.work-card-info .text-size-regular {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .section-work .button {
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }

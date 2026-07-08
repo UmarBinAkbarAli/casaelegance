@@ -1125,6 +1125,11 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Fix: display:flex on the rule above overrides the UA [hidden] rule, so be explicit */
+.cost-calculator__actions[hidden] {
+  display: none;
+}
+
 .cost-calculator__primary-button,
 .cost-calculator__ghost-button,
 .cost-calculator__secondary-button {

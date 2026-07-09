@@ -698,7 +698,7 @@ const REQUIRE_OTP_VERIFICATION = false;
 // Go High Level inbound webhook — receives every cost-calculator submission
 // (fires when the user clicks "See My Estimate", just before the estimate renders).
 const COST_CALCULATOR_WEBHOOK_URL =
-  "https://services.leadconnectorhq.com/hooks/lrcz9oKX9kSdCJ2jDB5Z/webhook-trigger/d490fc75-9aaf-48d3-8c59-27148f91f05d";
+  "https://services.leadconnectorhq.com/hooks/lrcz9oKX9kSdCJ2jDB5Z/webhook-trigger/03461f3a-cf72-455e-854e-b9b6a1edd951";
 
 const CONTINGENCY_RATE = 0.1;
 const SALES_BUFFER_RATE = 0.2;

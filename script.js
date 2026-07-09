@@ -695,6 +695,11 @@ const PROJECT_TYPE_MIN_BUDGET = {
 // Flip back to true to re-enable the Twilio OTP step without touching any other code.
 const REQUIRE_OTP_VERIFICATION = false;
 
+// Go High Level inbound webhook — receives every cost-calculator submission
+// (fires when the user clicks "See My Estimate", just before the estimate renders).
+const COST_CALCULATOR_WEBHOOK_URL =
+  "https://services.leadconnectorhq.com/hooks/lrcz9oKX9kSdCJ2jDB5Z/webhook-trigger/d490fc75-9aaf-48d3-8c59-27148f91f05d";
+
 const CONTINGENCY_RATE = 0.1;
 const SALES_BUFFER_RATE = 0.2;
 const DISPLAY_LOWER_RATE = 0.9;
@@ -996,6 +1001,68 @@ function setupCostCalculator() {
     stepActions.hidden = true;
   };
 
+  // Push the full cost-calculator submission to Go High Level.
+  // Fire-and-forget: never blocks or delays showing the estimate to the user.
+  // Uses no-cors + text/plain so the cross-origin POST reaches GHL without a
+  // failing CORS preflight; GHL parses the JSON body regardless.
+  const sendToWebhook = () => {
+    try {
+      const areaInSqft = getAreaInSqft();
+      const bathrooms = Number(state.bathrooms) || 0;
+      const estimate = calculateRenovationCost({
+        propertyType: state.propertyType,
+        commercialType: state.commercialType,
+        scope: state.scope,
+        finish: state.finish,
+        area: areaInSqft,
+        bathrooms
+      });
+
+      const isCommercialType = state.propertyType === "Commercial";
+      const payload = {
+        source: "Casa Elegance — Cost Calculator",
+        page_url: window.location.href,
+        submitted_at: new Date().toISOString(),
+
+        // Lead contact details
+        name: state.leadName,
+        email: state.leadEmail,
+        phone: state.leadPhone,
+        location: state.leadLocation,
+
+        // Property & scope
+        property_type: state.propertyType,
+        commercial_type: isCommercialType ? state.commercialType : "",
+        area: Number(state.area) || 0,
+        area_unit: state.areaUnit,
+        area_sqft: Math.round(areaInSqft),
+        scope: state.scope,
+        finish: state.finish,
+        bathrooms,
+        bedrooms: isCommercialType ? "" : (Number(state.bedrooms) || 0),
+        has_drawings: state.drawings,
+        project_status: state.projectStatus,
+        timeline: state.timeline,
+
+        // Calculated estimate
+        currency: "AED",
+        estimate_lower: Math.round(estimate.lower),
+        estimate_upper: Math.round(estimate.upper),
+        estimate_display: `AED ${formatter.format(estimate.lower)} - AED ${formatter.format(estimate.upper)}`
+      };
+
+      fetch(COST_CALCULATOR_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        keepalive: true,
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    } catch {
+      // Never let webhook issues block the estimate.
+    }
+  };
+
   const leadPanel = root.querySelector("[data-lead-panel]");
   const leadNameInput = root.querySelector("[data-lead-name]");
   const leadEmailInput = root.querySelector("[data-lead-email]");
@@ -1078,6 +1145,7 @@ function setupCostCalculator() {
 
     if (!REQUIRE_OTP_VERIFICATION) {
       state.leadVerified = true;
+      sendToWebhook();
       if (leadPanel) leadPanel.hidden = true;
       showResult();
       return;
@@ -1131,6 +1199,7 @@ function setupCostCalculator() {
       }
 
       state.leadVerified = true;
+      sendToWebhook();
       if (leadPanel) leadPanel.hidden = true;
       showResult();
     } catch {

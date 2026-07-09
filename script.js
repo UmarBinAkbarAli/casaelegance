@@ -698,7 +698,7 @@ const REQUIRE_OTP_VERIFICATION = false;
 // Go High Level inbound webhook — receives every cost-calculator submission
 // (fires when the user clicks "See My Estimate", just before the estimate renders).
 const COST_CALCULATOR_WEBHOOK_URL =
-  "https://services.leadconnectorhq.com/hooks/lrcz9oKX9kSdCJ2jDB5Z/webhook-trigger/03461f3a-cf72-455e-854e-b9b6a1edd951";
+  "https://services.leadconnectorhq.com/hooks/lrcz9oKX9kSdCJ2jDB5Z/webhook-trigger/3e96e390-8621-414a-8df4-bccbd5c14fe5";
 
 const CONTINGENCY_RATE = 0.1;
 const SALES_BUFFER_RATE = 0.2;
@@ -1003,8 +1003,7 @@ function setupCostCalculator() {
 
   // Push the full cost-calculator submission to Go High Level.
   // Fire-and-forget: never blocks or delays showing the estimate to the user.
-  // Uses no-cors + text/plain so the cross-origin POST reaches GHL without a
-  // failing CORS preflight; GHL parses the JSON body regardless.
+  // GHL's webhook endpoint supports CORS, so a normal application/json POST works directly.
   const sendToWebhook = () => {
     try {
       const areaInSqft = getAreaInSqft();
@@ -1053,9 +1052,8 @@ function setupCostCalculator() {
 
       fetch(COST_CALCULATOR_WEBHOOK_URL, {
         method: "POST",
-        mode: "no-cors",
         keepalive: true,
-        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       }).catch(() => {});
     } catch {

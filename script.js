@@ -933,7 +933,23 @@ function setupCostCalculator() {
     progressFill.style.width = `${fillPercent}%`;
   };
 
-  const updateStepVisibility = (direction = "forward") => {
+  const header = document.querySelector(".mrittik-header");
+
+  // Land the user at the top of the calculator (progress + step heading) on
+  // every step change, so a taller/shorter panel never leaves the viewport
+  // scrolled down to the bottom of the step.
+  const scrollToCalculatorTop = () => {
+    const headerOffset = (header ? header.offsetHeight : 0) + 16;
+    const targetTop = root.getBoundingClientRect().top + window.scrollY - headerOffset;
+    // Only pull the view up when the calculator top is above the fold; never
+    // force a downward jump. Use an instant jump — a smooth scroll gets
+    // cancelled when a taller panel changes the page height mid-animation.
+    if (window.scrollY > targetTop) {
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: "auto" });
+    }
+  };
+
+  const updateStepVisibility = (direction = "forward", scrollToTop = false) => {
     const enterClass = direction === "back" ? "is-entering-back" : "is-entering";
 
     stepPanels.forEach((panel, index) => {
@@ -959,6 +975,11 @@ function setupCostCalculator() {
     }
 
     updateProgress();
+
+    if (scrollToTop) {
+      // Wait for the panel swap/layout to settle before repositioning.
+      requestAnimationFrame(scrollToCalculatorTop);
+    }
   };
 
   const showResult = () => {
@@ -999,6 +1020,8 @@ function setupCostCalculator() {
     resultPanel.classList.add("is-entering");
     resultPanel.addEventListener("animationend", () => resultPanel.classList.remove("is-entering"), { once: true });
     stepActions.hidden = true;
+
+    requestAnimationFrame(scrollToCalculatorTop);
   };
 
   // Push the full cost-calculator submission to Go High Level.
@@ -1105,6 +1128,8 @@ function setupCostCalculator() {
       leadPanel.classList.add("is-entering");
       leadPanel.addEventListener("animationend", () => leadPanel.classList.remove("is-entering"), { once: true });
     }
+
+    requestAnimationFrame(scrollToCalculatorTop);
   };
 
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1340,7 +1365,7 @@ function setupCostCalculator() {
     }
 
     state.currentStep += 1;
-    updateStepVisibility("forward");
+    updateStepVisibility("forward", true);
   });
 
   backButton.addEventListener("click", () => {
@@ -1350,12 +1375,12 @@ function setupCostCalculator() {
 
     clearStepError(state.currentStep);
     state.currentStep -= 1;
-    updateStepVisibility("back");
+    updateStepVisibility("back", true);
   });
 
   editButton?.addEventListener("click", () => {
     state.currentStep = stepPanels.length - 1;
-    updateStepVisibility("back");
+    updateStepVisibility("back", true);
   });
 
   restartButton?.addEventListener("click", () => {

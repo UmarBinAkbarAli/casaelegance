@@ -743,12 +743,17 @@
 
 .cost-calculator__card {
   padding: 2rem;
+  /* Stop the browser from scroll-anchoring to the growing/shrinking step
+     content, which caused the page to jump to the bottom of the step
+     (worst on mobile) when advancing between steps. */
+  overflow-anchor: none;
 }
 
 .cost-calculator__steps {
   position: relative;
   min-height: 29rem;
   overflow: hidden;
+  overflow-anchor: none;
 }
 
 /* All panels sit in the same grid cell; inactive ones are clipped by overflow:hidden */
@@ -1035,10 +1040,47 @@
 .cost-calculator__range-scale {
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
+  /* Inset by half the thumb width (thumb is 2rem) so the first/last labels
+     sit under the slider circle's centre at min/max, not the track edges. */
+  padding: 0 1rem;
   color: rgba(255, 255, 255, 0.58);
   font-size: 0.82rem;
   font-weight: 700;
+}
+
+/* Collapse each label to a zero-width point and centre its text on it, so
+   every digit lines up with the circle when the slider rests on that value. */
+.cost-calculator__range-scale span {
+  width: 0;
+  display: grid;
+  place-items: center;
+  white-space: nowrap;
+}
+
+.cost-calculator-booking {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 5rem;
+}
+
+.cost-calculator-booking__title {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  font-family: "Mona Sans", Arial, sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.cost-calculator-booking__embed {
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.cost-calculator-booking__embed iframe {
+  display: block;
+  min-height: 40rem;
 }
 
 .cost-calculator__review {
